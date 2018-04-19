@@ -25,13 +25,14 @@ const Category = props => {
   )
 }
 
+const CategoryList = ({categories}) => categories.map(category => e(Category, {...category, key: category.id}))
+
 class Menu extends Component {
   render() {
-    const categoryList = this.props.categories.map(category => <Category {...category} key={category.id} />)
     return (
       <div>
         <h1>Menu</h1>
-        {categoryList}
+        <CategoryList categories={this.props.categories} />
       </div>
     )
   }
