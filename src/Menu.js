@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { fetchMenu } from './actions/menuActions'
 
 const e = React.createElement
 
@@ -11,7 +14,7 @@ const Category = props => (
   </div>
 )
 
-const Item = ({name, description, price}) => {
+const Item = ({ name, description, price }) => {
   return (
     <div>
       <h1>{name}</h1>
@@ -24,57 +27,28 @@ const Item = ({name, description, price}) => {
 class Menu extends Component {
   constructor() {
     super()
-
-    this.state = {
-      categories: [],
-      items: []
-    }
   }
 
   render() {
-    const categoryList = this.state.categories.map(category => {
-      const options = {
-        ...category,
-        onClick: this.fetchCategory.bind(this)
-      }
-      return e(Category, options)
-    })
-
-    const itemList = this.state.items.map(item => e(Item, item))
 
     return (
       <div>
         we in the menu right now
-        {categoryList}
-        {itemList}
       </div>
     )
   }
 
   componentDidMount() {
-    this.fetchMenu()
-  }
-
-  fetchMenu() {
-    fetch('/menus/1')
-      .then(resp => resp.json())
-      .then(resp => {
-        console.log(resp)
-        this.setState({
-          categories: resp.categories
-        })
-      })
-  }
-
-  fetchCategory(id) {
-    fetch(`/categories/${id}`)
-      .then(resp => resp.json())
-      .then(resp => {
-        this.setState({
-          items: resp.items
-        })
-      })
+    this.props.fetchMenu()
   }
 }
 
-export default Menu
+const mapStateToProps = state => {
+  return { categories: state.menu.categories }
+}
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({ fetchMenu }, dispatch)
+}
+
+export default Menu = connect(mapStateToProps, mapDispatchToProps)(Menu)
