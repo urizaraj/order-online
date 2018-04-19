@@ -14,10 +14,9 @@ const Item = ({ name, description, price }) => {
   )
 }
 
-const ItemList = ({items}) => items.map(item => e(Item, item))
+const ItemList = ({items}) => items.map(item => e(Item, {...item, key: item.id}))
 
 const Category = props => {
-  console.log(props)
   return (
     <div>
       <h2>{props.name}</h2>
@@ -28,7 +27,7 @@ const Category = props => {
 
 class Menu extends Component {
   render() {
-    const categoryList = this.props.categories.map(category => <Category {...category} />)
+    const categoryList = this.props.categories.map(category => <Category {...category} key={category.id} />)
     return (
       <div>
         <h1>Menu</h1>
