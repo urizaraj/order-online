@@ -7,7 +7,8 @@ import { Provider } from 'react-redux'
 import thunk from 'redux-thunk';
 import rootReducer from './reducers'
 
-import './index.css';
+import 'bootstrap/dist/css/bootstrap.min.css'
+// import './index.css';
 import App from './App';
 
 const e = React.createElement
