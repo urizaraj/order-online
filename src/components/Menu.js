@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { fetchMenu } from './actions/menuActions'
+import { fetchMenu } from '../actions/menuActions'
+import OrderForm from './OrderForm';
 
 const e = React.createElement
 
@@ -33,6 +34,8 @@ class Menu extends Component {
       <div>
         <h1>Menu</h1>
         <CategoryList categories={this.props.categories} />
+        <hr/>
+        <OrderForm categories={this.props.categories} />
       </div>
     )
   }
