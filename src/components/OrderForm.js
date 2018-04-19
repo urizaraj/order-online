@@ -8,8 +8,6 @@ const Row = props => (
   </div>
 )
 
-
-
 const Button = props => (
   <button className="btn btn-primary" onClick={() => props.handleClick(props.id)} >
     +
@@ -30,17 +28,28 @@ const Col = props => (
 
 const CurrentOrder = props => {
   const entries = Object.entries(props.order)
+  let total = 0
   const items = entries.map(entry => {
     const [id, count] = entry
+
+    const item = props.items.find(i => i.id === parseInt(id))
+
+    total += item.price * count
+
     return (
       <div>
-        {id}: {count}
+        {item.name}: {count}
       </div>
     )
-
   })
 
-  return <div>{items}</div>
+  return (
+    <div>
+      {items}
+      <br/>
+      {total}
+    </div>
+  )
 }
 
 class OrderForm extends Component {
@@ -63,7 +72,7 @@ class OrderForm extends Component {
             {items.map(item => <Item {...item} handleClick={this.handleClick.bind(this)} key={item.id} />)}
           </Col>
           <Col>
-            <CurrentOrder order={this.state.order} />
+            <CurrentOrder items={items} order={this.state.order} />
           </Col>
         </Row>
       </div>
