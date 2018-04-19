@@ -10,3 +10,13 @@ organic = Location.create({
   name: 'Oooh, Organic!',
   description: 'Fresh, delicious organic food'
 })
+
+menu = organic.menus.create()
+
+sandwiches = menu.categories.create({name: 'Sandwiches'})
+
+sandwiches.items.create({
+  name: 'Grilled Chicken Sandwich',
+  description: 'Grilled chicken on a kaiser roll with lettuce and tomato',
+  price: 6.00
+})
