@@ -5,35 +5,34 @@ import { fetchMenu } from './actions/menuActions'
 
 const e = React.createElement
 
-const Category = props => (
-  <div>
-    <button
-      onClick={() => props.onClick(props.id)}
-    >Load</button>
-    {props.name}
-  </div>
-)
-
 const Item = ({ name, description, price }) => {
   return (
     <div>
-      <h1>{name}</h1>
-      <h2>{description}</h2>
-      <h3>{price}</h3>
+      <h3>{name}</h3>
+      <small>{description} - {price}</small> 
+    </div>
+  )
+}
+
+const ItemList = ({items}) => items.map(item => e(Item, item))
+
+const Category = props => {
+  console.log(props)
+  return (
+    <div>
+      <h2>{props.name}</h2>
+      <ItemList items={props.items} />
     </div>
   )
 }
 
 class Menu extends Component {
-  constructor() {
-    super()
-  }
-
   render() {
-
+    const categoryList = this.props.categories.map(category => <Category {...category} />)
     return (
       <div>
-        we in the menu right now
+        <h1>Menu</h1>
+        {categoryList}
       </div>
     )
   }
