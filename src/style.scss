@@ -1,0 +1,11 @@
+$enable-rounded: false;
+
+$theme-colors: (
+  light: #edf2f4,
+  dark: #2b2d42,
+);
+
+$body-bg: #edf2f4;
+$body-color: #2b2d42;
+
+@import "../node_modules/bootstrap/scss/bootstrap";

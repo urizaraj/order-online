@@ -7,7 +7,8 @@ import { Provider } from 'react-redux'
 import thunk from 'redux-thunk';
 import rootReducer from './reducers'
 
-import 'bootstrap/dist/css/bootstrap.min.css'
+// import 'bootstrap/dist/css/bootstrap.min.css'
+import './style.css'
 
 import fontawesome from '@fortawesome/fontawesome'
 import solid from '@fortawesome/fontawesome-free-solid'
