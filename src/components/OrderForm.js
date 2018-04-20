@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Icon from '@fortawesome/react-fontawesome'
 
 const e = React.createElement
 
@@ -10,7 +11,7 @@ const Row = props => (
 
 const Button = props => (
   <button className="btn btn-primary" onClick={() => props.handleClick(props.id)} >
-    +
+    <Icon icon='plus' />
   </button>
 )
 
@@ -45,9 +46,11 @@ const CurrentOrder = props => {
 
   return (
     <div>
+      <h4>Current Order</h4>
       {items}
-      <br/>
-      {total}
+      <hr/>
+      <h4>Total</h4>
+      ${total}
     </div>
   )
 }
