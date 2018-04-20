@@ -6,13 +6,13 @@ import MenusPage from './MenusPage';
 class App extends Component {
   render() {
     return (
-      <Router>
-        <div className="App container">
+      <div className="App container">
+        <Router>
           <Switch>
             <Route path={'/menus'} component={MenusPage} />
           </Switch>
-        </div>
-      </Router>
+        </Router>
+      </div>
     )
   }
 }
