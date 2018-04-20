@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Icon from '@fortawesome/react-fontawesome'
 
-const e = React.createElement
+// const e = React.createElement
 
 const Row = props => (
   <div className="row">
@@ -20,12 +20,6 @@ const Button = props => (
     <Icon icon='plus' /> Add to Order
   </button>
 )
-
-// const Item = props => (
-//   <div>
-//     {props.name} <Button handleClick={props.handleClick} id={props.id} />
-//   </div>
-// )
 
 const ChevButton = ({onClick}) => (
   <button className="btn btn-primary" {...{onClick}} ><Icon icon='chevron-down' /></button>
@@ -62,28 +56,16 @@ const Details = props => (
 )
 
 const CurrentOrder = props => {
-  const entries = Object.entries(props.order)
   let total = 0
-  const items = entries.map(entry => {
-    const id = parseInt(entry[0])
-    const count = entry[1]
 
-    const item = props.items.find(i => i.id === id)
-
-    total += item.price * count
-
-    return (
-      <div>
-        {item.name}: {count}
-      </div>
-    )
+  props.currentItems.forEach(item => {
+    total += item.price
   })
 
   return (
     <div>
       <h4>Current Order</h4>
-      {items}
-      <hr />
+      {props.currentItems.map(item => <div>{item.name}</div>)}
       <h4>Total</h4>
       ${total}
     </div>
@@ -102,13 +84,15 @@ class OrderForm extends Component {
     super()
 
     this.state = {
-      order: {}
+      currentItems: []
     }
   }
 
   render() {
     const items = []
-    this.props.categories.forEach(category => category.items.forEach(item => items.push(item)))
+    this.props.categories.forEach(category => {
+      category.items.forEach(item => items.push(item))
+    })
 
     const itemListProps = {
       items,
@@ -122,7 +106,7 @@ class OrderForm extends Component {
             <ItemList {...itemListProps} />
           </Col>
           <Col>
-            <CurrentOrder items={items} order={this.state.order} />
+            <CurrentOrder items={items} currentItems={this.state.currentItems} />
           </Col>
         </Row>
       </div>
@@ -130,11 +114,15 @@ class OrderForm extends Component {
   }
 
   handleClick(id) {
-    let order = { ...this.state.order }
-    order[id] ? (order[id] += 1) : (order[id] = 1)
+    const items = []
+    this.props.categories.forEach(category => {
+      category.items.forEach(item => items.push(item))
+    })
+
+    const item = items.find(i => i.id === id)
 
     this.setState({
-      order
+      currentItems: [...this.state.currentItems, item]
     })
   }
 }
