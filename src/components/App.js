@@ -5,7 +5,7 @@ import Menu from './Menu';
 class App extends Component {
   render() {
     return (
-      <div className="App">
+      <div className="App container">
         <Menu />
       </div>
     )
