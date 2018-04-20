@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Icon from '@fortawesome/react-fontawesome'
+import cuid from 'cuid'
 
 // const e = React.createElement
 
@@ -62,10 +63,18 @@ const CurrentOrder = props => {
     total += item.price
   })
 
+  const itemList = props.currentItems.map(item => {
+    return (
+      <div key={item.cuid} >
+        {item.name} <button onClick={() => props.handleRemove(item.cuid)} className='btn btn-link' ><Icon icon='times' /></button>
+      </div>
+    )
+  })
+
   return (
     <div>
       <h4>Current Order</h4>
-      {props.currentItems.map(item => <div>{item.name}</div>)}
+      {itemList}
       <h4>Total</h4>
       ${total}
     </div>
@@ -86,6 +95,8 @@ class OrderForm extends Component {
     this.state = {
       currentItems: []
     }
+
+    this.handleRemove = this.handleRemove.bind(this)
   }
 
   render() {
@@ -99,6 +110,12 @@ class OrderForm extends Component {
       handleClick: this.handleClick.bind(this)
     }
 
+    const currentOrderProps = {
+      items, 
+      handleRemove: this.handleRemove,
+      currentItems: this.state.currentItems
+    }
+
     return (
       <div>
         <Row>
@@ -106,7 +123,7 @@ class OrderForm extends Component {
             <ItemList {...itemListProps} />
           </Col>
           <Col>
-            <CurrentOrder items={items} currentItems={this.state.currentItems} />
+            <CurrentOrder {...currentOrderProps} />
           </Col>
         </Row>
       </div>
@@ -119,10 +136,17 @@ class OrderForm extends Component {
       category.items.forEach(item => items.push(item))
     })
 
-    const item = items.find(i => i.id === id)
+    const item = {...items.find(i => i.id === id)}
+    item.cuid = cuid()
 
     this.setState({
       currentItems: [...this.state.currentItems, item]
+    })
+  }
+
+  handleRemove(itemCuid) {
+    this.setState({
+      currentItems: this.state.currentItems.filter(({cuid}) => cuid !== itemCuid)
     })
   }
 }
