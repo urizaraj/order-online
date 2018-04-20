@@ -22,8 +22,8 @@ const Button = props => (
   </button>
 )
 
-const ChevButton = ({onClick}) => (
-  <button className="btn btn-primary" {...{onClick}} ><Icon icon='chevron-down' /></button>
+const ChevButton = ({ onClick }) => (
+  <button className="btn btn-primary" {...{ onClick }} ><Icon icon='chevron-down' /></button>
 )
 
 class OrderForm extends Component {
@@ -32,12 +32,14 @@ class OrderForm extends Component {
 
     this.state = {
       currentItems: [],
-      activeItem: null
+      activeItem: null,
+      selectedOptions: []
     }
 
     this.handleAddItem = this.handleAddItem.bind(this)
     this.handleRemove = this.handleRemove.bind(this)
     this.handleSelect = this.handleSelect.bind(this)
+    this.handleOptionSelect = this.handleOptionSelect.bind(this)
   }
 
   render() {
@@ -48,13 +50,15 @@ class OrderForm extends Component {
 
     const itemListProps = {
       items,
+      handleOptionSelect: this.handleOptionSelect,
       handleAddItem: this.handleAddItem,
       handleSelect: this.handleSelect,
-      activeItem: this.state.activeItem
+      activeItem: this.state.activeItem,
+      selectedOptions: this.state.selectedOptions
     }
 
     const currentOrderProps = {
-      items, 
+      items,
       handleRemove: this.handleRemove,
       currentItems: this.state.currentItems
     }
@@ -79,7 +83,7 @@ class OrderForm extends Component {
       category.items.forEach(item => items.push(item))
     })
 
-    const item = {...items.find(i => i.id === id)}
+    const item = { ...items.find(i => i.id === id) }
     item.cuid = cuid()
 
     this.setState({
@@ -89,14 +93,15 @@ class OrderForm extends Component {
 
   handleRemove(itemCuid) {
     this.setState({
-      currentItems: this.state.currentItems.filter(({cuid}) => cuid !== itemCuid)
+      currentItems: this.state.currentItems.filter(({ cuid }) => cuid !== itemCuid)
     })
   }
 
   handleSelect(id) {
     if (this.state.activeItem === id) {
       this.setState({
-        activeItem: null
+        activeItem: null,
+        selectedOptions: []
       })
     } else {
       this.setState({
@@ -105,21 +110,38 @@ class OrderForm extends Component {
     }
 
   }
+
+  handleOptionSelect(option) {
+    const selectedOptions = [...this.state.selectedOptions]
+
+    if (selectedOptions.includes(option)) {
+      this.setState({
+        selectedOptions: selectedOptions.filter(o => o !== option)
+      })
+    } else {
+      this.setState({
+        selectedOptions: [...this.state.selectedOptions, option]
+      })
+    }
+  }
 }
 
 const Item = props => {
   return (
     <div className='mb-3' >
-    <ChevButton onClick={() => props.handleSelect(props.id)} /> {props.name}
-    {props.active && <Details handleAddItem={props.handleAddItem} id={props.id} options={props.options} />}
-  </div>
+      <ChevButton onClick={() => props.handleSelect(props.id)} /> {props.name}
+      {props.active && <Details handleAddItem={props.handleAddItem} id={props.id} options={props.options} selectedOptions={props.selectedOptions} handleOptionSelect={props.handleOptionSelect} />}
+    </div>
   )
 }
 
 const Details = props => (
   <div>
     <div>
-      {props.options.map(Option)}
+      {props.options.map(option => {
+        const newProps = { option, handleOptionSelect: props.handleOptionSelect }
+        return props.selectedOptions.includes(option) ? SelectedOption(newProps) : Option(newProps)
+      })}
     </div>
     <Button handleAddItem={props.handleAddItem} id={props.id} />
   </div>
@@ -127,13 +149,13 @@ const Details = props => (
 
 const Option = props => {
   return (
-    <div className='p-3 d-inline-block' >{props.name}</div>
+    <div onClick={() => props.handleOptionSelect(props.option)} className='p-3 d-inline-block' >{props.option.name}</div>
   )
 }
 
 const SelectedOption = props => {
   return (
-    <div className='p-3 d-inline-block bg-primary text-light' >{props.name}</div>
+    <div onClick={() => props.handleOptionSelect(props.option)} className='p-3 d-inline-block bg-primary text-light' >{props.option.name}</div>
   )
 }
 
@@ -162,10 +184,14 @@ const CurrentOrder = props => {
   )
 }
 
-const ItemList = ({ items, handleAddItem, handleSelect, activeItem }) => {
+const ItemList = ({ items, handleAddItem, handleSelect, activeItem, selectedOptions, handleOptionSelect }) => {
   return items.map(item => {
-    const options = { ...item, handleAddItem, handleSelect, active: (activeItem === item.id) }
-    return <Item {...options} key={item.id} />
+    const active = activeItem === item.id
+    const props = { ...item, handleAddItem, handleSelect, handleOptionSelect, active }
+    if (active) {
+      props.selectedOptions = selectedOptions
+    }
+    return <Item {...props} key={item.id} />
   })
 }
 
