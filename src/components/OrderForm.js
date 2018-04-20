@@ -26,28 +26,13 @@ const ChevButton = ({onClick}) => (
   <button className="btn btn-primary" {...{onClick}} ><Icon icon='chevron-down' /></button>
 )
 
-class Item extends Component {
-  constructor() {
-    super()
-    this.state = {
-      active: false
-    }
-  }
-
-  render() {
-    return (
-      <div className='mb-3' >
-        <ChevButton onClick={this.toggleActive.bind(this)} /> {this.props.name}
-        {this.state.active && <Details handleClick={this.props.handleClick} id={this.props.id} />}
-      </div>
-    )
-  }
-
-  toggleActive() {
-    this.setState({
-      active: !this.state.active
-    })
-  }
+const Item = props => {
+  return (
+    <div className='mb-3' >
+    <ChevButton onClick={() => props.handleSelect(props.id)} /> {props.name}
+    {props.active && <Details handleClick={props.handleClick} id={props.id} />}
+  </div>
+  )
 }
 
 const Details = props => (
@@ -81,9 +66,9 @@ const CurrentOrder = props => {
   )
 }
 
-const ItemList = ({ items, handleClick }) => {
+const ItemList = ({ items, handleClick, handleSelect, activeItem }) => {
   return items.map(item => {
-    const options = { ...item, handleClick }
+    const options = { ...item, handleClick, handleSelect, active: (activeItem === item.id) }
     return <Item {...options} key={item.id} />
   })
 }
@@ -93,10 +78,13 @@ class OrderForm extends Component {
     super()
 
     this.state = {
-      currentItems: []
+      currentItems: [],
+      activeItem: null
     }
 
+    this.handleClick = this.handleClick.bind(this)
     this.handleRemove = this.handleRemove.bind(this)
+    this.handleSelect = this.handleSelect.bind(this)
   }
 
   render() {
@@ -107,7 +95,9 @@ class OrderForm extends Component {
 
     const itemListProps = {
       items,
-      handleClick: this.handleClick.bind(this)
+      handleClick: this.handleClick,
+      handleSelect: this.handleSelect,
+      activeItem: this.state.activeItem
     }
 
     const currentOrderProps = {
@@ -148,6 +138,19 @@ class OrderForm extends Component {
     this.setState({
       currentItems: this.state.currentItems.filter(({cuid}) => cuid !== itemCuid)
     })
+  }
+
+  handleSelect(id) {
+    if (this.state.activeItem === id) {
+      this.setState({
+        activeItem: null
+      })
+    } else {
+      this.setState({
+        activeItem: id
+      })
+    }
+
   }
 }
 
