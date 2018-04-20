@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
-import Menu from './Menu';
+import MenusPage from './MenusPage';
 
 class App extends Component {
   render() {
     return (
-      <div className="App container">
-        <Menu />
-      </div>
+      <Router>
+        <div className="App container">
+          <Switch>
+            <Route path={'/menus'} component={MenusPage} />
+          </Switch>
+        </div>
+      </Router>
     )
   }
 }

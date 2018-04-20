@@ -41,7 +41,7 @@ class Menu extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchMenu()
+    this.props.fetchMenu(this.props.match.params.menuId)
   }
 }
 

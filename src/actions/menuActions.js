@@ -1,8 +1,8 @@
-export function fetchMenu() {
+export function fetchMenu(menuId) {
   return dispatch => {
     dispatch({ type: 'LOADING_MENU' })
 
-    return fetch('/menus/1')
+    return fetch(`/menus/${menuId}`)
       .then(resp => resp.json())
       .then(resp => {
         dispatch({
