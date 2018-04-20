@@ -17,7 +17,7 @@ const Col = props => (
 )
 
 const Button = props => (
-  <button className="btn btn-primary" onClick={() => props.handleClick(props.id)} >
+  <button className="btn btn-primary" onClick={() => props.handleAddItem(props.id)} >
     <Icon icon='plus' /> Add to Order
   </button>
 )
@@ -35,7 +35,7 @@ class OrderForm extends Component {
       activeItem: null
     }
 
-    this.handleClick = this.handleClick.bind(this)
+    this.handleAddItem = this.handleAddItem.bind(this)
     this.handleRemove = this.handleRemove.bind(this)
     this.handleSelect = this.handleSelect.bind(this)
   }
@@ -48,7 +48,7 @@ class OrderForm extends Component {
 
     const itemListProps = {
       items,
-      handleClick: this.handleClick,
+      handleAddItem: this.handleAddItem,
       handleSelect: this.handleSelect,
       activeItem: this.state.activeItem
     }
@@ -73,7 +73,7 @@ class OrderForm extends Component {
     )
   }
 
-  handleClick(id) {
+  handleAddItem(id) {
     const items = []
     this.props.categories.forEach(category => {
       category.items.forEach(item => items.push(item))
@@ -111,7 +111,7 @@ const Item = props => {
   return (
     <div className='mb-3' >
     <ChevButton onClick={() => props.handleSelect(props.id)} /> {props.name}
-    {props.active && <Details handleClick={props.handleClick} id={props.id} options={props.options} />}
+    {props.active && <Details handleAddItem={props.handleAddItem} id={props.id} options={props.options} />}
   </div>
   )
 }
@@ -121,7 +121,7 @@ const Details = props => (
     <div>
       {props.options.map(Option)}
     </div>
-    <Button handleClick={props.handleClick} id={props.id} />
+    <Button handleAddItem={props.handleAddItem} id={props.id} />
   </div>
 )
 
@@ -162,9 +162,9 @@ const CurrentOrder = props => {
   )
 }
 
-const ItemList = ({ items, handleClick, handleSelect, activeItem }) => {
+const ItemList = ({ items, handleAddItem, handleSelect, activeItem }) => {
   return items.map(item => {
-    const options = { ...item, handleClick, handleSelect, active: (activeItem === item.id) }
+    const options = { ...item, handleAddItem, handleSelect, active: (activeItem === item.id) }
     return <Item {...options} key={item.id} />
   })
 }
