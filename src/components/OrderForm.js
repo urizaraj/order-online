@@ -26,53 +26,6 @@ const ChevButton = ({onClick}) => (
   <button className="btn btn-primary" {...{onClick}} ><Icon icon='chevron-down' /></button>
 )
 
-const Item = props => {
-  return (
-    <div className='mb-3' >
-    <ChevButton onClick={() => props.handleSelect(props.id)} /> {props.name}
-    {props.active && <Details handleClick={props.handleClick} id={props.id} />}
-  </div>
-  )
-}
-
-const Details = props => (
-  <div>
-    <Button handleClick={props.handleClick} id={props.id} />
-  </div>
-)
-
-const CurrentOrder = props => {
-  let total = 0
-
-  props.currentItems.forEach(item => {
-    total += item.price
-  })
-
-  const itemList = props.currentItems.map(item => {
-    return (
-      <div key={item.cuid} >
-        {item.name} <button onClick={() => props.handleRemove(item.cuid)} className='btn btn-link' ><Icon icon='times' /></button>
-      </div>
-    )
-  })
-
-  return (
-    <div>
-      <h4>Current Order</h4>
-      {itemList}
-      <h4>Total</h4>
-      ${total}
-    </div>
-  )
-}
-
-const ItemList = ({ items, handleClick, handleSelect, activeItem }) => {
-  return items.map(item => {
-    const options = { ...item, handleClick, handleSelect, active: (activeItem === item.id) }
-    return <Item {...options} key={item.id} />
-  })
-}
-
 class OrderForm extends Component {
   constructor() {
     super()
@@ -152,6 +105,68 @@ class OrderForm extends Component {
     }
 
   }
+}
+
+const Item = props => {
+  return (
+    <div className='mb-3' >
+    <ChevButton onClick={() => props.handleSelect(props.id)} /> {props.name}
+    {props.active && <Details handleClick={props.handleClick} id={props.id} options={props.options} />}
+  </div>
+  )
+}
+
+const Details = props => (
+  <div>
+    <div>
+      {props.options.map(Option)}
+    </div>
+    <Button handleClick={props.handleClick} id={props.id} />
+  </div>
+)
+
+const Option = props => {
+  return (
+    <div className='p-3 d-inline-block' >{props.name}</div>
+  )
+}
+
+const SelectedOption = props => {
+  return (
+    <div className='p-3 d-inline-block bg-primary text-light' >{props.name}</div>
+  )
+}
+
+const CurrentOrder = props => {
+  let total = 0
+
+  props.currentItems.forEach(item => {
+    total += item.price
+  })
+
+  const itemList = props.currentItems.map(item => {
+    return (
+      <div key={item.cuid} >
+        {item.name} <button onClick={() => props.handleRemove(item.cuid)} className='btn btn-link' ><Icon icon='times' /></button>
+      </div>
+    )
+  })
+
+  return (
+    <div>
+      <h4>Current Order</h4>
+      {itemList}
+      <h4>Total</h4>
+      ${total}
+    </div>
+  )
+}
+
+const ItemList = ({ items, handleClick, handleSelect, activeItem }) => {
+  return items.map(item => {
+    const options = { ...item, handleClick, handleSelect, active: (activeItem === item.id) }
+    return <Item {...options} key={item.id} />
+  })
 }
 
 export default OrderForm
