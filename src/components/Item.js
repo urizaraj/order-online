@@ -25,6 +25,10 @@ const Item = props => {
   )
 }
 
+const ChevButton = ({ onClick }) => (
+  <button className="btn btn-primary" {...{ onClick }} ><Icon icon='chevron-down' /></button>
+)
+
 class Details extends Component {
   constructor() {
     super()
@@ -62,16 +66,6 @@ const OptionList = props => {
   })
 }
 
-const ChevButton = ({ onClick }) => (
-  <button className="btn btn-primary" {...{ onClick }} ><Icon icon='chevron-down' /></button>
-)
-
-const Button = props => (
-  <button className="btn btn-primary" onClick={props.handleAddItem} >
-    <Icon icon='plus' /> Add to Order
-  </button>
-)
-
 const Option = props => {
   let className = 'p-3 d-inline-block'
   if (props.selected) { className += ' bg-primary text-light' }
@@ -81,10 +75,14 @@ const Option = props => {
     className
   }
 
-  return (
-    <div {...params}> {props.option.name} </div>
-  )
+  return <div {...params}> {props.option.name} </div>
 }
+
+const Button = props => (
+  <button className="btn btn-primary" onClick={props.handleAddItem} >
+    <Icon icon='plus' /> Add to Order
+  </button>
+)
 
 // connect to store
 
