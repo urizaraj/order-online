@@ -5,7 +5,7 @@ import Icon from '@fortawesome/react-fontawesome'
 import cuid from 'cuid'
 // import { addActiveItem, removeActiveItem } from '../actions/activeItemActions'
 import Item from './Item'
-import { removeOrderItem } from '../actions/orderActions'
+import { removeOrderItem, saveOrder } from '../actions/orderActions'
 
 // const e = React.createElement
 
@@ -85,6 +85,9 @@ let CurrentOrder = props => {
           ${total}
         </div>
       </div>
+      <button className='btn btn-primary btn-block' onClick={() => props.saveOrder()} >
+        Save Order
+      </button>
     </div>
   )
 }
@@ -106,7 +109,7 @@ const mapStateToCurrentOrderProps = state => {
 }
 
 const mapDispatchToProps = dispatch => {
-  const actions = { removeOrderItem }
+  const actions = { removeOrderItem, saveOrder }
   return bindActionCreators(actions, dispatch)
 }
 
