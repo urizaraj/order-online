@@ -4,12 +4,23 @@ import { connect } from 'react-redux'
 import Icon from '@fortawesome/react-fontawesome'
 import cuid from 'cuid'
 import { toggleActiveItem } from '../actions/activeItemActions'
+import { addOrderItem } from '../actions/orderActions'
 
 const Item = props => {
+  const detailsProps = {
+    options: props.options,
+    addOrderItem: props.addOrderItem,
+    item: {
+      id: props.id,
+      name: props.name,
+      price: props.price,
+    }
+  }
+
   return (
     <div className='mb-3' >
       <ChevButton onClick={() => props.toggleActiveItem(props.active, props.id)} /> {props.name}
-      {props.active && <Details options={props.options} />}
+      {props.active && <Details {...detailsProps} />}
     </div>
   )
 }
@@ -30,6 +41,7 @@ const Details = props => {
   return (
     <div>
       {props.options.map(option => <div>{option.name}</div>)}
+      <Button handleAddItem={ () => props.addOrderItem(props.item) } />
     </div>
   )
 }
@@ -39,7 +51,7 @@ const ChevButton = ({ onClick }) => (
 )
 
 const Button = props => (
-  <button className="btn btn-primary" onClick={() => props.handleAddItem(props.id)} >
+  <button className="btn btn-primary" onClick={ props.handleAddItem } >
     <Icon icon='plus' /> Add to Order
   </button>
 )
@@ -63,7 +75,7 @@ const mapStateToProps = (state, own) => {
 }
 
 const mapDispatchToProps = dispatch => {
-  const actions = { toggleActiveItem }
+  const actions = { toggleActiveItem, addOrderItem }
   return bindActionCreators(actions, dispatch)
 }
 

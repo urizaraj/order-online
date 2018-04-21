@@ -101,17 +101,18 @@ class OrderForm extends Component {
   }
 }
 
-const CurrentOrder = props => {
+let CurrentOrder = props => {
   let total = 0
 
-  props.currentItems.forEach(item => {
+  props.orderItems.forEach(item => {
     total += item.price
   })
 
-  const itemList = props.currentItems.map(item => {
+  const itemList = props.orderItems.map(item => {
+    const cid = cuid()
     return (
-      <div key={item.cuid} >
-        {item.name} <button onClick={() => props.handleRemove(item.cuid)} className='btn btn-link' ><Icon icon='times' /></button>
+      <div key={cid} >
+        {item.name} <button onClick={() => props.handleRemove(cid)} className='btn btn-link' ><Icon icon='times' /></button>
       </div>
     )
   })
@@ -136,5 +137,13 @@ const ItemList = ({ items, handleAddItem, selectedOptions, handleOptionSelect })
 const mapStateToProps = state => {
   return { selectedOptions: state.activeItem.options }
 }
+
+const mapStateToCurrentOrderProps = state => {
+  return {
+    orderItems: state.order.items
+  }
+}
+
+CurrentOrder = connect(mapStateToCurrentOrderProps)(CurrentOrder)
 
 export default OrderForm = connect(mapStateToProps)(OrderForm)
