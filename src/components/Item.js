@@ -45,6 +45,7 @@ class Details extends Component {
     return (
       <div>
         <OptionList {...{options, handleClick: this.handleClick, selectedOptions}} />
+        <br/>
         <Button handleAddItem={() => addOrderItem(item, selectedOptions)} />
       </div>
     )
@@ -75,7 +76,7 @@ const OptionList = props => {
 }
 
 const Option = props => {
-  let className = 'p-3 d-inline-block'
+  let className = 'p-2 d-inline-block'
   if (props.selected) { className += ' bg-primary text-light' }
 
   const params = {
@@ -83,7 +84,7 @@ const Option = props => {
     className
   }
 
-  return <div {...params}> {props.option.name} </div>
+  return <div {...params}> {props.selected && <Icon icon='check' />} {props.option.name} - ${props.option.price} </div>
 }
 
 const Button = props => (
