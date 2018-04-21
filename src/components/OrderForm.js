@@ -55,13 +55,17 @@ let CurrentOrder = props => {
   let total = 0
 
   props.orderItems.forEach(item => {
-    total += item.price
+
   })
 
   const itemList = props.orderItems.map(item => {
+    let itemPrice = item.price
+    item.selectedOptions.forEach(({price}) => (itemPrice += price))
+    total += itemPrice
+
     return (
       <div key={item.cuid} >
-        <button onClick={() => props.removeOrderItem(item.cuid)} className='btn btn-link' ><Icon icon='times' /></button> {item.name}
+        <button onClick={() => props.removeOrderItem(item.cuid)} className='btn btn-link' ><Icon icon='times' /></button> {item.name} - ${itemPrice}
       </div>
     )
   })
