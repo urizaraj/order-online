@@ -6,5 +6,5 @@ export function addActiveItem(item) {
 }
 
 export function removeActiveItem() {
-  return {type: 'REMOVE_ACTIVE_ITEM'}
+  return { type: 'REMOVE_ACTIVE_ITEM' }
 }
