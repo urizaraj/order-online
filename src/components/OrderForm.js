@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { bindActionCreators } from 'redux'
+// import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import Icon from '@fortawesome/react-fontawesome'
 import cuid from 'cuid'
-import { addActiveItem, removeActiveItem } from '../actions/activeItemActions'
+// import { addActiveItem, removeActiveItem } from '../actions/activeItemActions'
 import Item from './Item'
 
 // const e = React.createElement
@@ -30,7 +30,6 @@ class OrderForm extends Component {
 
     this.handleAddItem = this.handleAddItem.bind(this)
     this.handleRemove = this.handleRemove.bind(this)
-    this.handleSelect = this.handleSelect.bind(this)
     this.handleOptionSelect = this.handleOptionSelect.bind(this)
   }
 
@@ -44,8 +43,6 @@ class OrderForm extends Component {
       items,
       handleOptionSelect: this.handleOptionSelect,
       handleAddItem: this.handleAddItem,
-      handleSelect: this.handleSelect,
-      activeItem: this.props.activeItem,
       selectedOptions: this.props.selectedOptions
     }
 
@@ -89,14 +86,6 @@ class OrderForm extends Component {
     })
   }
 
-  handleSelect(id) {
-    if (this.props.activeItem === id) {
-      this.props.removeActiveItem()
-    } else {
-      this.props.addActiveItem(id)
-    }
-  }
-
   handleOptionSelect(option) {
     const selectedOptions = [...this.state.selectedOptions]
 
@@ -137,28 +126,15 @@ const CurrentOrder = props => {
   )
 }
 
-const ItemList = ({ items, handleAddItem, handleSelect, activeItem, selectedOptions, handleOptionSelect }) => {
+const ItemList = ({ items, handleAddItem, selectedOptions, handleOptionSelect }) => {
   return items.map(item => {
-    const active = activeItem === item.id
-    const props = { ...item, handleAddItem, handleSelect, handleOptionSelect, active }
-    if (active) {
-      props.selectedOptions = selectedOptions
-    }
+    const props = { ...item, handleAddItem, handleOptionSelect }
     return <Item {...props} key={item.id} />
   })
 }
 
 const mapStateToProps = state => {
-  return { activeItem: state.activeItem.item, selectedOptions: state.activeItem.options }
+  return { selectedOptions: state.activeItem.options }
 }
 
-const mapDispatchToProps = dispatch => {
-  const actions = {
-    addActiveItem,
-    removeActiveItem
-  }
-
-  return bindActionCreators(actions, dispatch)
-}
-
-export default OrderForm = connect(mapStateToProps, mapDispatchToProps)(OrderForm)
+export default OrderForm = connect(mapStateToProps)(OrderForm)
