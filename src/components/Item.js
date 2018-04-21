@@ -25,25 +25,41 @@ const Item = props => {
   )
 }
 
-// const Details = props => (
-//   <div>
-//     <div>
-//       {props.options.map(option => {
-//         const newProps = { option, handleOptionSelect: props.handleOptionSelect }
-//         return props.selectedOptions.includes(option) ? SelectedOption(newProps) : Option(newProps)
-//       })}
-//     </div>
-//     <Button handleAddItem={props.handleAddItem} id={props.id} />
-//   </div>
-// )
+class Details extends Component {
+  constructor() {
+    super()
 
-const Details = props => {
-  return (
-    <div>
-      {props.options.map(option => <div>{option.name}</div>)}
-      <Button handleAddItem={ () => props.addOrderItem(props.item) } />
-    </div>
-  )
+    this.state = {
+      selectedOptions: []
+    }
+    this.handleClick = this.handleClick.bind(this)
+  }
+
+  render() {
+    const { addOrderItem, item, options } = this.props
+    return (
+      <div>
+        <OptionList {...{options, handleClick: this.handleClick, selectedOptions: this.state.selectedOptions}} />
+        <Button handleAddItem={() => addOrderItem(item)} />
+      </div>
+    )
+  }
+
+  handleClick(option) {
+    this.setState({
+      selectedOptions: [...this.state.selectedOptions, option]
+    })
+  }
+}
+
+const OptionList = props => {
+  return props.options.map(option => {
+    const selected = props.selectedOptions.includes(option)
+    const handleClick = props.handleClick
+    return (
+      <Option {...{ option, handleClick, selected }} />
+    )
+  })
 }
 
 const ChevButton = ({ onClick }) => (
@@ -51,22 +67,26 @@ const ChevButton = ({ onClick }) => (
 )
 
 const Button = props => (
-  <button className="btn btn-primary" onClick={ props.handleAddItem } >
+  <button className="btn btn-primary" onClick={props.handleAddItem} >
     <Icon icon='plus' /> Add to Order
   </button>
 )
 
 const Option = props => {
+  let className = 'p-3 d-inline-block'
+  if (props.selected) { className += ' bg-primary text-light' }
+
+  const params = {
+    onClick: () => props.handleClick(props.option),
+    className
+  }
+
   return (
-    <div onClick={() => props.handleOptionSelect(props.option)} className='p-3 d-inline-block' >{props.option.name}</div>
+    <div {...params}> {props.option.name} </div>
   )
 }
 
-const SelectedOption = props => {
-  return (
-    <div onClick={() => props.handleOptionSelect(props.option)} className='p-3 d-inline-block bg-primary text-light' >{props.option.name}</div>
-  )
-}
+// connect to store
 
 const mapStateToProps = (state, own) => {
   const active = state.activeItem.item === own.id
