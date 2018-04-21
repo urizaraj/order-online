@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Work+Sans');
+// @import url('https://fonts.googleapis.com/css?family=Work+Sans');
 
 $font-family-base: 'Work Sans', sans-serif;
 
@@ -8,13 +8,15 @@ $enable-shadows: true;
 $theme-colors: (
   light: #edf2f4,
   dark: #2b2d42,
-  primary: #0e6ba8
+  primary: #192bc2,
+  secondary: #6b2737
 );
 
 $body-bg: #edf2f4;
 $body-color: #2b2d42;
 
 @import "../node_modules/bootstrap/scss/bootstrap";
+
 
 .container {
   @extend .px-3;
