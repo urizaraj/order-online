@@ -70,7 +70,7 @@ const OptionList = props => {
     const selected = props.selectedOptions.includes(option)
     const handleClick = props.handleClick
     return (
-      <Option {...{ option, handleClick, selected }} />
+      <Option key={option.id} {...{ option, handleClick, selected }} />
     )
   })
 }
