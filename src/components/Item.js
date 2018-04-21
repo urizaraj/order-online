@@ -3,12 +3,12 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import Icon from '@fortawesome/react-fontawesome'
 import cuid from 'cuid'
-import { addActiveItem, removeActiveItem } from '../actions/activeItemActions'
+import { toggleActiveItem } from '../actions/activeItemActions'
 
 const Item = props => {
   return (
     <div className='mb-3' >
-      <ChevButton onClick={() => props.handleSelect(props.id)} /> {props.name}
+      <ChevButton onClick={() => props.toggleActiveItem(props.active, props.id)} /> {props.name}
       {props.active && <Details options={props.options} />}
     </div>
   )
@@ -62,4 +62,9 @@ const mapStateToProps = (state, own) => {
   return { active }
 }
 
-export default connect(mapStateToProps)(Item)
+const mapDispatchToProps = dispatch => {
+  const actions = { toggleActiveItem }
+  return bindActionCreators(actions, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Item)
