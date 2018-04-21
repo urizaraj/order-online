@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 import Icon from '@fortawesome/react-fontawesome'
 import cuid from 'cuid'
+import { addActiveItem, removeActiveItem } from '../actions/activeItemActions'
 
 // const e = React.createElement
 
@@ -32,8 +35,6 @@ class OrderForm extends Component {
 
     this.state = {
       currentItems: [],
-      activeItem: null,
-      selectedOptions: []
     }
 
     this.handleAddItem = this.handleAddItem.bind(this)
@@ -53,8 +54,8 @@ class OrderForm extends Component {
       handleOptionSelect: this.handleOptionSelect,
       handleAddItem: this.handleAddItem,
       handleSelect: this.handleSelect,
-      activeItem: this.state.activeItem,
-      selectedOptions: this.state.selectedOptions
+      activeItem: this.props.activeItem,
+      selectedOptions: this.props.selectedOptions
     }
 
     const currentOrderProps = {
@@ -98,17 +99,11 @@ class OrderForm extends Component {
   }
 
   handleSelect(id) {
-    if (this.state.activeItem === id) {
-      this.setState({
-        activeItem: null,
-        selectedOptions: []
-      })
+    if (this.props.activeItem === id) {
+      this.props.removeActiveItem()
     } else {
-      this.setState({
-        activeItem: id
-      })
+      this.props.addActiveItem(id)
     }
-
   }
 
   handleOptionSelect(option) {
@@ -195,4 +190,17 @@ const ItemList = ({ items, handleAddItem, handleSelect, activeItem, selectedOpti
   })
 }
 
-export default OrderForm
+const mapStateToProps = state => {
+  return { activeItem: state.activeItem.item, selectedOptions: state.activeItem.options }
+}
+
+const mapDispatchToProps = dispatch => {
+  const actions = {
+    addActiveItem,
+    removeActiveItem
+  }
+
+  return bindActionCreators(actions, dispatch)
+}
+
+export default OrderForm = connect(mapStateToProps, mapDispatchToProps)(OrderForm)

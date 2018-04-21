@@ -1,9 +1,14 @@
-const activeItemReducer = (state = {activeItem: null, selectedOptions: []}, action) => {
+const activeItemReducer = (state = {item: null, options: []}, action) => {
   switch(action.type) {
     case 'ADD_ACTIVE_ITEM':
-      return state
+      return {item: action.payload, options: []}
 
-    default: 
+    case 'REMOVE_ACTIVE_ITEM':
+      return {item: null, options: []}
+
+    default:
       return state
   }
 }
+
+export default activeItemReducer
