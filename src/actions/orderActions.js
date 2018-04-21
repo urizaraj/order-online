@@ -1,9 +1,9 @@
 import cuid from 'cuid'
 
-export function addOrderItem(item, selectedOptions) {
+export function addOrderItem(item, selectedOptions, text) {
   return {
     type: 'ADD_ORDER_ITEM',
-    item: {...item, cuid: cuid(), selectedOptions}
+    item: {...item, cuid: cuid(), selectedOptions, instructions: text}
   }
 }
 

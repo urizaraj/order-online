@@ -19,7 +19,9 @@ const Item = props => {
 
   return (
     <div className='mb-3' >
-      <ChevButton onClick={() => props.toggleActiveItem(props.active, props.id)} /> {props.name}
+      <div className='mb-3' >
+        <ChevButton onClick={() => props.toggleActiveItem(props.active, props.id)} /> {props.name}
+      </div>
       {props.active && <Details {...detailsProps} />}
     </div>
   )
@@ -34,9 +36,11 @@ class Details extends Component {
     super()
 
     this.state = {
-      selectedOptions: []
+      selectedOptions: [],
+      text: ''
     }
     this.handleClick = this.handleClick.bind(this)
+    this.handleChange = this.handleChange.bind(this)
   }
 
   render() {
@@ -44,9 +48,16 @@ class Details extends Component {
     const selectedOptions = this.state.selectedOptions
     return (
       <div>
-        <OptionList {...{options, handleClick: this.handleClick, selectedOptions}} />
-        <br/>
-        <Button handleAddItem={() => addOrderItem(item, selectedOptions)} />
+        <div className='mb-3' >
+          <OptionList {...{options, handleClick: this.handleClick, selectedOptions}} />
+        </div>
+
+        <div className='mb-3' >
+          <small>special instructions: </small>
+          <input type='text' value={this.state.text} onChange={this.handleChange} className='form-control form-control-sm' />
+        </div>
+
+        <Button handleAddItem={() => addOrderItem(item, selectedOptions, this.state.text)} />
       </div>
     )
   }
@@ -62,6 +73,12 @@ class Details extends Component {
         selectedOptions: [...selectedOptions, option]
       })
     }
+  }
+
+  handleChange(event) {
+    this.setState({
+      text: event.target.value
+    })
   }
 }
 
@@ -84,7 +101,7 @@ const Option = props => {
     className
   }
 
-  return <div {...params}> {props.selected && <Icon icon='check' />} {props.option.name} - ${props.option.price} </div>
+  return <div {...params}> <Icon icon={props.selected ? 'check' : 'plus'} fixedWidth /> {props.option.name} - ${props.option.price} </div>
 }
 
 const Button = props => (
