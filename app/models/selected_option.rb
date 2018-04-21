@@ -1,0 +1,2 @@
+class SelectedOption < ApplicationRecord
+end

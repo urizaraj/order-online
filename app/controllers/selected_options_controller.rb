@@ -1,0 +1,2 @@
+class SelectedOptionsController < ApplicationController
+end
