@@ -28,10 +28,6 @@ class OrderForm extends Component {
     this.state = {
       currentItems: [],
     }
-
-    this.handleAddItem = this.handleAddItem.bind(this)
-    this.handleRemove = this.handleRemove.bind(this)
-    this.handleOptionSelect = this.handleOptionSelect.bind(this)
   }
 
   render() {
@@ -40,65 +36,18 @@ class OrderForm extends Component {
       category.items.forEach(item => items.push(item))
     })
 
-    const itemListProps = {
-      items,
-      handleOptionSelect: this.handleOptionSelect,
-      handleAddItem: this.handleAddItem,
-      selectedOptions: this.props.selectedOptions
-    }
-
-    const currentOrderProps = {
-      items,
-      handleRemove: this.handleRemove,
-      currentItems: this.state.currentItems
-    }
-
     return (
       <div>
         <Row>
           <Col>
-            <ItemList {...itemListProps} />
+            <ItemList {...{ items }} />
           </Col>
           <Col>
-            <CurrentOrder {...currentOrderProps} />
+            <CurrentOrder {...{ items }} />
           </Col>
         </Row>
       </div>
     )
-  }
-
-  handleAddItem(id) {
-    const items = []
-    this.props.categories.forEach(category => {
-      category.items.forEach(item => items.push(item))
-    })
-
-    const item = { ...items.find(i => i.id === id) }
-    item.cuid = cuid()
-
-    this.setState({
-      currentItems: [...this.state.currentItems, item]
-    })
-  }
-
-  handleRemove(itemCuid) {
-    this.setState({
-      currentItems: this.state.currentItems.filter(({ cuid }) => cuid !== itemCuid)
-    })
-  }
-
-  handleOptionSelect(option) {
-    const selectedOptions = [...this.state.selectedOptions]
-
-    if (selectedOptions.includes(option)) {
-      this.setState({
-        selectedOptions: selectedOptions.filter(o => o !== option)
-      })
-    } else {
-      this.setState({
-        selectedOptions: [...this.state.selectedOptions, option]
-      })
-    }
   }
 }
 
@@ -110,10 +59,9 @@ let CurrentOrder = props => {
   })
 
   const itemList = props.orderItems.map(item => {
-    const cid = cuid()
     return (
       <div key={item.cuid} >
-        {item.name} <button onClick={() => props.removeOrderItem(item.cuid)} className='btn btn-link' ><Icon icon='times' /></button>
+        <button onClick={() => props.removeOrderItem(item.cuid)} className='btn btn-link' ><Icon icon='times' /></button> {item.name}
       </div>
     )
   })
@@ -128,12 +76,11 @@ let CurrentOrder = props => {
   )
 }
 
-const ItemList = ({ items, handleAddItem, selectedOptions, handleOptionSelect }) => {
-  return items.map(item => {
-    const props = { ...item, handleAddItem, handleOptionSelect }
-    return <Item {...props} key={item.id} />
-  })
+const ItemList = ({ items }) => {
+  return items.map(item => <Item {...item} key={item.id} />)
 }
+
+// connecting to the store
 
 const mapStateToProps = state => {
   return { selectedOptions: state.activeItem.options }
