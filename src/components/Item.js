@@ -41,18 +41,26 @@ class Details extends Component {
 
   render() {
     const { addOrderItem, item, options } = this.props
+    const selectedOptions = this.state.selectedOptions
     return (
       <div>
-        <OptionList {...{options, handleClick: this.handleClick, selectedOptions: this.state.selectedOptions}} />
-        <Button handleAddItem={() => addOrderItem(item)} />
+        <OptionList {...{options, handleClick: this.handleClick, selectedOptions}} />
+        <Button handleAddItem={() => addOrderItem(item, selectedOptions)} />
       </div>
     )
   }
 
   handleClick(option) {
-    this.setState({
-      selectedOptions: [...this.state.selectedOptions, option]
-    })
+    const selectedOptions = this.state.selectedOptions
+    if (selectedOptions.includes(option)) {
+      this.setState({
+        selectedOptions: selectedOptions.filter(o => o !== option)
+      })
+    } else {
+      this.setState({
+        selectedOptions: [...selectedOptions, option]
+      })
+    }
   }
 }
 
