@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-// import { bindActionCreators } from 'redux'
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import Icon from '@fortawesome/react-fontawesome'
 import cuid from 'cuid'
 // import { addActiveItem, removeActiveItem } from '../actions/activeItemActions'
 import Item from './Item'
+import { removeOrderItem } from '../actions/orderActions'
 
 // const e = React.createElement
 
@@ -111,8 +112,8 @@ let CurrentOrder = props => {
   const itemList = props.orderItems.map(item => {
     const cid = cuid()
     return (
-      <div key={cid} >
-        {item.name} <button onClick={() => props.handleRemove(cid)} className='btn btn-link' ><Icon icon='times' /></button>
+      <div key={item.cuid} >
+        {item.name} <button onClick={() => props.removeOrderItem(item.cuid)} className='btn btn-link' ><Icon icon='times' /></button>
       </div>
     )
   })
@@ -144,6 +145,11 @@ const mapStateToCurrentOrderProps = state => {
   }
 }
 
-CurrentOrder = connect(mapStateToCurrentOrderProps)(CurrentOrder)
+const mapDispatchToProps = dispatch => {
+  const actions = { removeOrderItem }
+  return bindActionCreators(actions, dispatch)
+}
+
+CurrentOrder = connect(mapStateToCurrentOrderProps, mapDispatchToProps)(CurrentOrder)
 
 export default OrderForm = connect(mapStateToProps)(OrderForm)
