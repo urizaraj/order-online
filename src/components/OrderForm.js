@@ -60,12 +60,17 @@ let CurrentOrder = props => {
 
   const itemList = props.orderItems.map(item => {
     let itemPrice = item.price
-    item.selectedOptions.forEach(({price}) => (itemPrice += price))
+    item.selectedOptions.forEach(({ price }) => (itemPrice += price))
     total += itemPrice
 
     return (
-      <div key={item.cuid} >
-        <button onClick={() => props.removeOrderItem(item.cuid)} className='btn btn-link' ><Icon icon='times' /></button> {item.name} - ${itemPrice}
+      <div key={item.cuid} className='d-flex'  >
+        <div className='p-2' >
+          <button onClick={() => props.removeOrderItem(item.cuid)} className='btn btn-link' ><Icon icon='times' /></button> {item.name}
+        </div>
+        <div className='ml-auto align-self-center p-2' >
+          ${itemPrice}
+        </div>
       </div>
     )
   })
@@ -74,8 +79,12 @@ let CurrentOrder = props => {
     <div>
       <h4>Current Order</h4>
       {itemList}
-      <h4>Total</h4>
-      ${total}
+      <div className='d-flex' >
+        <h4 className='align-self-center mb-0' >Total</h4>
+        <div className='ml-auto p-2' >
+          ${total}
+        </div>
+      </div>
     </div>
   )
 }
