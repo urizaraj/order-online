@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import Icon from '@fortawesome/react-fontawesome'
 import cuid from 'cuid'
 import { addActiveItem, removeActiveItem } from '../actions/activeItemActions'
+import Item from './Item'
 
 // const e = React.createElement
 
@@ -17,16 +18,6 @@ const Col = props => (
   <div className='col' >
     {props.children}
   </div>
-)
-
-const Button = props => (
-  <button className="btn btn-primary" onClick={() => props.handleAddItem(props.id)} >
-    <Icon icon='plus' /> Add to Order
-  </button>
-)
-
-const ChevButton = ({ onClick }) => (
-  <button className="btn btn-primary" {...{ onClick }} ><Icon icon='chevron-down' /></button>
 )
 
 class OrderForm extends Component {
@@ -119,39 +110,6 @@ class OrderForm extends Component {
       })
     }
   }
-}
-
-const Item = props => {
-  return (
-    <div className='mb-3' >
-      <ChevButton onClick={() => props.handleSelect(props.id)} /> {props.name}
-      {props.active && <Details handleAddItem={props.handleAddItem} id={props.id} options={props.options} selectedOptions={props.selectedOptions} handleOptionSelect={props.handleOptionSelect} />}
-    </div>
-  )
-}
-
-const Details = props => (
-  <div>
-    <div>
-      {props.options.map(option => {
-        const newProps = { option, handleOptionSelect: props.handleOptionSelect }
-        return props.selectedOptions.includes(option) ? SelectedOption(newProps) : Option(newProps)
-      })}
-    </div>
-    <Button handleAddItem={props.handleAddItem} id={props.id} />
-  </div>
-)
-
-const Option = props => {
-  return (
-    <div onClick={() => props.handleOptionSelect(props.option)} className='p-3 d-inline-block' >{props.option.name}</div>
-  )
-}
-
-const SelectedOption = props => {
-  return (
-    <div onClick={() => props.handleOptionSelect(props.option)} className='p-3 d-inline-block bg-primary text-light' >{props.option.name}</div>
-  )
 }
 
 const CurrentOrder = props => {
