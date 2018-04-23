@@ -34,3 +34,9 @@ export function saveOrder() {
       })
   }
 }
+
+export function resetOrder() {
+  return {
+    type: 'RESET_ORDER'
+  }
+}

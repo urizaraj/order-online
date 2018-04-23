@@ -6,6 +6,9 @@ const orderReducer = (state = { items: [] }, action) => {
     case 'REMOVE_ORDER_ITEM':
       return { items: state.items.filter(item => item.cuid !== action.cuid)}
 
+    case 'RESET_ORDER':
+      return {items: []}
+
     default:
       return state
   }

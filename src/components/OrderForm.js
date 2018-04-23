@@ -5,7 +5,7 @@ import Icon from '@fortawesome/react-fontawesome'
 // import cuid from 'cuid'
 // import { addActiveItem, removeActiveItem } from '../actions/activeItemActions'
 import Item from './Item'
-import { removeOrderItem, saveOrder } from '../actions/orderActions'
+import { removeOrderItem, saveOrder, resetOrder } from '../actions/orderActions'
 
 // const e = React.createElement
 
@@ -48,6 +48,10 @@ class OrderForm extends Component {
         </Row>
       </div>
     )
+  }
+
+  componentWillUnmount() {
+    this.props.resetOrder()
   }
 }
 
@@ -113,6 +117,11 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators(actions, dispatch)
 }
 
+const mapDispatchToOrderFormProps = dispatch => {
+  const actions = { resetOrder }
+  return bindActionCreators(actions, dispatch)
+}
+
 CurrentOrder = connect(mapStateToCurrentOrderProps, mapDispatchToProps)(CurrentOrder)
 
-export default OrderForm = connect(mapStateToProps)(OrderForm)
+export default OrderForm = connect(mapStateToProps, mapDispatchToOrderFormProps)(OrderForm)
