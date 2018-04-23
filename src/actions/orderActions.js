@@ -18,12 +18,17 @@ export function saveOrder() {
   return (dispatch, getState) => {
     dispatch({ type: 'SAVING_ORDER' })
     const order = getState().order
+
     const options = {
       method: 'POST',
-      body: order
+      body: JSON.stringify({order: order}),
+      headers: {
+        'Content-Type': 'application/json'
+      }
     }
-    return fetch('/orders', options)
-      .then(resp => resp.json())
+
+    return fetch('/orders.json', options)
+      .then(resp => resp.text())
       .then(resp => {
         dispatch({ type: 'ORDER_SAVED' })
       })
