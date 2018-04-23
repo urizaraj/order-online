@@ -1,18 +1,22 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
+import NavBar from './NavBar'
 import MenusPage from './MenusPage';
+import LocationsPage from './LocationsPage'
 
 class App extends Component {
   render() {
     return (
-      <div className="App container">
-        <Router>
+      <Router>
+        <div className="App container h-100">
+          <NavBar />
           <Switch>
-            <Route path={'/menus'} component={MenusPage} />
+            <Route path='/menus' component={MenusPage} />
+            <Route path='/locations' component={LocationsPage} />
           </Switch>
-        </Router>
-      </div>
+        </div>
+      </Router>
     )
   }
 }
