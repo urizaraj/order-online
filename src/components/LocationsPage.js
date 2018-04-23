@@ -1,9 +1,10 @@
 import React from 'react'
+import LocationsIndex from './LocationsIndex'
 
 const LocationsPage = props => {
   return (
     <div>
-      Locations Page
+      <LocationsIndex />
     </div>
   )
 }

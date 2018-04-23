@@ -5,7 +5,7 @@ export function fetchLocations() {
     return fetch('/locations')
       .then(resp => resp.json())
       .then(resp => {
-        dispatch({ type: 'FETCH_LOCATIONS', locations: resp.locations })
+        dispatch({ type: 'FETCH_LOCATIONS', locations: resp })
       })
   }
 }
