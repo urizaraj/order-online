@@ -9,4 +9,6 @@ Rails.application.routes.draw do
   resources :orders
   resources :order_items
   resources :selected_options
+
+  post '/users/sign_in', to: 'users#sign_in'
 end
