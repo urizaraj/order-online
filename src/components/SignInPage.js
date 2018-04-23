@@ -1,4 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { userSignIn } from '../actions/userActions'
 
 class SignInPage extends Component {
   constructor() {
@@ -29,21 +32,14 @@ class SignInPage extends Component {
     })
   }
 
-  handleSubmit(event) {
-    const options = {
-      method: 'POST',
-      body: JSON.stringify(this.state),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    }
-
-    fetch('/users/sign_in', options)
-      .then(resp => resp.json())
-      .then(resp => {
-        console.log(resp)
-      })
+  handleSubmit() {
+    this.props.userSignIn(this.state)
   }
 }
 
-export default SignInPage
+const mapDispatch = dispatch => {
+  const actions = { userSignIn }
+  return bindActionCreators(actions, dispatch)
+}
+
+export default connect(null, mapDispatch)(SignInPage)

@@ -10,6 +10,6 @@ class UsersController < ApplicationController
 
     token = JWT.encode payload, nil, 'none'
 
-    render json: {token: token}
+    render json: {token: token, id: user.id, name: user.name}
   end
 end

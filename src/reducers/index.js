@@ -3,12 +3,14 @@ import menuReducer from './menuReducer'
 import activeItemReducer from './activeItemReducer'
 import orderReducer from './orderReducer'
 import locationReducer from './locationReducer'
+import userReducer from './userReducer'
 
 const rootReducer = combineReducers({
   menu: menuReducer,
   activeItem: activeItemReducer,
   order: orderReducer,
-  locations: locationReducer
+  locations: locationReducer,
+  user: userReducer
 })
 
 export default rootReducer
