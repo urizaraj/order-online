@@ -3,6 +3,9 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { fetchLocation } from '../actions/locationActions'
 import { NavLink } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
+
+import Menu from './Menu'
 
 class LocationsShow extends Component {
   render() {
@@ -12,7 +15,10 @@ class LocationsShow extends Component {
         <div>
           {this.props.description}
         </div>
-        <MenuList menus={this.props.menus} />
+        <MenuList menus={this.props.menus} url={this.props.match.url} />
+        <Switch>
+          <Route path={`${this.props.match.url}/menus/:menuId`} component={Menu} />
+        </Switch>
       </div>
     )
   }
@@ -26,7 +32,7 @@ const MenuList = props => {
   const menus = props.menus || []
   return menus.map(menu => (
     <div key={menu.id} >
-      <NavLink to={`/menus/${menu.id}`} >{menu.name}</NavLink>
+      <NavLink to={`${props.url}/menus/${menu.id}`} >{menu.name}</NavLink>
     </div>
   ))
 }
