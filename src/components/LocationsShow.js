@@ -2,12 +2,17 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { fetchLocation } from '../actions/locationActions'
+import { NavLink } from 'react-router-dom'
 
 class LocationsShow extends Component {
   render() {
     return (
       <div>
         <h1>{this.props.name}</h1>
+        <div>
+          {this.props.description}
+        </div>
+        <MenuList menus={this.props.menus} />
       </div>
     )
   }
@@ -15,6 +20,15 @@ class LocationsShow extends Component {
   componentDidMount() {
     this.props.fetchLocation(this.props.match.params.locationId)
   }
+}
+
+const MenuList = props => {
+  const menus = props.menus || []
+  return menus.map(menu => (
+    <div key={menu.id} >
+      <NavLink to={`/menus/${menu.id}`} >{menu.name}</NavLink>
+    </div>
+  ))
 }
 
 const mapState = state => {
