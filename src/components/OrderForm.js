@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import Icon from '@fortawesome/react-fontawesome'
-import cuid from 'cuid'
+// import cuid from 'cuid'
 // import { addActiveItem, removeActiveItem } from '../actions/activeItemActions'
 import Item from './Item'
 import { removeOrderItem, saveOrder } from '../actions/orderActions'
