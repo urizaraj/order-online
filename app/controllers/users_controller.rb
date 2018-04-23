@@ -12,4 +12,13 @@ class UsersController < ApplicationController
 
     render json: {token: token, id: user.id, name: user.name}
   end
+
+  def sign_in_token
+    payload = JWT.decode params[:token], nil, false
+    user = User.find(payload[0]['user'])
+
+    return render json: {message: 'invalid'} unless user
+
+    render json: user
+  end
 end

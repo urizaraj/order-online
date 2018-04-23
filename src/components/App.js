@@ -1,12 +1,23 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+
+import { userCheckToken } from '../actions/userActions'
+
 import NavBar from './NavBar'
 import MenusPage from './MenusPage';
 import LocationsPage from './LocationsPage'
 import SignInPage from './SignInPage'
 
 class App extends Component {
+  constructor(props) {
+    super(props)
+
+    props.userCheckToken()
+  }
+
   render() {
     return (
       <Router>
@@ -23,4 +34,9 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapDispatch = dispatch => {
+  const actions = { userCheckToken }
+  return bindActionCreators(actions, dispatch)
+}
+
+export default connect(null, mapDispatch)(App)

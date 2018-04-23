@@ -11,4 +11,5 @@ Rails.application.routes.draw do
   resources :selected_options
 
   post '/users/sign_in', to: 'users#sign_in'
+  post '/users/sign_in_token', to: 'users#sign_in_token'
 end
