@@ -24,7 +24,7 @@ class App extends Component {
         <div className="App container h-100">
           <NavBar />
           <Switch>
-            <Route path='/users/sign_in' component={SignInPage} />
+            <Route path='/users/sign_in' component={this.props.user.signedIn ? LocationsPage : SignInPage} />
             <Route path='/menus' component={MenusPage} />
             <Route path='/locations' component={LocationsPage} />
           </Switch>
@@ -39,4 +39,10 @@ const mapDispatch = dispatch => {
   return bindActionCreators(actions, dispatch)
 }
 
-export default connect(null, mapDispatch)(App)
+const mapState = state => {
+  return {
+    user: state.user
+  }
+}
+
+export default connect(mapState, mapDispatch)(App)
