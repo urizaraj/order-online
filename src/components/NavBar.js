@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 
 import { NavLink } from 'react-router-dom'
 
+import { userSignOut } from '../actions/userActions'
+
 const NavBar = props => {
   let final
 
@@ -20,7 +22,9 @@ const NavBar = props => {
       <NavLink to="/locations">Locations</NavLink>
       {' '}
       {final}
-      
+      {' '}
+      {props.user.signedIn && <button className='btn btn-primary btn-sm' onClick={() => props.userSignOut()} >Sign Out</button>}
+
     </div>
   )
 }
@@ -31,4 +35,9 @@ const mapState = state => {
   }
 }
 
-export default connect(mapState)(NavBar)
+const mapDispatch = dispatch => {
+  const actions = { userSignOut }
+  return bindActionCreators(actions, dispatch)
+}
+
+export default connect(mapState, mapDispatch)(NavBar)

@@ -40,3 +40,8 @@ export function userCheckToken() {
       })
   }
 }
+
+export function userSignOut() {
+  localStorage.removeItem('token')
+  return {type: 'SIGN_OUT'}
+}
