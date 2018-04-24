@@ -16,8 +16,11 @@ export function removeOrderItem(cuid) {
 
 export function saveOrder() {
   return (dispatch, getState) => {
-    dispatch({ type: 'SAVING_ORDER' })
     const order = getState().order
+
+    if (!order.items.length) return
+
+    dispatch({ type: 'SAVING_ORDER' })
 
     const options = {
       method: 'POST',
