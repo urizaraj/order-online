@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 
 import { userSignOut } from '../actions/userActions'
+import { Row, Col as BCol } from './elements'
 
 const NavBar = props => {
   let final
@@ -16,16 +17,27 @@ const NavBar = props => {
   }
 
   return (
-    <div>
-      <NavLink to="/" >Home</NavLink>
-      {' '}
-      <NavLink to="/locations">Locations</NavLink>
-      {' '}
-      {final}
-      {' '}
-      {props.user.signedIn && <button className='btn btn-primary btn-sm' onClick={() => props.userSignOut()} >Sign Out</button>}
+    <Row>
+      <BCol size='auto' >
+        <NavLink to="/" >Home</NavLink>
+      </BCol>
 
-    </div>
+      <BCol size='auto' >
+        <NavLink to="/locations">Locations</NavLink>
+      </BCol>
+
+      <BCol size='auto' >
+        {final}
+      </BCol>
+
+      <BCol size='auto' >
+        {props.user.signedIn && <button className='btn btn-primary btn-sm' onClick={() => props.userSignOut()} >Sign Out</button>}
+      </BCol>
+
+      <BCol size='auto' >
+        <NavLink to='/user/saved_orders'>Saved Orders</NavLink>
+      </BCol>
+    </Row>
   )
 }
 
