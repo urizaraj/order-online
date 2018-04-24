@@ -19,9 +19,11 @@ export function saveOrder() {
     const order = getState().order
 
     if (!order.items.length) return
-
+    
     dispatch({ type: 'SAVING_ORDER' })
-
+    
+    order.location_id = getState().locations.location.id
+    
     const options = {
       method: 'POST',
       body: JSON.stringify({ order: order }),
