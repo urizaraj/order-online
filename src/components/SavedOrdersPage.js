@@ -10,7 +10,7 @@ class SavedOrdersPage extends Component {
       orders: []
     }
   }
-  
+
   render() {
     return (
       <div>
@@ -25,6 +25,7 @@ class SavedOrdersPage extends Component {
     fetch(url)
       .then(resp => resp.json())
       .then(resp => {
+        console.log(resp)
         this.setState({
           orders: resp.orders
         })
@@ -41,11 +42,14 @@ const OrderList = props => {
 }
 
 const Order = props => {
-  const { id, price } = props
+  const { created_at, location_name } = props
   return (
     <DFlex opt='align-items-center'>
+      <small>
+        {created_at}
+      </small>
       <h4>
-        {id}
+        {location_name}
       </h4>
     </DFlex>
   )
