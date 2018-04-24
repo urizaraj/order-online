@@ -11,7 +11,7 @@ export function userSignIn(user) {
     return fetch('/users/sign_in', options)
       .then(resp => resp.json())
       .then(resp => {
-        if (resp.message) return
+        if (resp.message) return dispatch({ type: 'INVALID_SIGN_IN' })
         const { token, ...user } = resp
         localStorage.setItem('token', token)
         dispatch({ type: 'SIGNED_IN', ...user })
@@ -35,7 +35,7 @@ export function userCheckToken() {
     return fetch('/users/sign_in_token', options)
       .then(resp => resp.json())
       .then(resp => {
-        if (resp.message) return
+        if (resp.message) return dispatch({ type: 'INVALID_SIGN_IN' })
         dispatch({ type: 'SIGNED_IN', ...resp })
       })
   }
@@ -43,5 +43,5 @@ export function userCheckToken() {
 
 export function userSignOut() {
   localStorage.removeItem('token')
-  return {type: 'SIGN_OUT'}
+  return { type: 'SIGN_OUT' }
 }

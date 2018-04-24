@@ -19,6 +19,7 @@ class SignInPage extends Component {
     return (
       <div>
         <h2>Sign In</h2>
+        {this.props.invalid && <InvalidMessage/>}
         <form onSubmit={this.handleSubmit.bind(this)} >
           <div className='form-group' >
             <input type='text' name='name' placeholder='username' className='form-control' value={this.state.name} onChange={this.handleChange} />
@@ -44,9 +45,19 @@ class SignInPage extends Component {
   }
 }
 
+const InvalidMessage = props => (
+  <div className='text-secondary mb-3' >
+    <strong>Invalid username or password</strong>
+  </div>
+)
+
 const mapDispatch = dispatch => {
   const actions = { userSignIn }
   return bindActionCreators(actions, dispatch)
 }
 
-export default connect(null, mapDispatch)(SignInPage)
+const mapState = state => {
+  return { invalid: state.user.invalid }
+}
+
+export default connect(mapState, mapDispatch)(SignInPage)
