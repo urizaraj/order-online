@@ -89,7 +89,7 @@ let CurrentOrder = props => {
           ${total}
         </div>
       </div>
-      <button className='btn btn-primary btn-block' onClick={() => props.saveOrder()} >
+      <button className='btn btn-success' onClick={() => props.saveOrder()} >
         Save Order
       </button>
     </div>
