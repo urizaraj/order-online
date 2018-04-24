@@ -11,6 +11,7 @@ import MenusPage from './MenusPage';
 import LocationsPage from './LocationsPage'
 import SignInPage from './SignInPage'
 import AdminPage from './AdminPage'
+import SavedOrdersPage from './SavedOrdersPage';
 
 class App extends Component {
   constructor(props) {
@@ -29,6 +30,7 @@ class App extends Component {
             <Route path='/menus' component={MenusPage} />
             <Route path='/locations' component={LocationsPage} />
             <Route path='/admin' component={AdminPage} />
+            <Route path='/user/saved_orders' component={SavedOrdersPage} />
           </Switch>
         </div>
       </Router>
