@@ -3,12 +3,12 @@ import { Row, Col as BCol } from './elements'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import OrderShow from './OrderShow';
+import { fetchOrderIndex } from '../actions/orderActions'
 
 class SavedOrdersPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      orders: [],
       currentOrder: null
     }
 
@@ -19,7 +19,7 @@ class SavedOrdersPage extends Component {
     return (
       <div>
         <OrderList
-          orders={this.state.orders}
+          orders={this.props.orders}
           handleClick={this.handleClick}
           currentOrder={this.state.currentOrder} />
       </div>
@@ -27,16 +27,7 @@ class SavedOrdersPage extends Component {
   }
 
   componentDidMount() {
-    if (!this.props.user.signedIn) return
-    const url = `/users/${this.props.user.id}`
-    fetch(url)
-      .then(resp => resp.json())
-      .then(resp => {
-        console.log(resp)
-        this.setState({
-          orders: resp.orders
-        })
-      })
+    this.props.fetchOrderIndex()
   }
 
   handleClick(id) {
@@ -81,10 +72,16 @@ const Order = props => {
 
 const mapState = state => {
   return {
-    user: state.user
+    user: state.user,
+    orders: state.order.index
   }
 }
 
-export default connect(mapState)(SavedOrdersPage)
+const mapDispatch = dispatch => {
+  const actions = { fetchOrderIndex }
+  return bindActionCreators(actions, dispatch)
+}
+
+export default connect(mapState, mapDispatch)(SavedOrdersPage)
 
 // 

@@ -61,3 +61,21 @@ export function fetchOrder(id) {
       })
   }
 }
+
+export function fetchOrderIndex() {
+  return (dispatch, getState) => {
+    const user = getState().user
+
+    if (!user.signedIn) return
+
+    dispatch({type: 'LOADING_ORDER'})
+
+    const url = `/users/${user.id}`
+
+    fetch(url)
+      .then(resp => resp.json())
+      .then(resp => {
+        dispatch({ type: 'FETCH_ORDER_INDEX', index: resp.orders })
+      })
+  }
+}
