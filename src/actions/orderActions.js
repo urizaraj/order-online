@@ -24,9 +24,10 @@ export function saveOrder() {
 
     const options = {
       method: 'POST',
-      body: JSON.stringify({order: order}),
+      body: JSON.stringify({ order: order }),
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Token token=${localStorage.getItem('token')}`
       }
     }
 

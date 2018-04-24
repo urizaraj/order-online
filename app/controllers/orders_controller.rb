@@ -1,4 +1,6 @@
 class OrdersController < ApplicationController
+  before_action :authenticate
+
   def create
     order = Order.create
     strong_params[:items].each do |item|
