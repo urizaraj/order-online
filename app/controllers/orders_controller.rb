@@ -1,5 +1,9 @@
 class OrdersController < ApplicationController
-  before_action :authenticate
+  before_action :authenticate, only: [:create]
+
+  def index
+    render json: Order.all, include: '**'
+  end
 
   def create
     attributes = {

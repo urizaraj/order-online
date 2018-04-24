@@ -4,4 +4,12 @@ class OrderItem < ApplicationRecord
   has_many :selected_options
 
   accepts_nested_attributes_for :selected_options
+
+  def name
+    item.name
+  end
+
+  def price
+    item.price
+  end
 end
