@@ -5,8 +5,9 @@ export const DFlex = props => {
   if (props.opt) {
     className += props.opt
   }
+  const { opt, ...other } = props
   return (
-    <div {...{ className }} >
+    <div {...{ className }} {...other} >
       {props.children}
     </div>
   )
@@ -17,15 +18,15 @@ export const Row = props => {
   if (props.opt) {
     className += props.opt
   }
+  const { opt, ...other } = props
   return (
-    <div {...{ className }} >
+    <div {...{ className }} {...other} >
       {props.children}
     </div>
   )
 }
 
 export const Col = props => {
-  // const className = ['col', (props.size || '')].join('-') + ' ' + props.opt
   let className = 'col'
   if (props.size) {
     className += '-' + props.size
