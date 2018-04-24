@@ -1,7 +1,10 @@
 import React from 'react'
 
 export const DFlex = props => {
-  const className = 'd-flex ' + props.opt
+  let className = 'd-flex '
+  if (props.opt) {
+    className += props.opt
+  }
   return (
     <div {...{ className }} >
       {props.children}
@@ -10,7 +13,10 @@ export const DFlex = props => {
 }
 
 export const Row = props => {
-  const className = 'row ' + props.opt
+  let className = 'row '
+  if (props.opt) {
+    className += props.opt
+  }
   return (
     <div {...{ className }} >
       {props.children}
