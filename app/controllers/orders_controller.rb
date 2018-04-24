@@ -25,6 +25,11 @@ class OrdersController < ApplicationController
     Order.create(attributes)
   end
 
+  def show
+    order = Order.find(params[:id])
+    render json: order
+  end
+
   def strong_params
     params
       .require(:order)

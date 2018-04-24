@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { DFlex } from './elements'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import OrderShow from './OrderShow';
 
 class SavedOrdersPage extends Component {
   constructor(props) {
@@ -42,7 +43,7 @@ const OrderList = props => {
 }
 
 const Order = props => {
-  const { created_at, location_name } = props
+  const { created_at, location_name, id } = props
   return (
     <DFlex opt='align-items-center'>
       <small>

@@ -1,4 +1,4 @@
-const orderReducer = (state = { items: [] }, action) => {
+const orderReducer = (state = { items: [], id: null }, action) => {
   switch (action.type) {
     case 'ADD_ORDER_ITEM':
       return { items: [...state.items, action.item] }
@@ -8,6 +8,9 @@ const orderReducer = (state = { items: [] }, action) => {
 
     case 'RESET_ORDER':
       return { items: [] }
+
+    case 'FETCH_ORDER':
+      return { items: action.items, id: action.id }
 
     default:
       return state
