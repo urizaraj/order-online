@@ -11,12 +11,12 @@ export function userSignIn(user) {
     return fetch('/users/sign_in', options)
       .then(resp => resp.json())
       .then(resp => {
+        if (resp.message) return
         const { token, ...user } = resp
         localStorage.setItem('token', token)
         dispatch({ type: 'SIGNED_IN', ...user })
       })
   }
-
 }
 
 export function userCheckToken() {
