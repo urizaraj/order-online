@@ -10,6 +10,7 @@ import NavBar from './NavBar'
 import MenusPage from './MenusPage';
 import LocationsPage from './LocationsPage'
 import SignInPage from './SignInPage'
+import AdminPage from './AdminPage'
 
 class App extends Component {
   constructor(props) {
@@ -27,6 +28,7 @@ class App extends Component {
             <Route path='/users/sign_in' component={this.props.user.signedIn ? LocationsPage : SignInPage} />
             <Route path='/menus' component={MenusPage} />
             <Route path='/locations' component={LocationsPage} />
+            <Route path='/admin' component={AdminPage} />
           </Switch>
         </div>
       </Router>
