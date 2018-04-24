@@ -2,19 +2,23 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import { fetchOrder } from '../actions/orderActions'
+import { fetchOrder, resetOrder } from '../actions/orderActions'
 
 class OrderShow extends Component {
   render() {
     return (
       <div>
-        this is the order show
+        {this.props.items.map(item => <strong className='p-3'>{item.name}</strong>)}
       </div>
     )
   }
 
   componentDidMount() {
     this.props.fetchOrder(this.props.id)
+  }
+
+  componentWillUnmount() {
+    this.props.resetOrder()
   }
 }
 
@@ -25,7 +29,7 @@ const mapState = state => {
 }
 
 const mapDispatch = dispatch => {
-  const actions = { fetchOrder }
+  const actions = { fetchOrder, resetOrder }
   return bindActionCreators(actions, dispatch)
 }
 
