@@ -1,18 +1,21 @@
 // @import url('https://fonts.googleapis.com/css?family=Work+Sans');
 
-$font-family-base: 'Work Sans', sans-serif;
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans');
+
+$font-family-base: 'IBM Plex Sans', sans-serif;
 
 $enable-rounded: false;
 $enable-shadows: true;
 
 $theme-colors: (
-  light: #edf2f4,
+  light: #efefef,
   dark: #2b2d42,
   primary: #192bc2,
-  secondary: #6b2737
+  secondary: #d1345b,
+  success: #34d1bf
 );
 
-$body-bg: #edf2f4;
+$body-bg: #efefef;
 $body-color: #2b2d42;
 
 @import "../node_modules/bootstrap/scss/bootstrap";
