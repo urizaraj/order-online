@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import { addCategory, updateCategory, removeCategory } from '../actions/newLocationActions'
+import { addCategory, updateCategory, removeCategory, addItem } from '../actions/newLocationActions'
 
 import cuid from 'cuid'
 
@@ -14,10 +14,6 @@ const FormGroup = props => <div className='form-group' >{props.children}</div>
 const FormControl = props => <input {...props} type='text' className='form-control' />
 
 class LocationNew extends Component {
-  constructor() {
-    super()
-  }
-
   render() {
     return (
       <div>
@@ -35,7 +31,7 @@ class LocationNew extends Component {
 
           <h2>Menu</h2>
 
-          {this.props.categories.map(category => <Category key={category[0]} cuid={category[0]} {...category[1]} />)}
+          {this.props.categories.map(category => <Category {...category} />)}
 
           <button
             className='btn btn-success'
@@ -52,15 +48,8 @@ class LocationNew extends Component {
 }
 
 class Category extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      items: []
-    }
-    this.handleNewItem = this.handleNewItem.bind(this);
-  }
-
   render() {
+    const addItem = () => this.props.addItem(this.props.cuid)
     return (
       <div className='mb-3' >
         <FormGroup>
@@ -70,11 +59,11 @@ class Category extends Component {
             onChange={this.handleChange} />
         </FormGroup>
 
-        {this.state.items.map(item => <Item key={item} />)}
+        {this.props.items.map(item => <Item key={item} />)}
 
         <button
           className='btn btn-success ml-3'
-          onClick={this.handleNewItem} > <Icon icon='plus' /> New Item</button>
+          onClick={addItem} > <Icon icon='plus' /> New Item</button>
 
       </div>
     )
@@ -83,12 +72,6 @@ class Category extends Component {
   handleChange = event => {
     const value = event.target.value
     this.props.updateCategory(this.props.cuid, value)
-  }
-
-  handleNewItem() {
-    this.setState({
-      items: [...this.state.items, cuid()]
-    })
   }
 }
 
@@ -147,7 +130,7 @@ class Option extends Component {
 
 const mapState = state => {
   return {
-    categories: Object.entries(state.newLocation.categories)
+    categories: state.newLocation.categories
   }
 }
 
@@ -157,11 +140,16 @@ const mapDispatch = dispatch => {
 }
 
 const mapCatState = (state, ownProps) => {
-  return { ...state.newLocation.categories[ownProps.cuid] }
+  // const category = state.newLocation.categories[ownProps.cuid]
+  return {
+    items: state.newLocation.items.filter(item => {
+      return item.categoryCuid === ownProps.cuid
+    })
+  }
 }
 
 const mapCatDispatch = dispatch => {
-  const actions = { updateCategory, removeCategory }
+  const actions = { updateCategory, removeCategory, addItem }
   return bindActionCreators(actions, dispatch)
 }
 
