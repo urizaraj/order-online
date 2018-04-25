@@ -7,7 +7,6 @@ import { connect } from 'react-redux'
 import { userCheckToken } from '../actions/userActions'
 
 import NavBar from './NavBar'
-import MenusPage from './MenusPage';
 import LocationsPage from './LocationsPage'
 import SignInPage from './SignInPage'
 import AdminPage from './AdminPage'
@@ -23,13 +22,13 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div className="App container h-100">
+        <div className="App container">
           <NavBar />
           <Switch>
-            <Route path='/users/sign_in' component={this.props.user.signedIn ? LocationsPage : SignInPage} />
-            <Route path='/menus' component={MenusPage} />
             <Route path='/locations' component={LocationsPage} />
             <Route path='/admin' component={AdminPage} />
+
+            <Route path='/user/sign_in' component={SignInPage} />
             <Route path='/user/saved_orders' component={SavedOrdersPage} />
           </Switch>
         </div>
