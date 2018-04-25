@@ -1,6 +1,6 @@
 // @import url('https://fonts.googleapis.com/css?family=Work+Sans');
 
-@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans');
+// @import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans');
 
 $font-family-base: 'IBM Plex Sans', sans-serif;
 
@@ -14,6 +14,8 @@ $theme-colors: (
   secondary: #d1345b,
   success: #1effbc
 );
+
+$input-btn-focus-width: 0rem;
 
 $body-bg: #efefef;
 $body-color: #2b2d42;
