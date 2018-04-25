@@ -1,13 +1,17 @@
+//#region imports 
+
 import React, { Component } from 'react'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import { addCategory, updateCategory, removeCategory, addItem, updateItem, addOption, updateOption } from '../actions/newLocationActions'
+import * as actions from '../actions/newLocationActions'
 
 import cuid from 'cuid'
 
 import Icon from '@fortawesome/react-fontawesome'
+
+//#endregion 
 
 const FormGroup = props => <div className='form-group' >{props.children}</div>
 
@@ -59,6 +63,8 @@ class Category extends Component {
             onChange={this.handleChange} />
         </FormGroup>
 
+        <button className='btn btn-secondary' onClick={() => this.props.removeCategory(this.props.cuid)} ><Icon icon='trash'/></button>
+
         {this.props.items.map(item => <Item {...item} />)}
 
         <button
@@ -85,6 +91,8 @@ class Item extends Component {
             onChange={this.handleName}
             value={this.props.name} />
         </FormGroup>
+
+        <button className='btn btn-secondary' onClick={() => this.props.removeItem(this.props.cuid)} ><Icon icon='trash'/></button>
 
         {this.props.options.map(option => <Option {...option} />)}
 
@@ -116,6 +124,8 @@ class Option extends Component {
             value={this.props.name}
             placeholder='Option Name' />
         </FormGroup>
+
+        <button className='btn btn-secondary' onClick={() => this.props.removeOption(this.props.cuid)} ><Icon icon='trash'/></button>
       </div>
     )
   }
@@ -136,8 +146,8 @@ const mapState = state => {
 }
 
 const mapDispatch = dispatch => {
-  const actions = { addCategory, updateCategory, removeCategory }
-  return bindActionCreators(actions, dispatch)
+  const { addCategory, updateCategory, removeCategory } = actions
+  return bindActionCreators({ addCategory, updateCategory, removeCategory }, dispatch)
 }
 
 const mapCatState = (state, ownProps) => {
@@ -150,8 +160,8 @@ const mapCatState = (state, ownProps) => {
 }
 
 const mapCatDispatch = dispatch => {
-  const actions = { updateCategory, removeCategory, addItem }
-  return bindActionCreators(actions, dispatch)
+  const { updateCategory, removeCategory, addItem } = actions
+  return bindActionCreators({ updateCategory, removeCategory, addItem }, dispatch)
 }
 
 const mapItemState = (state, ownProps) => {
@@ -159,13 +169,13 @@ const mapItemState = (state, ownProps) => {
 }
 
 const mapItemDispatch = dispatch => {
-  const actions = { updateItem, addOption }
-  return bindActionCreators(actions, dispatch)
+  const { updateItem, addOption, removeItem } = actions
+  return bindActionCreators({ updateItem, addOption, removeItem }, dispatch)
 }
 
 const mapOptionDispatch = dispatch => {
-  const actions = { updateOption }
-  return bindActionCreators(actions, dispatch)
+  const { updateOption, removeOption } = actions
+  return bindActionCreators({ updateOption, removeOption }, dispatch)
 }
 
 Category = connect(mapCatState, mapCatDispatch)(Category)

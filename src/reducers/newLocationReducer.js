@@ -14,6 +14,7 @@ const newLocationReducer = (state = { categories: [], items: [], options: [] }, 
       })}
 
     case 'REMOVE_RESOURCE':
+      cuid = action.cuid
       let filtered = state[resource].filter(r => r.cuid !== cuid)
       return {...state, [resource]: filtered}
 

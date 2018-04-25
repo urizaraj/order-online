@@ -42,6 +42,14 @@ export function updateItem(cuid, value) {
   }
 }
 
+export function removeItem(cuid) {
+  return {
+    type: 'REMOVE_RESOURCE',
+    resource: 'items',
+    cuid
+  }
+}
+
 export function addOption(itemCuid) {
   return {
     type: 'ADD_RESOURCE',
@@ -61,5 +69,13 @@ export function updateOption(cuid, value) {
     resource: 'options',
     cuid,
     value
+  }
+}
+
+export function removeOption(cuid) {
+  return {
+    type: 'REMOVE_RESOURCE',
+    resource: 'options',
+    cuid
   }
 }
