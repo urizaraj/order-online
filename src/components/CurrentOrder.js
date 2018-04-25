@@ -2,7 +2,8 @@ import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import Icon from '@fortawesome/react-fontawesome'
-import { removeOrderItem, saveOrder, resetOrder } from '../actions/orderActions'
+import { removeOrderItem, saveOrder } from '../actions/orderActions'
+import { DFlex } from './elements'
 
 let CurrentOrder = props => {
   let total = 0
@@ -28,15 +29,18 @@ let CurrentOrder = props => {
     <div>
       <h4>Current Order</h4>
       {itemList}
-      <div className='d-flex' >
+      <DFlex opt='mb-2' >
         <h4 className='align-self-center mb-0' >Total</h4>
         <div className='ml-auto p-2' >
           ${total}
         </div>
-      </div>
-      <button className='btn btn-success' onClick={() => props.saveOrder()} >
-        Save Order
-      </button>
+      </DFlex>
+
+      <DFlex>
+        <button className='btn btn-success ml-auto' onClick={() => props.saveOrder()} >
+          <Icon icon='check' /> Save Order
+        </button>
+      </DFlex>
     </div>
   )
 }
