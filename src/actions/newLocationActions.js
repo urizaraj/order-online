@@ -4,17 +4,15 @@ export function addCategory() {
   return {
     type: 'ADD_RESOURCE',
     resource: 'categories',
-    cuid: cuid(),
-    value: { name: '' }
+    value: { cuid: cuid(), name: '' }
   }
 }
 
 export function updateCategory(cuid, value) {
   return {
-    type: 'ADD_RESOURCE',
+    type: 'UPDATE_RESOURCE',
     resource: 'categories',
-    cuid,
-    value: { name: value }
+    value: { cuid, name: value }
   }
 }
 
@@ -23,5 +21,14 @@ export function removeCategory(cuid) {
     type: 'REMOVE_RESOURCE',
     resource: 'categories',
     cuid
+  }
+}
+
+export function addItem(categoryCuid) {
+  return {
+    type: 'ADD_RESOURCE',
+    resource: 'items',
+    cuid: cuid(),
+    value: { name: '', price: '', categoryCuid }
   }
 }
