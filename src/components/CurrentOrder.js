@@ -1,8 +1,11 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import Icon from '@fortawesome/react-fontawesome'
+
 import { removeOrderItem, saveOrder } from '../actions/orderActions'
+
+import Icon from '@fortawesome/react-fontawesome'
+
 import { DFlex } from './elements'
 
 let CurrentOrder = props => {
