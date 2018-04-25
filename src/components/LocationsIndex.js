@@ -8,6 +8,10 @@ class LocationsIndex extends Component {
   render() {
     return (
       <div>
+        <div className='mb-3' >
+          <NavLink to='/locations/new'>New Location</NavLink>
+        </div>
+
         {this.props.locations.map(location => <Location {...location} key={location.id} />)}
       </div>
     )
