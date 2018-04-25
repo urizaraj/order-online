@@ -41,3 +41,25 @@ export function updateItem(cuid, value) {
     value
   }
 }
+
+export function addOption(itemCuid) {
+  return {
+    type: 'ADD_RESOURCE',
+    resource: 'options',
+    value: {
+      name: '',
+      price: '',
+      itemCuid,
+      cuid: cuid()
+    }
+  }
+}
+
+export function updateOption(cuid, value) {
+  return {
+    type: 'UPDATE_RESOURCE',
+    resource: 'options',
+    cuid,
+    value
+  }
+}

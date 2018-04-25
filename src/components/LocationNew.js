@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import { addCategory, updateCategory, removeCategory, addItem, updateItem } from '../actions/newLocationActions'
+import { addCategory, updateCategory, removeCategory, addItem, updateItem, addOption, updateOption } from '../actions/newLocationActions'
 
 import cuid from 'cuid'
 
@@ -86,7 +86,7 @@ class Item extends Component {
             value={this.props.name} />
         </FormGroup>
 
-        {/* {this.state.options.map(option => <Option key={option} />)} */}
+        {this.props.options.map(option => <Option {...option} />)}
 
         <button
           className='btn btn-success ml-3'
@@ -101,27 +101,28 @@ class Item extends Component {
     this.props.updateItem(this.props.cuid, { name })
   }
 
-  handleNewOption() {
-    this.setState({
-      options: [...this.state.options, cuid()]
-    })
+  handleNewOption = () => {
+    this.props.addOption(this.props.cuid)
   }
 }
 
 class Option extends Component {
-  constructor(props) {
-    super(props)
-
-  }
-
   render() {
     return (
       <div className='mb-3 ml-3' >
         <FormGroup>
-          <FormControl placeholder='Option Name' />
+          <FormControl
+            onChange={this.handleName}
+            value={this.props.name}
+            placeholder='Option Name' />
         </FormGroup>
       </div>
     )
+  }
+
+  handleName = event => {
+    const name = event.target.value
+    this.props.updateOption(this.props.cuid, { name })
   }
 
 }
@@ -158,13 +159,20 @@ const mapItemState = (state, ownProps) => {
 }
 
 const mapItemDispatch = dispatch => {
-  const actions = { updateItem }
+  const actions = { updateItem, addOption }
+  return bindActionCreators(actions, dispatch)
+}
+
+const mapOptionDispatch = dispatch => {
+  const actions = { updateOption }
   return bindActionCreators(actions, dispatch)
 }
 
 Category = connect(mapCatState, mapCatDispatch)(Category)
 
 Item = connect(mapItemState, mapItemDispatch)(Item)
+
+Option = connect(null, mapOptionDispatch)(Option)
 
 export default connect(mapState, mapDispatch)(LocationNew)
 
