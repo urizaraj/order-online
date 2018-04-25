@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   def sign_in
-    user = User.find_by(name: params[:name])
+    # user = User.find_by(name: params[:name])
+    user = User.where('lower(name) = ?', params[:name].downcase).first 
 
     valid = user && user.authenticate(params[:password])
     return render json: {message: 'invalid'} unless valid
