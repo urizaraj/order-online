@@ -8,6 +8,7 @@ import thunk from 'redux-thunk';
 import rootReducer from './reducers'
 
 // import 'bootstrap/dist/css/bootstrap.min.css'
+import './plex.css'
 import './style.css'
 
 import fontawesome from '@fortawesome/fontawesome'
