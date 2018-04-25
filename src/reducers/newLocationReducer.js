@@ -1,16 +1,21 @@
-const newLocationReducer = (state = { categories: {}, items: {}, options: {} }, action) => {
-  const { resource, cuid } = action
+const newLocationReducer = (state = { categories: [], items: [], options: [] }, action) => {
+  const { resource } = action
+  let cuid
 
   switch (action.type) {
     case 'ADD_RESOURCE':
-      return { ...state, [resource]: { ...state[resource], [cuid]: action.value } }
+      return {...state, [resource]: [...state[resource], action.value]}
 
     case 'UPDATE_RESOURCE':
-      return { ...state, [resource]: { ...state[resource], [cuid]: action.value } }
+      cuid = action.value.cuid
+      let old = state[resource].filter(r => r.cuid !== cuid)
+      return {...state, [resource]: state[resource].map(r => {
+        return (r.cuid === cuid ? action.value : r)
+      })}
 
     case 'REMOVE_RESOURCE':
-      const { [cuid]: a, ...rest } = state[resource]
-      return {...state, [resource]: rest}
+      let filtered = state[resource].filter(r => r.cuid !== cuid)
+      return {...state, [resource]: filtered}
 
     default:
       return state
