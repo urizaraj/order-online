@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
+
 import { userSignIn } from '../actions/userActions'
 
 class SignInPage extends Component {
@@ -16,10 +18,12 @@ class SignInPage extends Component {
   }
 
   render() {
+    if (this.props.signedIn) return <Redirect to='/' />
+
     return (
       <div>
         <h2>Sign In</h2>
-        {this.props.invalid && <InvalidMessage/>}
+        {this.props.invalid && <InvalidMessage />}
         <form onSubmit={this.handleSubmit.bind(this)} >
           <div className='form-group' >
             <input type='text' name='name' placeholder='username' className='form-control' value={this.state.name} onChange={this.handleChange} />
@@ -57,7 +61,7 @@ const mapDispatch = dispatch => {
 }
 
 const mapState = state => {
-  return { invalid: state.user.invalid }
+  return { invalid: state.user.invalid, signedIn: state.user.signedIn }
 }
 
 export default connect(mapState, mapDispatch)(SignInPage)
