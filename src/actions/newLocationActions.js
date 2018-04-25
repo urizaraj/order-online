@@ -12,7 +12,8 @@ export function updateCategory(cuid, value) {
   return {
     type: 'UPDATE_RESOURCE',
     resource: 'categories',
-    value: { cuid, name: value }
+    cuid,
+    value
   }
 }
 
@@ -28,7 +29,15 @@ export function addItem(categoryCuid) {
   return {
     type: 'ADD_RESOURCE',
     resource: 'items',
-    cuid: cuid(),
-    value: { name: '', price: '', categoryCuid }
+    value: { name: '', price: '', categoryCuid, cuid: cuid() }
+  }
+}
+
+export function updateItem(cuid, value) {
+  return {
+    type: 'UPDATE_RESOURCE',
+    resource: 'items',
+    cuid,
+    value
   }
 }

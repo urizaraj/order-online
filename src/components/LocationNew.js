@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import { addCategory, updateCategory, removeCategory, addItem } from '../actions/newLocationActions'
+import { addCategory, updateCategory, removeCategory, addItem, updateItem } from '../actions/newLocationActions'
 
 import cuid from 'cuid'
 
@@ -59,7 +59,7 @@ class Category extends Component {
             onChange={this.handleChange} />
         </FormGroup>
 
-        {this.props.items.map(item => <Item key={item} />)}
+        {this.props.items.map(item => <Item {...item} />)}
 
         <button
           className='btn btn-success ml-3'
@@ -70,28 +70,23 @@ class Category extends Component {
   }
 
   handleChange = event => {
-    const value = event.target.value
-    this.props.updateCategory(this.props.cuid, value)
+    const name = event.target.value
+    this.props.updateCategory(this.props.cuid, { name })
   }
 }
 
 class Item extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      options: []
-    }
-    this.handleNewOption = this.handleNewOption.bind(this);
-  }
-
   render() {
     return (
       <div className='mb-3 ml-3' >
         <FormGroup>
-          <FormControl placeholder='Item Name' />
+          <FormControl
+            placeholder='Item Name'
+            onChange={this.handleName}
+            value={this.props.name} />
         </FormGroup>
 
-        {this.state.options.map(option => <Option key={option} />)}
+        {/* {this.state.options.map(option => <Option key={option} />)} */}
 
         <button
           className='btn btn-success ml-3'
@@ -99,6 +94,11 @@ class Item extends Component {
 
       </div>
     )
+  }
+
+  handleName = event => {
+    const name = event.target.value
+    this.props.updateItem(this.props.cuid, { name })
   }
 
   handleNewOption() {
@@ -153,7 +153,18 @@ const mapCatDispatch = dispatch => {
   return bindActionCreators(actions, dispatch)
 }
 
+const mapItemState = (state, ownProps) => {
+  return { options: state.newLocation.options.filter(option => option.itemCuid === ownProps.cuid) }
+}
+
+const mapItemDispatch = dispatch => {
+  const actions = { updateItem }
+  return bindActionCreators(actions, dispatch)
+}
+
 Category = connect(mapCatState, mapCatDispatch)(Category)
+
+Item = connect(mapItemState, mapItemDispatch)(Item)
 
 export default connect(mapState, mapDispatch)(LocationNew)
 

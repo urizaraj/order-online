@@ -7,10 +7,10 @@ const newLocationReducer = (state = { categories: [], items: [], options: [] }, 
       return {...state, [resource]: [...state[resource], action.value]}
 
     case 'UPDATE_RESOURCE':
-      cuid = action.value.cuid
+      cuid = action.cuid
       let old = state[resource].filter(r => r.cuid !== cuid)
       return {...state, [resource]: state[resource].map(r => {
-        return (r.cuid === cuid ? action.value : r)
+        return (r.cuid === cuid ? {...r, ...action.value} : r)
       })}
 
     case 'REMOVE_RESOURCE':
