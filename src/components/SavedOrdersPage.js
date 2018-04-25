@@ -50,20 +50,19 @@ const OrderList = props => {
 
 const Order = props => {
   const { created_at, location_name, id, handleClick, active } = props
+  const date = new Date(created_at).toDateString()
   return (
     <div>
       <Row opt='align-items-center' onClick={() => handleClick(id)} >
         <BCol>
+          <h4 className='mb-0' >
+            {location_name}
+          </h4>
           <small>
-            {created_at}
+            {date}
           </small>
         </BCol>
 
-        <BCol>
-          <h4>
-            {location_name}
-          </h4>
-        </BCol>
       </Row>
       {active && <OrderShow id={id} />}
     </div>
