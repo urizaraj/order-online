@@ -8,16 +8,8 @@ import { userSignOut } from '../actions/userActions'
 import { Row, Col as BCol } from './elements'
 
 const NavBar = props => {
-  let final
-
-  if (props.user.signedIn) {
-    final = props.user.name
-  } else {
-    final = <NavLink to="/users/sign_in">Sign In</NavLink>
-  }
-
   return (
-    <Row>
+    <Row opt='p-3' >
       <BCol size='auto' >
         <NavLink to="/" >Home</NavLink>
       </BCol>
@@ -26,18 +18,39 @@ const NavBar = props => {
         <NavLink to="/locations">Locations</NavLink>
       </BCol>
 
-      <BCol size='auto' >
-        {final}
-      </BCol>
+      {props.user.signedIn ? <SignedInLinks userSignOut={props.userSignOut} user={props.user} /> : <SignedOutLinks />}
 
-      <BCol size='auto' >
-        {props.user.signedIn && <button className='btn btn-primary btn-sm' onClick={() => props.userSignOut()} >Sign Out</button>}
-      </BCol>
-
-      <BCol size='auto' >
-        <NavLink to='/user/saved_orders'>Saved Orders</NavLink>
-      </BCol>
     </Row>
+  )
+}
+
+const SignedInLinks = props => {
+  const username = (
+    <BCol size='auto' >
+      {props.user.name}
+    </BCol>
+  )
+
+  const signOut = (
+    <BCol size='auto' >
+      <button className='btn btn-primary btn-sm' onClick={() => props.userSignOut()} >Sign Out</button>
+    </BCol>
+  )
+
+  const savedOrders = (
+    <BCol size='auto' >
+      <NavLink to='/user/saved_orders'>Saved Orders</NavLink>
+    </BCol>
+  )
+
+  return [username, signOut, savedOrders]
+}
+
+const SignedOutLinks = props => {
+  return (
+    <BCol size='auto' >
+      <NavLink to="/users/sign_in">Sign In</NavLink>
+    </BCol>
   )
 }
 
