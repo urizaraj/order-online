@@ -38,11 +38,11 @@ class LocationNew extends Component {
 
         <form onSubmit={this.handleSubmit}>
           <FormGroup>
-            <FormControl placeholder='Location Name' />
+            <FormControl placeholder='Location Name' name='name' onChange={this.handleChange} value={this.props.name} />
           </FormGroup>
 
           <FormGroup>
-            <FormControl placeholder='Location Description' />
+            <FormControl placeholder='Location Description' name='description' onChange={this.handleChange} value={this.props.description} />
           </FormGroup>
 
           <h2>Menu</h2>
@@ -63,6 +63,15 @@ class LocationNew extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
+  }
+
+  handleChange = event => {
+    const value = event.target.value
+    const name = event.target.name
+
+    const func = (name === 'name' ? this.props.updateLocationName : this.props.updateLocationDescription)
+
+    func(value)
   }
 }
 
@@ -202,13 +211,15 @@ class Option extends Component {
 
 const mapState = state => {
   return {
-    categories: state.newLocation.categories
+    categories: state.newLocation.categories,
+    name: state.newLocation.name,
+    description: state.newLocation.description
   }
 }
 
 const mapDispatch = dispatch => {
-  const { addCategory, updateCategory, removeCategory, saveLocation } = actions
-  return bindActionCreators({ addCategory, updateCategory, removeCategory, saveLocation }, dispatch)
+  const { addCategory, updateCategory, removeCategory, saveLocation, updateLocationName, updateLocationDescription } = actions
+  return bindActionCreators({ addCategory, updateCategory, removeCategory, saveLocation, updateLocationName, updateLocationDescription }, dispatch)
 }
 
 const mapCatState = (state, ownProps) => {

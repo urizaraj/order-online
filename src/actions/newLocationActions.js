@@ -80,6 +80,20 @@ export function removeOption(cuid) {
   }
 }
 
+export function updateLocationName(name) {
+  return {
+    type: 'UPDATE_LOCATION_NAME',
+    value: name
+  }
+}
+
+export function updateLocationDescription(description) {
+  return {
+    type: 'UPDATE_LOCATION_DESCRIPTION',
+    value: description
+  }
+}
+
 export function saveLocation() {
   return (dispatch, getState) => {
     const state = getState().newLocation

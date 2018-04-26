@@ -1,4 +1,4 @@
-const newLocationReducer = (state = { categories: [], items: [], options: [] }, action) => {
+const newLocationReducer = (state = { categories: [], items: [], options: [], name: '', description: '' }, action) => {
   const { resource } = action
   let cuid
 
@@ -16,6 +16,12 @@ const newLocationReducer = (state = { categories: [], items: [], options: [] }, 
       cuid = action.cuid
       let filtered = state[resource].filter(r => r.cuid !== cuid)
       return {...state, [resource]: filtered}
+
+    case 'UPDATE_LOCATION_NAME':
+      return {...state, name: action.value}
+
+    case 'UPDATE_LOCATION_DESCRIPTION':
+      return {...state, description: action.value}
 
     default:
       return state
