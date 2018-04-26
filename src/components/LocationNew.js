@@ -25,7 +25,7 @@ const FormRow = props => <div className='form-row' >{props.children}</div>
 
 const RemoveButton = props => <button className='btn btn-secondary' onClick={props.onClick} ><Icon icon='trash' /></button>
 
-const AddButton = props => <button className='btn btn-success ml-3' onClick={props.onClick} > <Icon icon='plus' /> New {props.type}</button>
+const AddButton = props => <button className='btn btn-success btn-sm mb-3' onClick={props.onClick} > <Icon icon='plus' /> New {props.type}</button>
 
 //#endregion
 
@@ -47,12 +47,11 @@ class LocationNew extends Component {
 
           <h2>Menu</h2>
 
+          <AddButton onClick={this.props.addCategory} type='Category' />
+
           {this.props.categories.map(category => <Category {...category} key={category.cuid} />)}
 
-          <button
-            className='btn btn-success'
-            onClick={this.props.addCategory} > <Icon icon='plus' /> New Category</button>
-
+          <div></div>
           <button
             onClick={this.props.saveLocation}
             className='btn btn-primary'
@@ -70,7 +69,7 @@ class LocationNew extends Component {
 class Category extends Component {
   render() {
     return (
-      <div className='mb-3' >
+      <div className='mb-3 ml-3' >
         <FormRow>
           <Bcol size='auto' opt='mb-3' >
             <RemoveButton onClick={this.removeCategory} />
@@ -158,7 +157,7 @@ class Option extends Component {
     return (
       <div className='mb-3 ml-3' >
         <FormRow>
-          <Bcol size='auto' opt='mb-3' >
+          <Bcol size='auto' >
             <RemoveButton onClick={this.removeOption} />
           </Bcol>
 
