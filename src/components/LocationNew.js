@@ -133,6 +133,11 @@ class Item extends Component {
               value={this.props.price} />
           </Bcol>
         </FormRow>
+        <FormGroup>
+          <FormControl placeholder='description'
+          onChange={this.handleDescription}
+          value={this.props.description} />
+        </FormGroup>
 
         <AddButton onClick={this.handleNewOption} type='Option' />
 
@@ -145,6 +150,11 @@ class Item extends Component {
   handleName = event => {
     const name = event.target.value
     this.props.updateItem(this.props.cuid, { name })
+  }
+
+  handleDescription = event => {
+    const description = event.target.value
+    this.props.updateItem(this.props.cuid, { description })
   }
 
   handlePrice = event => {
@@ -166,7 +176,7 @@ class Option extends Component {
     return (
       <div className='mb-3 ml-3' >
         <FormRow>
-          <Bcol size='auto' >
+          <Bcol size='auto' opt='mb-3' >
             <RemoveButton onClick={this.removeOption} />
           </Bcol>
 
@@ -185,6 +195,13 @@ class Option extends Component {
           </Bcol>
         </FormRow>
 
+        <FormGroup>
+          <FormControl 
+          onChange={this.handleDescription}
+          value={this.props.description}
+          placeholder='Description' />
+        </FormGroup>
+
       </div>
     )
   }
@@ -201,6 +218,11 @@ class Option extends Component {
       if (!price) return
     }
     this.props.updateOption(this.props.cuid, { price })
+  }
+
+  handleDescription = event => {
+    const description = event.target.value
+    this.props.updateItem(this.props.cuid, { description })
   }
 
   removeOption = () => this.props.removeOption(this.props.cuid)

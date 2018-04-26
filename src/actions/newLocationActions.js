@@ -29,7 +29,7 @@ export function addItem(categoryCuid) {
   return {
     type: 'ADD_RESOURCE',
     resource: 'items',
-    value: { name: '', price: '', categoryCuid, cuid: cuid() }
+    value: { name: '', price: '', description: '', categoryCuid, cuid: cuid() }
   }
 }
 
@@ -57,6 +57,7 @@ export function addOption(itemCuid) {
     value: {
       name: '',
       price: '',
+      description: '',
       itemCuid,
       cuid: cuid()
     }
