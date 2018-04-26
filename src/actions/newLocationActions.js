@@ -95,12 +95,12 @@ export function saveLocation() {
     for (let item of state.items) {
       let { cuid, categoryCuid, ...rest } = item
       let c = b[cuid] = {...rest, options_attributes: []}
-      a[categoryCuid].items_attributes.push(c)
+      if (a[categoryCuid]) a[categoryCuid].items_attributes.push(c)
     }
 
     for (let option of state.options) {
       let { cuid, itemCuid, ...rest } = option
-      b[itemCuid].options_attributes.push(rest)
+      if (b[itemCuid]) b[itemCuid].options_attributes.push(rest)
     }
 
     console.log(a)
