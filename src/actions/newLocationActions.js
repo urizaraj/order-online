@@ -108,7 +108,7 @@ export function saveLocation() {
 
     for (let item of state.items) {
       let { cuid, categoryCuid, ...rest } = item
-      let c = b[cuid] = {...rest, options_attributes: []}
+      let c = b[cuid] = { ...rest, options_attributes: [] }
       if (a[categoryCuid]) a[categoryCuid].items_attributes.push(c)
     }
 
@@ -117,6 +117,28 @@ export function saveLocation() {
       if (b[itemCuid]) b[itemCuid].options_attributes.push(rest)
     }
 
-    console.log(a)
+    const data = {
+      name: state.name,
+      description: state.description,
+      menus_attributes: [{
+        categories_attributes: Object.values(a)
+      }]
+    }
+
+    const params = {
+      method: 'POST',
+      body: JSON.stringify({ location: data }),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Token token=${localStorage.getItem('token')}`
+      }
+    }
+
+    return fetch('/locations', params)
+      .then(resp => resp.json())
+      .then(resp => {
+        console.log(resp)
+        dispatch({ type: 'LOCATION_SAVED' })
+      })
   }
 }
