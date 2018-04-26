@@ -7,15 +7,27 @@ import { connect } from 'react-redux'
 
 import * as actions from '../actions/newLocationActions'
 
-import cuid from 'cuid'
+// import cuid from 'cuid'
 
 import Icon from '@fortawesome/react-fontawesome'
 
+import { Col as Bcol } from './elements'
+
 //#endregion 
+
+//#region presentational components
 
 const FormGroup = props => <div className='form-group' >{props.children}</div>
 
 const FormControl = props => <input {...props} type='text' className='form-control' />
+
+const FormRow = props => <div className='form-row' >{props.children}</div>
+
+const RemoveButton = props => <button className='btn btn-secondary' onClick={props.onClick} ><Icon icon='trash' /></button>
+
+const AddButton = props => <button className='btn btn-success ml-3' onClick={props.onClick} > <Icon icon='plus' /> New {props.type}</button>
+
+//#endregion
 
 class LocationNew extends Component {
   render() {
@@ -35,7 +47,7 @@ class LocationNew extends Component {
 
           <h2>Menu</h2>
 
-          {this.props.categories.map(category => <Category {...category} />)}
+          {this.props.categories.map(category => <Category {...category} key={category.cuid} />)}
 
           <button
             className='btn btn-success'
@@ -57,23 +69,24 @@ class LocationNew extends Component {
 
 class Category extends Component {
   render() {
-    const addItem = () => this.props.addItem(this.props.cuid)
     return (
       <div className='mb-3' >
-        <FormGroup>
-          <FormControl
-            placeholder='Category Name'
-            value={this.props.name}
-            onChange={this.handleChange} />
-        </FormGroup>
+        <FormRow>
+          <Bcol size='auto' opt='mb-3' >
+            <RemoveButton onClick={this.removeCategory} />
+          </Bcol>
 
-        <button className='btn btn-secondary' onClick={() => this.props.removeCategory(this.props.cuid)} ><Icon icon='trash' /></button>
+          <Bcol>
+            <FormControl
+              placeholder='Category Name'
+              value={this.props.name}
+              onChange={this.handleChange} />
+          </Bcol>
+        </FormRow>
 
-        {this.props.items.map(item => <Item {...item} />)}
+        <AddButton onClick={this.addItem} type='Item' />
 
-        <button
-          className='btn btn-success ml-3'
-          onClick={addItem} > <Icon icon='plus' /> New Item</button>
+        {this.props.items.map(item => <Item {...item} key={item.cuid} />)}
 
       </div>
     )
@@ -83,26 +96,39 @@ class Category extends Component {
     const name = event.target.value
     this.props.updateCategory(this.props.cuid, { name })
   }
+
+  addItem = () => this.props.addItem(this.props.cuid)
+
+  removeCategory = () => this.props.removeCategory(this.props.cuid)
 }
 
 class Item extends Component {
   render() {
     return (
       <div className='mb-3 ml-3' >
-        <FormGroup>
-          <FormControl
-            placeholder='Item Name'
-            onChange={this.handleName}
-            value={this.props.name} />
-        </FormGroup>
+        <FormRow>
+          <Bcol size='auto' opt='mb-3' >
+            <RemoveButton onClick={this.removeItem} />
+          </Bcol>
 
-        <button className='btn btn-secondary' onClick={() => this.props.removeItem(this.props.cuid)} ><Icon icon='trash' /></button>
+          <Bcol>
+            <FormControl
+              placeholder='Item Name'
+              onChange={this.handleName}
+              value={this.props.name} />
+          </Bcol>
 
-        {this.props.options.map(option => <Option {...option} />)}
+          <Bcol>
+            <FormControl
+              placeholder='Price'
+              onChange={this.handlePrice}
+              value={this.props.price} />
+          </Bcol>
+        </FormRow>
 
-        <button
-          className='btn btn-success ml-3'
-          onClick={this.handleNewOption} > <Icon icon='plus' /> New Option</button>
+        <AddButton onClick={this.handleNewOption} type='Option' />
+
+        {this.props.options.map(option => <Option {...option} key={option.cuid} />)}
 
       </div>
     )
@@ -113,23 +139,44 @@ class Item extends Component {
     this.props.updateItem(this.props.cuid, { name })
   }
 
-  handleNewOption = () => {
-    this.props.addOption(this.props.cuid)
+  handlePrice = event => {
+    let price = event.target.value
+    if (price !== '') {
+      price = parseInt(price, 10)
+      if (!price) return
+    }
+    this.props.updateItem(this.props.cuid, { price })
   }
+
+  handleNewOption = () => this.props.addOption(this.props.cuid)
+
+  removeItem = () => this.props.removeItem(this.props.cuid)
 }
 
 class Option extends Component {
   render() {
     return (
       <div className='mb-3 ml-3' >
-        <FormGroup>
-          <FormControl
-            onChange={this.handleName}
-            value={this.props.name}
-            placeholder='Option Name' />
-        </FormGroup>
+        <FormRow>
+          <Bcol size='auto' opt='mb-3' >
+            <RemoveButton onClick={this.removeOption} />
+          </Bcol>
 
-        <button className='btn btn-secondary' onClick={() => this.props.removeOption(this.props.cuid)} ><Icon icon='trash' /></button>
+          <Bcol>
+            <FormControl
+              onChange={this.handleName}
+              value={this.props.name}
+              placeholder='Option Name' />
+          </Bcol>
+
+          <Bcol>
+            <FormControl
+              onChange={this.handlePrice}
+              value={this.props.price}
+              placeholder='Price' />
+          </Bcol>
+        </FormRow>
+
       </div>
     )
   }
@@ -138,6 +185,17 @@ class Option extends Component {
     const name = event.target.value
     this.props.updateOption(this.props.cuid, { name })
   }
+
+  handlePrice = event => {
+    let price = event.target.value
+    if (price !== '') {
+      price = parseInt(price, 10)
+      if (!price) return
+    }
+    this.props.updateOption(this.props.cuid, { price })
+  }
+
+  removeOption = () => this.props.removeOption(this.props.cuid)
 
 }
 
