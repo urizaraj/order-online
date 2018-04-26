@@ -79,3 +79,30 @@ export function removeOption(cuid) {
     cuid
   }
 }
+
+export function saveLocation() {
+  return (dispatch, getState) => {
+    const state = getState().newLocation
+
+    let a = {}
+    let b = {}
+
+    for (let category of state.categories) {
+      let { cuid, ...rest } = category
+      a[cuid] = { ...rest, items_attributes: [] }
+    }
+
+    for (let item of state.items) {
+      let { cuid, categoryCuid, ...rest } = item
+      let c = b[cuid] = {...rest, options_attributes: []}
+      a[categoryCuid].items_attributes.push(c)
+    }
+
+    for (let option of state.options) {
+      let { cuid, itemCuid, ...rest } = option
+      b[itemCuid].options_attributes.push(rest)
+    }
+
+    console.log(a)
+  }
+}
