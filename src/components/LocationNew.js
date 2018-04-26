@@ -41,6 +41,10 @@ class LocationNew extends Component {
             className='btn btn-success'
             onClick={this.props.addCategory} > <Icon icon='plus' /> New Category</button>
 
+          <button
+            onClick={this.props.saveLocation}
+            className='btn btn-primary'
+          >Save Location</button>
         </form>
       </div>
     )
@@ -63,7 +67,7 @@ class Category extends Component {
             onChange={this.handleChange} />
         </FormGroup>
 
-        <button className='btn btn-secondary' onClick={() => this.props.removeCategory(this.props.cuid)} ><Icon icon='trash'/></button>
+        <button className='btn btn-secondary' onClick={() => this.props.removeCategory(this.props.cuid)} ><Icon icon='trash' /></button>
 
         {this.props.items.map(item => <Item {...item} />)}
 
@@ -92,7 +96,7 @@ class Item extends Component {
             value={this.props.name} />
         </FormGroup>
 
-        <button className='btn btn-secondary' onClick={() => this.props.removeItem(this.props.cuid)} ><Icon icon='trash'/></button>
+        <button className='btn btn-secondary' onClick={() => this.props.removeItem(this.props.cuid)} ><Icon icon='trash' /></button>
 
         {this.props.options.map(option => <Option {...option} />)}
 
@@ -125,7 +129,7 @@ class Option extends Component {
             placeholder='Option Name' />
         </FormGroup>
 
-        <button className='btn btn-secondary' onClick={() => this.props.removeOption(this.props.cuid)} ><Icon icon='trash'/></button>
+        <button className='btn btn-secondary' onClick={() => this.props.removeOption(this.props.cuid)} ><Icon icon='trash' /></button>
       </div>
     )
   }
@@ -146,8 +150,8 @@ const mapState = state => {
 }
 
 const mapDispatch = dispatch => {
-  const { addCategory, updateCategory, removeCategory } = actions
-  return bindActionCreators({ addCategory, updateCategory, removeCategory }, dispatch)
+  const { addCategory, updateCategory, removeCategory, saveLocation } = actions
+  return bindActionCreators({ addCategory, updateCategory, removeCategory, saveLocation }, dispatch)
 }
 
 const mapCatState = (state, ownProps) => {
