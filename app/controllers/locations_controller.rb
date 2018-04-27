@@ -3,8 +3,11 @@ class LocationsController < ApplicationController
     render json: Location.all
   end
 
-  def show
-    render json: Location.find(params[:id])
+  def show 
+    location = Location.find(params[:id])
+
+    return render json: location, serializer: LocationEditSerializer if params[:edit]
+    render json: location
   end
 
   def create
