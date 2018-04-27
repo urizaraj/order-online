@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
-import { Row, Col as BCol } from './elements'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+
+import { Row, Col as BCol } from '../elements'
+
 import OrderShow from './OrderShow';
-import { fetchOrderIndex } from '../actions/orderActions'
+
+import { fetchOrderIndex } from '../../actions/orderActions'
 
 class SavedOrdersPage extends Component {
   constructor(props) {

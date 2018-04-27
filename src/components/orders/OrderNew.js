@@ -3,11 +3,11 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import Item from './Item'
 import CurrentOrder from './CurrentOrder'
-import { resetOrder } from '../actions/orderActions'
+import { resetOrder } from '../../actions/orderActions'
 
-import { Row, Col } from './elements'
+import { Row, Col } from '../elements'
 
-class OrderForm extends Component {
+class OrderNew extends Component {
   constructor() {
     super()
 
@@ -56,4 +56,4 @@ const mapDispatch = dispatch => {
   return bindActionCreators(actions, dispatch)
 }
 
-export default OrderForm = connect(mapState, mapDispatch)(OrderForm)
+export default OrderNew = connect(mapState, mapDispatch)(OrderNew)

@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
-import { fetchLocations } from '../actions/locationActions'
+
+import { fetchLocations } from '../../actions/locationActions'
 
 class LocationsIndex extends Component {
   render() {

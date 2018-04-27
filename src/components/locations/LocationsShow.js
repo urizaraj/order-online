@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { fetchLocation } from '../actions/locationActions'
 import { NavLink } from 'react-router-dom'
 import { Route, Switch } from 'react-router-dom'
 
-import Menu from './Menu'
+import { fetchLocation } from '../../actions/locationActions'
+
+import Menu from '../menus/MenusShow'
 
 class LocationsShow extends Component {
   render() {

@@ -3,8 +3,8 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import Icon from '@fortawesome/react-fontawesome'
 // import cuid from 'cuid'
-import { toggleActiveItem } from '../actions/activeItemActions'
-import { addOrderItem } from '../actions/orderActions'
+import { toggleActiveItem } from '../../actions/activeItemActions'
+import { addOrderItem } from '../../actions/orderActions'
 
 const Item = props => {
   const detailsProps = {

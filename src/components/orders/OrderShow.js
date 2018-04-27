@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import { fetchOrder, resetOrder } from '../actions/orderActions'
+import { fetchOrder, resetOrder } from '../../actions/orderActions'
 
 class OrderShow extends Component {
   render() {

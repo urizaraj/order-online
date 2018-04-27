@@ -1,17 +1,16 @@
 //#region imports 
 
 import React, { Component } from 'react'
-
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import * as actions from '../actions/newLocationActions'
+import * as actions from '../../actions/newLocationActions'
 
 // import cuid from 'cuid'
 
 import Icon from '@fortawesome/react-fontawesome'
 
-import { Col as Bcol } from './elements'
+import { Col as Bcol } from '../elements'
 
 //#endregion 
 

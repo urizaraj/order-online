@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { fetchMenu } from '../actions/menuActions'
-import OrderForm from './OrderForm';
+
+import { fetchMenu } from '../../actions/menuActions'
+
+import OrderNew from '../orders/OrderNew';
 
 const e = React.createElement
 
@@ -28,14 +30,14 @@ const Category = props => {
 
 const CategoryList = ({categories}) => categories.map(category => e(Category, {...category, key: category.id}))
 
-class Menu extends Component {
+class MenusShow extends Component {
   render() {
     return (
       <div>
         <h1>Menu</h1>
         <CategoryList categories={this.props.categories} />
         <hr/>
-        <OrderForm categories={this.props.categories} />
+        <OrderNew categories={this.props.categories} />
       </div>
     )
   }
@@ -53,4 +55,4 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators({ fetchMenu }, dispatch)
 }
 
-export default Menu = connect(mapStateToProps, mapDispatchToProps)(Menu)
+export default MenusShow = connect(mapStateToProps, mapDispatchToProps)(MenusShow)

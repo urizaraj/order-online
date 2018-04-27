@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom'
 
 import LocationsIndex from './LocationsIndex'
 import LocationsShow from './LocationsShow'
-import LocationsNew from './LocationNew'
+import LocationsNew from './LocationsNew'
 
 const LocationsPage = props => {
   return (

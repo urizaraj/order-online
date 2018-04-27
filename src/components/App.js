@@ -7,10 +7,10 @@ import { connect } from 'react-redux'
 import { userCheckToken } from '../actions/userActions'
 
 import NavBar from './NavBar'
-import LocationsPage from './LocationsPage'
+import LocationsPage from './locations/LocationsPage'
 import SignInPage from './SignInPage'
 import AdminPage from './AdminPage'
-import SavedOrdersPage from './SavedOrdersPage';
+import SavedOrdersPage from './orders/SavedOrdersPage';
 
 class App extends Component {
   constructor(props) {
