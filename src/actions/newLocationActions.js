@@ -144,3 +144,7 @@ export function saveLocation() {
       })
   }
 }
+
+export function resetLocation() {
+  return { type: 'RESET_LOCATION' }
+}
