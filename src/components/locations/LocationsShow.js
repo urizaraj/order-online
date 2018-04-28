@@ -18,6 +18,9 @@ class LocationsShow extends Component {
         </div>
 
         <MenuList menus={this.props.menus} url={this.props.match.url} />
+        <NavLink to={`${this.props.match.url}/edit`} >
+          Edit
+        </NavLink>
         
         <Switch>
           <Route path={`${this.props.match.url}/menus/:menuId`} component={Menu} />
