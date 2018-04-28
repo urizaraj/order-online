@@ -38,18 +38,21 @@ class Category extends Component {
     this.props.updateCategory(this.props.cuid, { name })
   }
 
-  addItem = () => this.props.addItem(this.props.cuid)
+  addItem = () => this.props.addItem(this.props.cuid, this.props.id)
 
   removeCategory = () => this.props.removeCategory(this.props.cuid)
 }
 
-
 const mapState = (state, ownProps) => {
-  return {
-    items: state.newLocation.items.filter(item => {
-      return item.category_id === ownProps.id
-    })
-  }
+  let items = state.newLocation.items
+
+  const [key, itemKey] = (ownProps.id ? ['id', 'category_id'] : ['cuid', 'categoryCuid'])
+
+  items = items.filter(item => {
+    return item[itemKey] === ownProps[key]
+  })
+
+  return { items }
 }
 
 const mapDispatch = dispatch => {

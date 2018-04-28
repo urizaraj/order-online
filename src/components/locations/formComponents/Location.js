@@ -12,33 +12,35 @@ class Location extends Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-      <FormGroup>
-        <FormControl
-          placeholder='Location Name'
-          name='name'
-          onChange={this.handleChange}
-          value={this.props.name} />
-      </FormGroup>
+        <FormGroup>
+          <FormControl
+            placeholder='Location Name'
+            name='name'
+            onChange={this.handleChange}
+            value={this.props.name} />
 
-      <FormGroup>
-        <FormControl
-          placeholder='Location Description'
-          name='description'
-          onChange={this.handleChange}
-          value={this.props.description} />
-      </FormGroup>
+        </FormGroup>
 
-      <h2>Menu</h2>
+        <FormGroup>
+          <FormControl
+            placeholder='Location Description'
+            name='description'
+            onChange={this.handleChange}
+            value={this.props.description} />
 
-      <AddButton onClick={this.props.addCategory} type='Category' />
+        </FormGroup>
 
-      {this.props.categories.map(category => <Category {...category} key={category.cuid} />)}
+        <h2>Menu</h2>
 
-      <div></div>
-      <button
-        onClick={this.props.saveLocation}
-        className='btn btn-primary'
-      >Save Location</button>
+        <AddButton onClick={this.addCategory} type='Category' />
+
+        {this.props.categories.map(category => <Category {...category} key={category.cuid} />)}
+
+        <div></div>
+        <button
+          onClick={this.props.saveLocation}
+          className='btn btn-primary'
+        >Save Location</button>
       </form>
     )
   }
@@ -55,13 +57,18 @@ class Location extends Component {
   handleSubmit = event => {
     event.preventDefault()
   }
+
+  addCategory = event => {
+    this.props.addCategory(this.props.menuId)
+  }
 }
 
 const mapState = state => {
   return {
     categories: state.newLocation.categories,
     name: state.newLocation.name,
-    description: state.newLocation.description
+    description: state.newLocation.description,
+    menuId: state.newLocation.menuId
   }
 }
 

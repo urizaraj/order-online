@@ -63,7 +63,7 @@ class Item extends Component {
     this.props.updateItem(this.props.cuid, { price })
   }
 
-  handleNewOption = () => this.props.addOption(this.props.cuid)
+  handleNewOption = () => this.props.addOption(this.props.cuid, this.props.id)
 
   removeItem = () => this.props.removeItem(this.props.cuid)
 }

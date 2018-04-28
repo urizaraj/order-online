@@ -1,10 +1,10 @@
 import cuid from 'cuid'
 
-export function addCategory() {
+export function addCategory(menuId = null) {
   return {
     type: 'ADD_RESOURCE',
     resource: 'categories',
-    value: { cuid: cuid(), name: '' }
+    value: { cuid: cuid(), name: '', menu_id: menuId }
   }
 }
 
@@ -25,11 +25,11 @@ export function removeCategory(cuid) {
   }
 }
 
-export function addItem(categoryCuid) {
+export function addItem(categoryCuid, categoryId = null) {
   return {
     type: 'ADD_RESOURCE',
     resource: 'items',
-    value: { name: '', price: '', description: '', categoryCuid, cuid: cuid() }
+    value: { name: '', price: '', description: '', categoryCuid, cuid: cuid(), category_id: categoryId }
   }
 }
 
@@ -50,7 +50,7 @@ export function removeItem(cuid) {
   }
 }
 
-export function addOption(itemCuid) {
+export function addOption(itemCuid, itemId = null) {
   return {
     type: 'ADD_RESOURCE',
     resource: 'options',
@@ -59,6 +59,7 @@ export function addOption(itemCuid) {
       price: '',
       description: '',
       itemCuid,
+      item_id: itemId,
       cuid: cuid()
     }
   }
