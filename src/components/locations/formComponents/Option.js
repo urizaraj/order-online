@@ -28,6 +28,7 @@ class Option extends Component {
               onChange={this.handlePrice}
               value={this.props.price}
               placeholder='Price' />
+
           </Bcol>
         </FormRow>
       </div>
@@ -54,6 +55,5 @@ class Option extends Component {
 const mapOptionDispatch = dispatch => {
   return bindActionCreators({ updateOption, removeOption }, dispatch)
 }
-
 
 export default connect(null, mapOptionDispatch)(Option)
