@@ -20,6 +20,9 @@ const newLocationReducer = (state = { categories: [], items: [], options: [], na
     case 'UPDATE_LOCATION':
       return {...state, ...action.value}
 
+    case 'RESET_LOCATION':
+      return { categories: [], items: [], options: [], name: '', description: '' }
+
     default:
       return state
   }
