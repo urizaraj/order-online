@@ -6,6 +6,8 @@ import { fetchMenu } from '../../actions/menuActions'
 
 import OrderNew from '../orders/OrderNew';
 
+import Icon from '@fortawesome/react-fontawesome'
+
 const e = React.createElement
 
 const Item = ({ name, description, price }) => {
@@ -32,6 +34,9 @@ const CategoryList = ({categories}) => categories.map(category => e(Category, {.
 
 class MenusShow extends Component {
   render() {
+
+    if (this.props.loading) return <div><Icon icon="spinner" spin /></div>
+
     return (
       <div>
         <h1>Menu</h1>
@@ -47,12 +52,12 @@ class MenusShow extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return { categories: state.menu.categories }
+const mapState = state => {
+  return { categories: state.menu.categories, loading: state.menu.loading }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatch = dispatch => {
   return bindActionCreators({ fetchMenu }, dispatch)
 }
 
-export default MenusShow = connect(mapStateToProps, mapDispatchToProps)(MenusShow)
+export default MenusShow = connect(mapState, mapDispatch)(MenusShow)
