@@ -16,18 +16,18 @@ function handleResp(resp, dispatch) {
       dispatch({
         type: 'ADD_RESOURCE',
         resource,
-        value: {cuid: cuid(), ...value}
+        value: { cuid: cuid(), ...value }
       })
     }
   }
 
   dispatch({
-    type: 'UPDATE_LOCATION_NAME',
-    value: resp.name
-  })
-
-  dispatch({
-    type: 'UPDATE_LOCATION_DESCRIPTION',
-    value: resp.description
+    type: 'UPDATE_LOCATION',
+    value: { 
+      name: resp.name, 
+      description: resp.description,
+      id: resp.id,
+      menuId: resp.menus[0].id
+     }
   })
 }
