@@ -17,11 +17,8 @@ const newLocationReducer = (state = { categories: [], items: [], options: [], na
       let filtered = state[resource].filter(r => r.cuid !== cuid)
       return {...state, [resource]: filtered}
 
-    case 'UPDATE_LOCATION_NAME':
-      return {...state, name: action.value}
-
-    case 'UPDATE_LOCATION_DESCRIPTION':
-      return {...state, description: action.value}
+    case 'UPDATE_LOCATION':
+      return {...state, ...action.value}
 
     default:
       return state

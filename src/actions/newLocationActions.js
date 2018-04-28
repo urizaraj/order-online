@@ -83,15 +83,15 @@ export function removeOption(cuid) {
 
 export function updateLocationName(name) {
   return {
-    type: 'UPDATE_LOCATION_NAME',
-    value: name
+    type: 'UPDATE_LOCATION',
+    value: { name }
   }
 }
 
 export function updateLocationDescription(description) {
   return {
-    type: 'UPDATE_LOCATION_DESCRIPTION',
-    value: description
+    type: 'UPDATE_LOCATION',
+    value: { description }
   }
 }
 
