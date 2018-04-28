@@ -23,11 +23,32 @@ function handleResp(resp, dispatch) {
 
   dispatch({
     type: 'UPDATE_LOCATION',
-    value: { 
-      name: resp.name, 
+    value: {
+      name: resp.name,
       description: resp.description,
       id: resp.id,
       menuId: resp.menus[0].id
-     }
+    }
   })
 }
+
+export function updateLocation() {
+  return (dispatch, getState) => {
+    const state = getState().newLocation
+    console.log(state)
+    const options = {
+      method: 'PATCH',
+      body: JSON.stringify({location: state}),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Token token=${localStorage.getItem('token')}`
+      }
+    }
+
+    return fetch(`/locations/${state.id}`, options)
+      .then(resp => resp.json())
+      .then(resp => {
+        console.log(resp)
+      })
+  }
+} 
