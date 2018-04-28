@@ -30,10 +30,12 @@ class Item extends Component {
               value={this.props.price} />
           </Bcol>
         </FormRow>
+
         <FormGroup>
           <FormControl placeholder='description'
             onChange={this.handleDescription}
             value={this.props.description} />
+            
         </FormGroup>
 
         <AddButton onClick={this.handleNewOption} type='Option' />
@@ -69,9 +71,16 @@ class Item extends Component {
 }
 
 const mapState = (state, ownProps) => {
-  return {
-    options: state.newLocation.options.filter(option => option.item_id === ownProps.id)
+  const options = state.newLocation.options
+  let filter
+
+  if (ownProps.id) {
+    filter = option => option.item_id === ownProps.id
+  } else {
+    filter = option => option.itemCuid === ownProps.cuid
   }
+
+  return { options: options.filter(filter) }
 }
 
 const mapDispatch = dispatch => {
@@ -79,4 +88,4 @@ const mapDispatch = dispatch => {
   return bindActionCreators(actions, dispatch)
 }
 
- export default connect(mapState, mapDispatch)(Item)
+export default connect(mapState, mapDispatch)(Item)
