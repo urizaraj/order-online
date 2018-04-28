@@ -11,11 +11,10 @@ const LocationsPage = props => {
     <div>
       <Switch>
         <Route path={`${props.match.url}/new`} component={LocationsNew} />
-        <Route path={`${props.match.url}/edit`} component={LocationsEdit} />
+        <Route path={`${props.match.url}/:locationId/edit`} component={LocationsEdit} />
         <Route path={`${props.match.url}/:locationId`} component={LocationsShow} />
         <Route path={`${props.match.url}`} component={LocationsIndex} />
       </Switch>
-
     </div>
   )
 }

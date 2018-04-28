@@ -6,7 +6,6 @@ import { fetchLocation } from '../../actions/editLocationActions'
 
 import Location from './formComponents/Location'
 
-
 class LocationEdit extends Component {
   render() {
     return (
@@ -18,13 +17,12 @@ class LocationEdit extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchLocation(1)
+    this.props.fetchLocation(this.props.match.params.locationId)
   }
 }
 
 const mapDispatch = dispatch => {
   return bindActionCreators({ fetchLocation }, dispatch)
 }
-
 
 export default connect(null, mapDispatch)(LocationEdit)
