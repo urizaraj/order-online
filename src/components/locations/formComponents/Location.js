@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 import { FormGroup, FormControl, AddButton } from './elements'
 
-import { addCategory, saveLocation, updateLocationName, updateLocationDescription } from '../../../actions/newLocationActions'
+import { addCategory, updateLocationName, updateLocationDescription } from '../../../actions/newLocationActions'
 
 import Category from './Category'
 
@@ -35,12 +35,6 @@ class Location extends Component {
         <AddButton onClick={this.addCategory} type='Category' />
 
         {this.props.categories.map(category => <Category {...category} key={category.cuid} />)}
-
-        <div></div>
-        <button
-          onClick={this.props.saveLocation}
-          className='btn btn-primary'
-        >Save Location</button>
       </form>
     )
   }
@@ -73,7 +67,7 @@ const mapState = state => {
 }
 
 const mapDispatch = dispatch => {
-  const actions = { addCategory, saveLocation, updateLocationName, updateLocationDescription }
+  const actions = { addCategory, updateLocationName, updateLocationDescription }
   return bindActionCreators(actions, dispatch)
 }
 
