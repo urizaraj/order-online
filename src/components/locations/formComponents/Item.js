@@ -12,10 +12,6 @@ class Item extends Component {
     return (
       <div className='mb-3 ml-3' >
         <FormRow>
-          <Bcol size='auto' opt='mb-3' >
-            <RemoveButton onClick={this.removeItem} />
-          </Bcol>
-
           <Bcol>
             <FormControl
               placeholder='Item Name'
@@ -23,19 +19,23 @@ class Item extends Component {
               value={this.props.name} />
           </Bcol>
 
-          <Bcol>
+          <Bcol size='md-2 col' >
             <FormControl
               placeholder='Price'
               onChange={this.handlePrice}
               value={this.props.price} />
           </Bcol>
+
+          <Bcol size='auto' opt='mb-3' >
+            <RemoveButton onClick={this.removeItem} />
+          </Bcol>
         </FormRow>
 
         <FormGroup>
-          <FormControl placeholder='description'
+          <FormControl placeholder='Description'
             onChange={this.handleDescription}
             value={this.props.description} />
-            
+
         </FormGroup>
 
         <AddButton onClick={this.handleNewOption} type='Option' />

@@ -12,23 +12,23 @@ class Option extends Component {
     return (
       <div className='mb-3 ml-3' >
         <FormRow>
-          <Bcol size='auto' opt='mb-3' >
-            <RemoveButton onClick={this.removeOption} />
-          </Bcol>
-
-          <Bcol>
+          <Bcol >
             <FormControl
               onChange={this.handleName}
               value={this.props.name}
               placeholder='Option Name' />
           </Bcol>
 
-          <Bcol>
+          <Bcol size='md-2 col'>
             <FormControl
               onChange={this.handlePrice}
               value={this.props.price}
               placeholder='Price' />
 
+          </Bcol>
+
+          <Bcol size='auto'  >
+            <RemoveButton onClick={this.removeOption} />
           </Bcol>
         </FormRow>
       </div>

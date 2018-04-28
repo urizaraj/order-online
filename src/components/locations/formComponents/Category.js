@@ -13,15 +13,15 @@ class Category extends Component {
     return (
       <div className='mb-3 ml-3' >
         <FormRow>
-          <Bcol size='auto' opt='mb-3' >
-            <RemoveButton onClick={this.removeCategory} />
-          </Bcol>
-
-          <Bcol>
+          <Bcol >
             <FormControl
               placeholder='Category Name'
               value={this.props.name}
               onChange={this.handleChange} />
+          </Bcol>
+
+          <Bcol size='auto' opt='mb-3' >
+            <RemoveButton onClick={this.removeCategory} />
           </Bcol>
         </FormRow>
 
