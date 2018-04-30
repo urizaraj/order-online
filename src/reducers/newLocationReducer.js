@@ -1,4 +1,4 @@
-const newLocationReducer = (state = { categories: [], items: [], options: [], name: '', description: '', loading: false }, action) => {
+const newLocationReducer = (state = { categories: [], items: [], options: [], name: '', description: '', loading: false, saved: false }, action) => {
   const { resource } = action
   let cuid
 
@@ -23,13 +23,16 @@ const newLocationReducer = (state = { categories: [], items: [], options: [], na
       return { ...state, ...action.value }
 
     case 'RESET_LOCATION':
-      return { categories: [], items: [], options: [], name: '', description: '', loading: false }
+      return { categories: [], items: [], options: [], name: '', description: '', loading: false, saved: false }
 
     case 'LOADING_EDIT_LOCATION':
       return { ...state, loading: true }
 
     case 'LOADED_EDIT_LOCATION':
       return {...state, loading: false}
+
+    case 'LOCATION_SAVED':
+      return {...state, saved: true}
 
     default:
       return state
