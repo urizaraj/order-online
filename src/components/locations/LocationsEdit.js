@@ -17,7 +17,7 @@ class LocationEdit extends Component {
         <Location />
 
         <button
-          onClick={this.updateLocation}
+          onClick={this.patchLocation}
           className='btn btn-primary' >
           Update Location
         </button>
@@ -30,8 +30,8 @@ class LocationEdit extends Component {
     this.props.fetchLocation(this.props.id)
   }
 
-  updateLocation = event => {
-    this.props.updateLocation()
+  patchLocation = event => {
+    this.props.patchLocation()
   }
 
   componentWillUnmount() {
