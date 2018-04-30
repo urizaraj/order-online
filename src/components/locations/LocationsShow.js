@@ -11,8 +11,15 @@ import { fetchLocation } from '../../actions/locationActions'
 import Icon from '@fortawesome/react-fontawesome'
 
 import Menu from '../menus/MenusShow'
+import LocationsEdit from './LocationsEdit';
 
 class LocationsShow extends Component {
+  constructor(props) {
+    super(props)
+    this.url = props.match.url
+    this.id = props.match.params.locationId
+  }
+
   render() {
     if (this.props.loading) return <div className='text-center' ><Icon icon="spinner" spin size='2x' /></div>
 
@@ -25,28 +32,31 @@ class LocationsShow extends Component {
 
         <Row>
           <BCol>
-            <NavLink to={`${this.props.match.url}/menu`} >
+            <NavLink to={`${this.url}/menu`} >
               Menu
             </NavLink>
           </BCol>
 
           <BCol>
-            <NavLink to={`${this.props.match.url}/edit`} >
+            <NavLink to={`${this.url}/edit`} >
               Edit
             </NavLink>
           </BCol>
         </Row>
 
         <Switch>
-          <Route path={`${this.props.match.url}/menu`} component={Menu} />
+          <Route path={`${this.url}/edit`} render={this.locationEdit} />
+          <Route path={`${this.url}/menu`} component={Menu} />
         </Switch>
       </div>
     )
   }
 
   componentDidMount() {
-    this.props.fetchLocation(this.props.match.params.locationId)
+    this.props.fetchLocation(this.id)
   }
+
+  locationEdit = () => <LocationsEdit id={this.id} />
 }
 
 const mapState = state => {

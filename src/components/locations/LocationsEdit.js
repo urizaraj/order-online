@@ -27,7 +27,7 @@ class LocationEdit extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchLocation(this.props.match.params.locationId)
+    this.props.fetchLocation(this.props.id)
   }
 
   updateLocation = event => {
