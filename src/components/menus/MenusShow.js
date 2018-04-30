@@ -7,6 +7,7 @@ import { fetchMenu } from '../../actions/menuActions'
 import OrderNew from '../orders/OrderNew';
 
 import Icon from '@fortawesome/react-fontawesome'
+import { DFlex } from '../elements'
 
 class MenusShow extends Component {
   render() {
@@ -17,7 +18,7 @@ class MenusShow extends Component {
       <div>
         <h1>Menu</h1>
         <CategoryList categories={this.props.categories} />
-        <hr/>
+        <hr />
         <OrderNew categories={this.props.categories} />
       </div>
     )
@@ -28,24 +29,30 @@ class MenusShow extends Component {
   }
 }
 
-const CategoryList = ({categories}) => categories.map(category => <Category {...{...category, key: category.id}} />)
+const CategoryList = ({ categories }) => categories.map(category => <Category {...{ ...category, key: category.id }} />)
 
 const Category = props => {
   return (
-    <div>
-      <h2>{props.name}</h2>
+    <div className='mb-3' >
+      <h2 className='text-primary' >{props.name}</h2>
       <ItemList items={props.items} />
     </div>
   )
 }
 
-const ItemList = ({items}) => items.map(item => <Item {...{...item, key: item.id}} />)
+const ItemList = ({ items }) => items.map(item => <Item {...{ ...item, key: item.id }} />)
+
 
 const Item = ({ name, description, price }) => {
   return (
-    <div>
-      <h3>{name}</h3>
-      <small>{description} - {price}</small> 
+    <div className='mb-2' >
+      
+      <DFlex>
+        <h3 className='mb-0' >{name}</h3>
+        <h3 className='mb-0 ml-3 text-muted ' >${price}</h3>
+      </DFlex>
+
+      <small>{description}</small>
     </div>
   )
 }
