@@ -25,7 +25,7 @@ class MenusShow extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchMenu(this.props.match.params.menuId)
+    this.props.fetchMenu(this.props.id)
   }
 }
 
@@ -46,7 +46,7 @@ const ItemList = ({ items }) => items.map(item => <Item {...{ ...item, key: item
 const Item = ({ name, description, price }) => {
   return (
     <div className='mb-2' >
-      
+
       <DFlex>
         <h3 className='mb-0' >{name}</h3>
         <h3 className='mb-0 ml-3 text-muted ' >${price}</h3>
@@ -60,7 +60,11 @@ const Item = ({ name, description, price }) => {
 // store
 
 const mapState = state => {
-  return { categories: state.menu.categories, loading: state.menu.loading }
+  return {
+    categories: state.menu.categories,
+    loading: state.menu.loading,
+    id: state.locations.location.menu.id
+  }
 }
 
 const mapDispatch = dispatch => {
