@@ -13,8 +13,9 @@ class LocationsController < ApplicationController
   end
 
   def create
-    location = Location.new(strong_params)
+    location = Location.new(params_to_attributes)
     status = location.save
+
     render json: { saved: status }
   end
 
@@ -56,8 +57,8 @@ class LocationsController < ApplicationController
               :id,
               :menuId,
               categories: %i[id cuid name description menu_id],
-              items: %i[id cuid name description price category_id],
-              options: %i[id cuid name price item_id]
+              items: %i[id cuid name description price category_id categoryCuid],
+              options: %i[id cuid name price item_id itemCuid]
   end
 
   def params_to_attributes
@@ -80,7 +81,11 @@ class LocationsController < ApplicationController
   def categories_attributes(categories, items, options)
     categories.map do |category|
       c_items = items.select do |item|
-        item[:categoryCuid] == category[:cuid] || item[:category_id] == category[:id]
+        if item[:category_id]
+          item[:category_id] == category[:id]
+        else
+          item[:categoryCuid] == category[:cuid]
+        end
       end
 
       {
@@ -95,7 +100,11 @@ class LocationsController < ApplicationController
   def items_attributes(items, options)
     items.map do |item|
       i_options = options.select do |option|
-        option[:itemCuid] == item[:cuid] || option[:item_id] == item[:id]
+        if option[:item_id]
+          option[:item_id] == item[:id]
+        else
+          option[:itemCuid] == item[:cuid]
+        end
       end
 
       {
