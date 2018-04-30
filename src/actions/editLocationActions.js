@@ -28,7 +28,7 @@ function handleResp(resp, dispatch) {
       name: resp.name,
       description: resp.description,
       id: resp.id,
-      menuId: resp.menus[0].id
+      menuId: resp.menu.id
     }
   })
 

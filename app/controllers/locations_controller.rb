@@ -71,10 +71,10 @@ class LocationsController < ApplicationController
       id: location[:id],
       name: location[:name],
       description: location[:description],
-      menus_attributes: [{
+      menu_attributes: {
         id: location[:menuId],
         categories_attributes: categories_attributes(categories, items, options)
-      }]
+      }
     }.compact
   end
 

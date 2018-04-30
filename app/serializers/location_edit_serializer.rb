@@ -1,6 +1,6 @@
 class LocationEditSerializer < ActiveModel::Serializer
   attributes :id, :name, :description
-  has_many :menus
+  has_one :menu
   has_many :categories
   has_many :items
   has_many :options
