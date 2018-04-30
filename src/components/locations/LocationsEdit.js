@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import { fetchLocation, updateLocation } from '../../actions/editLocationActions'
+import { fetchLocation, patchLocation } from '../../actions/editLocationActions'
 import { resetLocation } from '../../actions/newLocationActions'
 
 import Location from './formComponents/Location'
@@ -38,7 +38,7 @@ class LocationEdit extends Component {
 }
 
 const mapDispatch = dispatch => {
-  return bindActionCreators({ fetchLocation, updateLocation, resetLocation }, dispatch)
+  return bindActionCreators({ fetchLocation, patchLocation, resetLocation }, dispatch)
 }
 
 export default connect(null, mapDispatch)(LocationEdit)

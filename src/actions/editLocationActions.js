@@ -32,7 +32,7 @@ function handleResp(resp, dispatch) {
   })
 }
 
-export function updateLocation() {
+export function patchLocation() {
   return (dispatch, getState) => {
     const state = getState().newLocation
     const options = {
