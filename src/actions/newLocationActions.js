@@ -96,55 +96,76 @@ export function updateLocationDescription(description) {
   }
 }
 
+// export function saveLocation() {
+//   return (dispatch, getState) => {
+//     const state = getState().newLocation
+
+//     let a = {}
+//     let b = {}
+
+//     for (let category of state.categories) {
+//       let { cuid, ...rest } = category
+//       a[cuid] = { ...rest, items_attributes: [] }
+//     }
+
+//     for (let item of state.items) {
+//       let { cuid, categoryCuid, ...rest } = item
+//       let c = b[cuid] = { ...rest, options_attributes: [] }
+//       if (a[categoryCuid]) a[categoryCuid].items_attributes.push(c)
+//     }
+
+//     for (let option of state.options) {
+//       let { cuid, itemCuid, ...rest } = option
+//       if (b[itemCuid]) b[itemCuid].options_attributes.push(rest)
+//     }
+
+//     const data = {
+//       name: state.name,
+//       description: state.description,
+//       menus_attributes: [{
+//         categories_attributes: Object.values(a)
+//       }]
+//     }
+
+//     const params = {
+//       method: 'POST',
+//       body: JSON.stringify({ location: data }),
+//       headers: {
+//         'Content-Type': 'application/json',
+//         'Authorization': `Token token=${localStorage.getItem('token')}`
+//       }
+//     }
+
+//     return fetch('/locations', params)
+//       .then(resp => resp.json())
+//       .then(resp => {
+//         console.log(resp)
+//         dispatch({ type: 'LOCATION_SAVED' })
+//       })
+//   }
+// }
+
+export function resetLocation() {
+  return { type: 'RESET_LOCATION' }
+}
+
 export function saveLocation() {
   return (dispatch, getState) => {
     const state = getState().newLocation
-
-    let a = {}
-    let b = {}
-
-    for (let category of state.categories) {
-      let { cuid, ...rest } = category
-      a[cuid] = { ...rest, items_attributes: [] }
-    }
-
-    for (let item of state.items) {
-      let { cuid, categoryCuid, ...rest } = item
-      let c = b[cuid] = { ...rest, options_attributes: [] }
-      if (a[categoryCuid]) a[categoryCuid].items_attributes.push(c)
-    }
-
-    for (let option of state.options) {
-      let { cuid, itemCuid, ...rest } = option
-      if (b[itemCuid]) b[itemCuid].options_attributes.push(rest)
-    }
-
-    const data = {
-      name: state.name,
-      description: state.description,
-      menus_attributes: [{
-        categories_attributes: Object.values(a)
-      }]
-    }
-
-    const params = {
+    const options = {
       method: 'POST',
-      body: JSON.stringify({ location: data }),
+      body: JSON.stringify({ location: state }),
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Token token=${localStorage.getItem('token')}`
       }
     }
 
-    return fetch('/locations', params)
+    return fetch(`/locations`, options)
       .then(resp => resp.json())
       .then(resp => {
         console.log(resp)
         dispatch({ type: 'LOCATION_SAVED' })
       })
   }
-}
-
-export function resetLocation() {
-  return { type: 'RESET_LOCATION' }
 }
