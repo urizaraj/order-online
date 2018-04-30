@@ -2,6 +2,7 @@ import cuid from 'cuid'
 
 export function fetchLocation(id) {
   return dispatch => {
+    dispatch({ type: 'LOADING_EDIT_LOCATION' })
     return fetch(`/locations/${id}?edit=true`)
       .then(resp => resp.json())
       .then(resp => {
@@ -30,6 +31,8 @@ function handleResp(resp, dispatch) {
       menuId: resp.menus[0].id
     }
   })
+
+  dispatch({type: 'LOADED_EDIT_LOCATION'})
 }
 
 export function patchLocation() {
