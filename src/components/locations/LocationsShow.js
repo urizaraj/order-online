@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import { Route, Switch } from 'react-router-dom'
 
+import { Row, BCol } from '../elements'
+
 import { fetchLocation } from '../../actions/locationActions'
 
 import Icon from '@fortawesome/react-fontawesome'
@@ -21,13 +23,19 @@ class LocationsShow extends Component {
           {this.props.description}
         </div>
 
-        <NavLink to={`${this.props.match.url}/menu`} >
-          Menu
-        </NavLink>
-        
-        <NavLink to={`${this.props.match.url}/edit`} >
-          Edit
-        </NavLink>
+        <Row>
+          <BCol>
+            <NavLink to={`${this.props.match.url}/menu`} >
+              Menu
+            </NavLink>
+          </BCol>
+
+          <BCol>
+            <NavLink to={`${this.props.match.url}/edit`} >
+              Edit
+            </NavLink>
+          </BCol>
+        </Row>
 
         <Switch>
           <Route path={`${this.props.match.url}/menu`} component={Menu} />
