@@ -18,8 +18,6 @@ class MenusShow extends Component {
       <div>
         <h1>Menu</h1>
         <CategoryList categories={this.props.categories} />
-        <hr />
-        <OrderNew categories={this.props.categories} />
       </div>
     )
   }
