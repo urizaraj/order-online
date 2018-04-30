@@ -12,6 +12,7 @@ import Icon from '@fortawesome/react-fontawesome'
 
 import Menu from '../menus/MenusShow'
 import LocationsEdit from './LocationsEdit';
+import OrderNew from '../orders/OrderNew';
 
 class LocationsShow extends Component {
   constructor(props) {
@@ -34,23 +35,12 @@ class LocationsShow extends Component {
           {this.props.description}
         </div>
 
-        <Row opt='mb-3' >
-          <BCol size='auto' >
-            <NavLink to={`${this.url}/menu`} >
-              Menu
-            </NavLink>
-          </BCol>
-
-          <BCol size='auto' >
-            <NavLink to={`${this.url}/edit`} >
-              Edit
-            </NavLink>
-          </BCol>
-        </Row>
+        <LocationActions url={this.url} />
 
         <Switch>
           <Route path={`${this.url}/edit`} render={this.locationEdit} />
           <Route path={`${this.url}/menu`} component={Menu} />
+          <Route path={`${this.url}/new_order`} render={this.newOrder} />
         </Switch>
       </div>
     )
@@ -62,6 +52,33 @@ class LocationsShow extends Component {
   }
 
   locationEdit = () => <LocationsEdit id={this.id} />
+
+  newOrder = () => <OrderNew categories={this.props.menu.categories} />
+}
+
+const LocationActions = props => {
+  const { url } = props
+  return (
+    <Row opt='mb-3' >
+      <BCol size='auto' >
+        <NavLink to={`${url}/menu`} >
+          Menu
+        </NavLink>
+      </BCol>
+
+      <BCol size='auto' >
+        <NavLink to={`${url}/edit`} >
+          Edit
+        </NavLink>
+      </BCol>
+
+      <BCol>
+        <NavLink to={`${url}/new_order`} >
+          New Order
+        </NavLink>
+      </BCol>
+    </Row>
+  )
 }
 
 const mapState = state => {
