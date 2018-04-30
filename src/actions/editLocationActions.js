@@ -35,10 +35,9 @@ function handleResp(resp, dispatch) {
 export function updateLocation() {
   return (dispatch, getState) => {
     const state = getState().newLocation
-    console.log(state)
     const options = {
       method: 'PATCH',
-      body: JSON.stringify({location: state}),
+      body: JSON.stringify({ location: state }),
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Token token=${localStorage.getItem('token')}`
@@ -51,4 +50,4 @@ export function updateLocation() {
         console.log(resp)
       })
   }
-} 
+}
