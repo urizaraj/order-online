@@ -14,7 +14,7 @@ class OrderNew extends Component {
 
   render() {
 
-    if (this.props.saved) return <ItemSavedPrompt resetOrder={this.resetOrder} />
+    if (this.props.saved) return <OrderSavedPrompt resetOrder={this.resetOrder} />
 
     const items = []
     this.props.categories.forEach(category => {
@@ -42,11 +42,11 @@ class OrderNew extends Component {
   }
 }
 
-const ItemSavedPrompt = props => {
+const OrderSavedPrompt = props => {
   return (
     <div>
       <h1>
-        Item Saved!
+        Order Saved!
       </h1>
 
       <button className='btn btn-success' onClick={props.resetOrder} >
