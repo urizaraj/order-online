@@ -21,13 +21,16 @@ class LocationsShow extends Component {
           {this.props.description}
         </div>
 
-        <MenuList menus={this.props.menus} url={this.props.match.url} />
+        <NavLink to={`${this.props.match.url}/menu`} >
+          Menu
+        </NavLink>
+        
         <NavLink to={`${this.props.match.url}/edit`} >
           Edit
         </NavLink>
 
         <Switch>
-          <Route path={`${this.props.match.url}/menus/:menuId`} component={Menu} />
+          <Route path={`${this.props.match.url}/menu`} component={Menu} />
         </Switch>
       </div>
     )
@@ -36,15 +39,6 @@ class LocationsShow extends Component {
   componentDidMount() {
     this.props.fetchLocation(this.props.match.params.locationId)
   }
-}
-
-const MenuList = props => {
-  const menus = props.menus || []
-  return menus.map(menu => (
-    <div key={menu.id} >
-      <NavLink to={`${props.url}/menus/${menu.id}`} >{menu.name}</NavLink>
-    </div>
-  ))
 }
 
 const mapState = state => {
