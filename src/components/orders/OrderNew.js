@@ -10,13 +10,12 @@ import { Row, BCol } from '../elements'
 class OrderNew extends Component {
   constructor() {
     super()
-
-    this.state = {
-      currentItems: [],
-    }
   }
 
   render() {
+
+    if (this.props.saved) return <ItemSavedPrompt resetOrder={this.resetOrder} />
+
     const items = []
     this.props.categories.forEach(category => {
       category.items.forEach(item => items.push(item))
@@ -36,9 +35,25 @@ class OrderNew extends Component {
     )
   }
 
+  resetOrder = () => this.props.resetOrder()
+
   componentWillUnmount() {
-    this.props.resetOrder()
+    this.resetOrder()
   }
+}
+
+const ItemSavedPrompt = props => {
+  return (
+    <div>
+      <h1>
+        Item Saved!
+      </h1>
+
+      <button className='btn btn-success' onClick={props.resetOrder} >
+        New Order
+      </button>
+    </div>
+  )
 }
 
 const ItemList = ({ items }) => {
@@ -48,7 +63,11 @@ const ItemList = ({ items }) => {
 // connecting to the store
 
 const mapState = state => {
-  return { selectedOptions: state.activeItem.options }
+  return {
+    categories: state.menu.categories,
+    selectedOptions: state.activeItem.options,
+    saved: state.order.saved
+  }
 }
 
 const mapDispatch = dispatch => {
