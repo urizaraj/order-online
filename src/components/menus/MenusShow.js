@@ -21,10 +21,6 @@ class MenusShow extends Component {
       </div>
     )
   }
-
-  componentDidMount() {
-    this.props.fetchMenu(this.props.id)
-  }
 }
 
 const CategoryList = ({ categories }) => categories.map(category => <Category {...{ ...category, key: category.id }} />)

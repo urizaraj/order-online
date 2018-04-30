@@ -7,6 +7,7 @@ import { Route, Switch } from 'react-router-dom'
 import { Row, BCol } from '../elements'
 
 import { fetchLocation } from '../../actions/locationActions'
+import { fetchMenu } from '../../actions/menuActions'
 
 import Icon from '@fortawesome/react-fontawesome'
 
@@ -48,6 +49,7 @@ class LocationsShow extends Component {
 
   componentDidMount() {
     this.props.fetchLocation(this.id)
+      .then(() => this.props.fetchMenu(this.props.menu.id))
       .then(() => this.setState({ loading: false }))
   }
 
@@ -89,7 +91,7 @@ const mapState = state => {
 }
 
 const mapDispatch = dispatch => {
-  const actions = { fetchLocation }
+  const actions = { fetchLocation, fetchMenu }
   return bindActionCreators(actions, dispatch)
 }
 
