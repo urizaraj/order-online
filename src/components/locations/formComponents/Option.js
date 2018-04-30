@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 import { FormRow, FormControl, RemoveButton } from './elements'
-import { Col as Bcol } from '../../elements'
+import { BCol } from '../../elements'
 
 import { updateOption, removeOption } from '../../../actions/newLocationActions'
 
@@ -12,24 +12,24 @@ class Option extends Component {
     return (
       <div className='mb-3 ml-3' >
         <FormRow>
-          <Bcol >
+          <BCol >
             <FormControl
               onChange={this.handleName}
               value={this.props.name}
               placeholder='Option Name' />
-          </Bcol>
+          </BCol>
 
-          <Bcol size='md-2 col'>
+          <BCol size='md-2 col'>
             <FormControl
               onChange={this.handlePrice}
               value={this.props.price}
               placeholder='Price' />
 
-          </Bcol>
+          </BCol>
 
-          <Bcol size='auto'  >
+          <BCol size='auto'  >
             <RemoveButton onClick={this.removeOption} />
-          </Bcol>
+          </BCol>
         </FormRow>
       </div>
     )

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import { Row, Col as BCol } from '../elements'
+import { Row, BCol } from '../elements'
 
 import OrderShow from './OrderShow';
 

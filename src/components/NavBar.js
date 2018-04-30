@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 
 import { userSignOut } from '../actions/userActions'
-import { Row, Col as BCol } from './elements'
+import { Row, BCol } from './elements'
 
 const NavBar = props => {
   return (

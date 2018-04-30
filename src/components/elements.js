@@ -26,7 +26,7 @@ export const Row = props => {
   )
 }
 
-export const Col = props => {
+export const BCol = props => {
   let className = 'col'
   if (props.size) {
     className += '-' + props.size

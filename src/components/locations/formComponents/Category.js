@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { updateCategory, removeCategory, addItem } from '../../../actions/newLocationActions'
 
 import { FormRow, FormControl, AddButton, RemoveButton } from './elements'
-import { Col as Bcol } from '../../elements'
+import { BCol } from '../../elements'
 import Item from './Item'
 
 class Category extends Component {
@@ -13,16 +13,16 @@ class Category extends Component {
     return (
       <div className='mb-3 ml-3' >
         <FormRow>
-          <Bcol >
+          <BCol >
             <FormControl
               placeholder='Category Name'
               value={this.props.name}
               onChange={this.handleChange} />
-          </Bcol>
+          </BCol>
 
-          <Bcol size='auto' opt='mb-3' >
+          <BCol size='auto' opt='mb-3' >
             <RemoveButton onClick={this.removeCategory} />
-          </Bcol>
+          </BCol>
         </FormRow>
 
         <AddButton onClick={this.addItem} type='Item' />

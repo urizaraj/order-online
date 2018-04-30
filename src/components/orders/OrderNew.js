@@ -5,7 +5,7 @@ import Item from './Item'
 import CurrentOrder from './CurrentOrder'
 import { resetOrder } from '../../actions/orderActions'
 
-import { Row, Col } from '../elements'
+import { Row, BCol } from '../elements'
 
 class OrderNew extends Component {
   constructor() {
@@ -25,12 +25,12 @@ class OrderNew extends Component {
     return (
       <div>
         <Row>
-          <Col>
+          <BCol>
             <ItemList {...{ items }} />
-          </Col>
-          <Col>
+          </BCol>
+          <BCol>
             <CurrentOrder {...{ items }} />
-          </Col>
+          </BCol>
         </Row>
       </div>
     )
