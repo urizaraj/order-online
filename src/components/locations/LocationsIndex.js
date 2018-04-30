@@ -5,8 +5,13 @@ import { NavLink } from 'react-router-dom'
 
 import { fetchLocations } from '../../actions/locationActions'
 
+import Icon from '@fortawesome/react-fontawesome'
+
 class LocationsIndex extends Component {
   render() {
+
+    if (this.props.loading) return <div className='text-center' ><Icon icon="spinner" spin size='2x' /></div>
+
     return (
       <div>
         <div className='mb-3' >
@@ -40,7 +45,8 @@ const Location = props => {
 
 const mapState = state => {
   return {
-    locations: state.locations.locations
+    locations: state.locations.locations,
+    loading: state.locations.loading
   }
 }
 

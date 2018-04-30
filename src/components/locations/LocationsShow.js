@@ -6,10 +6,14 @@ import { Route, Switch } from 'react-router-dom'
 
 import { fetchLocation } from '../../actions/locationActions'
 
+import Icon from '@fortawesome/react-fontawesome'
+
 import Menu from '../menus/MenusShow'
 
 class LocationsShow extends Component {
   render() {
+    if (this.props.loading) return <div className='text-center' ><Icon icon="spinner" spin size='2x' /></div>
+
     return (
       <div>
         <h1>{this.props.name}</h1>
@@ -21,7 +25,7 @@ class LocationsShow extends Component {
         <NavLink to={`${this.props.match.url}/edit`} >
           Edit
         </NavLink>
-        
+
         <Switch>
           <Route path={`${this.props.match.url}/menus/:menuId`} component={Menu} />
         </Switch>
@@ -44,7 +48,10 @@ const MenuList = props => {
 }
 
 const mapState = state => {
-  return { ...state.locations.location }
+  return {
+    ...state.locations.location,
+    loading: state.locations.loading
+  }
 }
 
 const mapDispatch = dispatch => {
