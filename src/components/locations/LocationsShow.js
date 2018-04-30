@@ -18,26 +18,30 @@ class LocationsShow extends Component {
     super(props)
     this.url = props.match.url
     this.id = props.match.params.locationId
+
+    this.state = {
+      loading: true
+    }
   }
 
   render() {
-    if (this.props.loading) return <div className='text-center' ><Icon icon="spinner" spin size='2x' /></div>
+    if (this.state.loading) return <div className='text-center' ><Icon icon="spinner" spin size='2x' /></div>
 
     return (
       <div>
-        <h1>{this.props.name}</h1>
-        <div>
+        <h1 className='mb-0' >{this.props.name}</h1>
+        <div className='mb-3' >
           {this.props.description}
         </div>
 
-        <Row>
-          <BCol>
+        <Row opt='mb-3' >
+          <BCol size='auto' >
             <NavLink to={`${this.url}/menu`} >
               Menu
             </NavLink>
           </BCol>
 
-          <BCol>
+          <BCol size='auto' >
             <NavLink to={`${this.url}/edit`} >
               Edit
             </NavLink>
@@ -54,6 +58,7 @@ class LocationsShow extends Component {
 
   componentDidMount() {
     this.props.fetchLocation(this.id)
+      .then(() => this.setState({ loading: false }))
   }
 
   locationEdit = () => <LocationsEdit id={this.id} />
