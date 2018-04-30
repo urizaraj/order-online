@@ -8,15 +8,18 @@ import Icon from '@fortawesome/react-fontawesome'
 
 import { DFlex } from '../elements'
 
+import OrderItem from './OrderItem'
+
 class CurrentOrder extends React.Component {
   render() {
     return (
       <div>
         <h4>Current Order</h4>
-        <OrderItemList orderItems={this.props.orderItems} removeOrderItem={this.props.removeOrderItem} />
+        <OrderItemList orderItems={this.props.orderItems} />
 
         <DFlex opt='mb-2' >
           <h4 className='align-self-center mb-0' >Total</h4>
+
           <div className='ml-auto p-2' >
             ${this.total()}
           </div>
@@ -31,9 +34,7 @@ class CurrentOrder extends React.Component {
     )
   }
 
-  saveOrder = event => {
-    this.props.saveOrder()
-  }
+  saveOrder = event => this.props.saveOrder()
 
   total = () => {
     return this.props.orderItems.reduce((total, item) => total + item.price, 0)
@@ -41,24 +42,7 @@ class CurrentOrder extends React.Component {
 }
 
 const OrderItemList = props => {
-  return props.orderItems.map(oi => <OrderItem {...oi} key={oi.cuid} removeOrderItem={props.removeOrderItem} />)
-}
-
-const OrderItem = props => {
-  const itemPrice = props.selectedOptions.reduce((total, option) => {
-    return total + option.price
-  }, props.price)
-
-  return (
-    <DFlex>
-      <div className='p-2' >
-        <button onClick={() => props.removeOrderItem(props.cuid)} className='btn btn-link' ><Icon icon='times' /></button> {props.name}
-      </div>
-      <div className='ml-auto align-self-center p-2' >
-        ${itemPrice}
-      </div>
-    </DFlex>
-  )
+  return props.orderItems.map(oi => <OrderItem {...oi} key={oi.cuid} />)
 }
 
 const mapState = state => {
@@ -68,7 +52,7 @@ const mapState = state => {
 }
 
 const mapDispatch = dispatch => {
-  const actions = { removeOrderItem, saveOrder }
+  const actions = { saveOrder }
   return bindActionCreators(actions, dispatch)
 }
 
