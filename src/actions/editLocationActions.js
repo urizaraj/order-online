@@ -50,7 +50,8 @@ export function patchLocation() {
     return fetch(`/locations/${state.id}`, options)
       .then(resp => resp.json())
       .then(resp => {
-        console.log(resp)
+        dispatch({type: 'RESET_LOCATION'})
+        handleResp(resp, dispatch)
       })
   }
 }
