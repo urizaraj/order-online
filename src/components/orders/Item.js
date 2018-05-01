@@ -19,7 +19,7 @@ const Item = props => {
 
   return (
     <div className='mb-3' >
-      <div className='mb-3' >
+      <div className='' >
         <ChevButton onClick={() => props.toggleActiveItem(props.active, props.id)} /> {props.name}
       </div>
       {props.active && <Details {...detailsProps} />}
@@ -47,13 +47,11 @@ class Details extends Component {
     const { addOrderItem, item, options } = this.props
     const selectedOptions = this.state.selectedOptions
     return (
-      <div>
-        <div className='mb-3' >
-          <OptionList {...{options, handleClick: this.handleClick, selectedOptions}} />
-        </div>
+      <div className='mt-2' >
+        <OptionList {...{options, handleClick: this.handleClick, selectedOptions}} />
 
-        <div className='mb-3' >
-          <small>special instructions: </small>
+        <div className='mb-3 mt-2' >
+          <small>Special Instructions: </small>
           <input type='text' value={this.state.text} onChange={this.handleChange} className='form-control form-control-sm' />
         </div>
 
