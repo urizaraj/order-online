@@ -29,7 +29,7 @@ class OrdersController < ApplicationController
 
   def show
     order = Order.find(params[:id])
-    render json: order
+    render json: order, include: %w[order_items order_items.selected_options]
   end
 
   def strong_params
