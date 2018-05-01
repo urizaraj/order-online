@@ -13,8 +13,6 @@ class SignInPage extends Component {
       name: '',
       password: ''
     }
-
-    this.handleChange = this.handleChange.bind(this)
   }
 
   render() {
@@ -24,26 +22,40 @@ class SignInPage extends Component {
       <div>
         <h2>Sign In</h2>
         {this.props.invalid && <InvalidMessage />}
-        <form onSubmit={this.handleSubmit.bind(this)} >
+        <form onSubmit={this.handleSubmit} >
           <div className='form-group' >
-            <input type='text' name='name' placeholder='username' className='form-control' value={this.state.name} onChange={this.handleChange} />
+            <input
+              type='text'
+              name='name'
+              placeholder='Username'
+              className='form-control'
+              value={this.state.name}
+              onChange={this.handleChange} />
           </div>
+
           <div className='form-group' >
-            <input type='password' name='password' placeholder='password' className='form-control' value={this.state.password} onChange={this.handleChange} />
+            <input
+              type='password'
+              name='password'
+              placeholder='Password'
+              className='form-control'
+              value={this.state.password}
+              onChange={this.handleChange} />
           </div>
+
           <button className='btn btn-primary' type='submit' >Sign In</button>
         </form>
       </div>
     )
   }
 
-  handleChange(event) {
+  handleChange = event => {
     this.setState({
       [event.target.name]: event.target.value
     })
   }
 
-  handleSubmit(event) {
+  handleSubmit = event => {
     event.preventDefault()
     this.props.userSignIn(this.state)
   }
