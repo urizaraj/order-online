@@ -5,4 +5,7 @@ class Location < ApplicationRecord
   has_many :options, through: :items
 
   accepts_nested_attributes_for :menu
+
+  validates :name, presence: true
+  validates :description, presence: true
 end
