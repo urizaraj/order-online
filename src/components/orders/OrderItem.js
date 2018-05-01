@@ -40,7 +40,7 @@ class OrderItem extends Component {
   removeOrderItem = () => this.props.removeOrderItem(this.props.cuid)
 }
 
-const SelectedOptionsList = props => props.selectedOptions.map(so => <SelectedOption {...so} />)
+const SelectedOptionsList = props => props.selectedOptions.map(so => <SelectedOption {...so} key={so.id} />)
 
 const SelectedOption = props => {
   return (
