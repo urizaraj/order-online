@@ -47,11 +47,14 @@ const SignedInLinks = props => {
 }
 
 const SignedOutLinks = props => {
-  return (
+  return [
     <BCol size='auto' >
       <NavLink to="/user/sign_in">Sign In</NavLink>
+    </BCol>,
+    <BCol size='auto' >
+      <NavLink to="/user/sign_up">Sign Up</NavLink>
     </BCol>
-  )
+  ]
 }
 
 const mapState = state => {
