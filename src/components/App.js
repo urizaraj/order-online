@@ -9,6 +9,7 @@ import { userCheckToken } from '../actions/userActions'
 import NavBar from './NavBar'
 import LocationsPage from './locations/LocationsPage'
 import SignInPage from './SignInPage'
+import SignUpPage from './SignUpPage'
 import AdminPage from './AdminPage'
 import SavedOrdersPage from './orders/SavedOrdersPage';
 
@@ -29,6 +30,7 @@ class App extends Component {
             <Route path='/admin' component={AdminPage} />
 
             <Route path='/user/sign_in' component={SignInPage} />
+            <Route path='/user/sign_up' component={SignUpPage} />
             <Route path='/user/saved_orders' component={SavedOrdersPage} />
           </Switch>
         </div>
