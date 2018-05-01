@@ -1,47 +1,30 @@
-export function userSignIn(user) {
-  return dispatch => {
-    const options = {
-      method: 'POST',
-      body: JSON.stringify(user),
-      headers: {
-        'Content-Type': 'application/json'
+function user(path) {
+  return user => {
+    return dispatch => {
+      const options = {
+        method: 'POST',
+        body: JSON.stringify(user),
+        headers: {
+          'Content-Type': 'application/json'
+        }
       }
+  
+      return fetch(path, options)
+        .then(resp => resp.json())
+        .then(resp => {
+          if (resp.message) return dispatch({ type: 'INVALID_SIGN_IN' })
+          const { token, ...user } = resp
+          localStorage.setItem('token', token)
+          localStorage.setItem('userId', user.id)
+          localStorage.setItem('userName', user.name)
+          dispatch({ type: 'SIGNED_IN', ...user })
+        })
     }
-
-    return fetch('/users/sign_in', options)
-      .then(resp => resp.json())
-      .then(resp => {
-        if (resp.message) return dispatch({ type: 'INVALID_SIGN_IN' })
-        const { token, ...user } = resp
-        localStorage.setItem('token', token)
-        localStorage.setItem('userId', user.id)
-        localStorage.setItem('userName', user.name)
-        dispatch({ type: 'SIGNED_IN', ...user })
-      })
   }
 }
 
-// export function userCheckToken() {
-//   return dispatch => {
-//     const token = localStorage.getItem('token')
-//     if (!token) return
-
-//     const options = {
-//       method: 'POST',
-//       body: JSON.stringify({ token }),
-//       headers: {
-//         'Content-Type': 'application/json'
-//       }
-//     }
-
-//     return fetch('/users/sign_in_token', options)
-//       .then(resp => resp.json())
-//       .then(resp => {
-//         if (resp.message) return dispatch({ type: 'INVALID_SIGN_IN' })
-//         dispatch({ type: 'SIGNED_IN', ...resp })
-//       })
-//   }
-// }
+export const userSignIn = user('/users/sign_in')
+export const userSignUp = user('/users')
 
 export function userCheckToken() {
   const token = localStorage.getItem('token')
