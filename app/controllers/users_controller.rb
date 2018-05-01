@@ -26,4 +26,21 @@ class UsersController < ApplicationController
     user = User.find(params[:id])
     render json: user
   end
+
+  def create
+    user = User.new(name: params[:name], email: params[:email], password: params[:password])
+    valid = user.save
+    return render json: { message: 'invalid' } unless valid
+    render json: user
+  end
+
+  private
+
+  def strong_params
+    params
+      .require(:user)
+      .permit :name,
+              :email,
+              :password
+  end
 end
