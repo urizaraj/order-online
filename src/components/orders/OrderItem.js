@@ -18,18 +18,45 @@ class OrderItem extends Component {
 
   render() {
     return (
-      <DFlex>
-        <div className='p-2' >
-          <button onClick={this.removeOrderItem} className='btn btn-link' ><Icon icon='times' /></button> {this.props.name}
-        </div>
-        <div className='ml-auto align-self-center p-2' >
-          ${this.itemPrice}
-        </div>
-      </DFlex>
+      <div>
+        <DFlex opt='' >
+          <div className='' >
+            <button onClick={this.removeOrderItem} className='btn btn-link' ><Icon icon='times' /></button>
+          </div>
+          <div className='p-2' >
+            {this.props.name}
+            <br/>
+            <SelectedOptionsList selectedOptions={this.props.selectedOptions} />
+          </div>
+          <div className='ml-auto align-self-end p-2' >
+            ${this.itemPrice}
+          </div>
+        </DFlex>
+        
+      </div>
     )
   }
 
   removeOrderItem = () => this.props.removeOrderItem(this.props.cuid)
+}
+
+const SelectedOptionsList = props => props.selectedOptions.map(so => <SelectedOption {...so} />)
+
+const SelectedOption = props => {
+  return (
+    <DFlex>
+      <div className='' >
+        <small>
+          {props.name}
+        </small>
+      </div>
+      <div className='ml-3' >
+        <small>
+          ${props.price}
+        </small>
+      </div>
+    </DFlex>
+  )
 }
 
 const mapDispatch = dispatch => {
