@@ -15,12 +15,20 @@ class OrderShow extends Component {
     )
   }
 
+  fetchOrder = () => this.props.fetchOrder(this.props.id)
+
   componentDidMount() {
-    this.props.fetchOrder(this.props.id)
+    this.fetchOrder()
   }
 
   componentWillUnmount() {
     this.props.resetOrder()
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.id !== this.props.id) {
+      this.fetchOrder()
+    }
   }
 }
 
