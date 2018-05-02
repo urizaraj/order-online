@@ -26,9 +26,7 @@ class OrderShow extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.id !== this.props.id) {
-      this.fetchOrder()
-    }
+    if (prevProps.id !== this.props.id) this.fetchOrder()
   }
 }
 
