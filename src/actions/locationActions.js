@@ -1,8 +1,8 @@
-export function fetchLocations() {
+export function fetchLocations(page = 1) {
   return dispatch => {
     dispatch({ type: 'LOADING_LOCATIONS' })
 
-    return fetch('/locations')
+    return fetch(`/locations?page=${page}`)
       .then(resp => resp.json())
       .then(resp => {
         dispatch({ type: 'FETCH_LOCATIONS', locations: resp })
