@@ -4,8 +4,6 @@ import { connect } from 'react-redux'
 
 import { fetchMenu } from '../../actions/menuActions'
 
-import OrderNew from '../orders/OrderNew';
-
 import Icon from '@fortawesome/react-fontawesome'
 import { DFlex } from '../elements'
 

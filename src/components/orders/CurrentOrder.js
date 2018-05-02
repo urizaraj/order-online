@@ -2,7 +2,7 @@ import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import { removeOrderItem, saveOrder } from '../../actions/orderActions'
+import { saveOrder } from '../../actions/orderActions'
 
 import Icon from '@fortawesome/react-fontawesome'
 

@@ -8,10 +8,6 @@ import { resetOrder } from '../../actions/orderActions'
 import { Row, BCol } from '../elements'
 
 class OrderNew extends Component {
-  constructor() {
-    super()
-  }
-
   render() {
 
     if (this.props.saved) return <OrderSavedPrompt resetOrder={this.resetOrder} />
