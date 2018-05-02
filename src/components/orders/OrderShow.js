@@ -4,11 +4,13 @@ import { connect } from 'react-redux'
 
 import { fetchOrder, resetOrder } from '../../actions/orderActions'
 
+import OrderItem from './OrderItem'
+
 class OrderShow extends Component {
   render() {
     return (
       <div>
-        {this.props.items.map(item => <strong className='p-3'>{item.name}</strong>)}
+        <OrderItemList orderItems={this.props.items} />
       </div>
     )
   }
@@ -21,6 +23,13 @@ class OrderShow extends Component {
     this.props.resetOrder()
   }
 }
+
+const OrderItemList = ({ orderItems }) => orderItems.map(oi => {
+  return <OrderItem
+    selectedOptions={oi.selected_options}
+    name={oi.name}
+    price={oi.price} />
+})
 
 const mapState = state => {
   return {
