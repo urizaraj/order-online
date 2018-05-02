@@ -8,6 +8,13 @@ import { fetchLocations } from '../../actions/locationActions'
 import Icon from '@fortawesome/react-fontawesome'
 
 class LocationsIndex extends Component {
+  constructor() {
+    super()
+    this.state = {
+      page: 1
+    }
+  }
+
   render() {
 
     if (this.props.loading) return <div className='text-center' ><Icon icon="spinner" spin size='2x' /></div>
@@ -19,6 +26,14 @@ class LocationsIndex extends Component {
         </div>
 
         {this.props.locations.map(location => <Location {...location} key={location.id} />)}
+
+        <button className='btn btn-primary' onClick={this.prevPage} disabled={this.state.page < 2} >
+          <Icon icon='angle-left' /> Prev
+        </button>
+
+        <button className='btn btn-primary' onClick={this.nextPage} >
+          Next <Icon icon='angle-right' />
+        </button>
       </div>
     )
   }
@@ -26,6 +41,16 @@ class LocationsIndex extends Component {
   componentDidMount() {
     this.props.fetchLocations()
   }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.page !== prevState.page) {
+      this.props.fetchLocations(this.state.page)
+    }
+  }
+
+  nextPage = () => this.setState(({ page }) => ({ page: page + 1 }))
+  
+  prevPage = () => this.setState(({ page }) => ({ page: page - 1 }))
 }
 
 const Location = props => {
