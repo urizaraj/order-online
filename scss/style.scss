@@ -12,7 +12,8 @@ $theme-colors: (
   dark: #2b2d42,
   primary: #192bc2,
   secondary: #d1345b,
-  success: #1effbc
+  success: #1effbc,
+  boss: #73628a
 );
 
 $input-btn-focus-width: 0rem;
@@ -23,8 +24,6 @@ $body-color: #2b2d42;
 @import "../node_modules/bootstrap/scss/bootstrap";
 
 body {
-	-webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   -moz-user-select: none;
   -webkit-user-select: none;
   -ms-user-select: none;
