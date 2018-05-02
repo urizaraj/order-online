@@ -6,11 +6,21 @@ import { fetchOrder, resetOrder } from '../../actions/orderActions'
 
 import OrderItem from './OrderItem'
 
+import CurrentOrderDisplay from "./CurrentOrderDisplay"
+
 class OrderShow extends Component {
   render() {
+    const orderItems = this.props.items.map(oi => {
+      return {
+        selectedOptions: oi.selected_options,
+        name: oi.name,
+        price: oi.price
+      }
+    })
+
     return (
       <div>
-        <OrderItemList orderItems={this.props.items} />
+        <CurrentOrderDisplay orderItems={orderItems} />
       </div>
     )
   }
