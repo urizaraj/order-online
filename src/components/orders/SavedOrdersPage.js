@@ -21,10 +21,19 @@ class SavedOrdersPage extends Component {
   render() {
     return (
       <div>
-        <OrderList
-          orders={this.props.orders}
-          handleClick={this.handleClick}
-          currentOrder={this.state.currentOrder} />
+        <Row>
+          <BCol>
+            <OrderList
+              orders={this.props.orders}
+              handleClick={this.handleClick}
+              currentOrder={this.state.currentOrder} />
+          </BCol>
+
+          <BCol>
+            {this.state.currentOrder && <OrderShow id={this.state.currentOrder} />}
+          </BCol>
+        </Row>
+
       </div>
     )
   }
@@ -54,9 +63,17 @@ const OrderList = props => {
 const Order = props => {
   const { created_at, location_name, id, handleClick, active } = props
   const date = new Date(created_at).toDateString()
+  let opt
+
+  if (active) {
+    opt = 'align-items-center bg-primary py-2 text-light'
+  } else {
+    opt = 'align-items-center'
+  }
+
   return (
     <div>
-      <Row opt='align-items-center' onClick={() => handleClick(id)} >
+      <Row opt={opt} onClick={() => handleClick(id)} >
         <BCol>
           <h4 className='mb-0' >
             {location_name}
@@ -65,9 +82,7 @@ const Order = props => {
             {date}
           </small>
         </BCol>
-
       </Row>
-      {active && <OrderShow id={id} />}
     </div>
   )
 }
