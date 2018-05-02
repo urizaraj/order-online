@@ -2,7 +2,10 @@
 
 class LocationsController < ApplicationController
   def index
-    render json: Location.all
+    page = params[:page].to_i || 1
+    offset = (page - 1) * 4
+
+    render json: Location.limit(4).offset(offset)
   end
 
   def show
