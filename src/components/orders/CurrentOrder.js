@@ -45,7 +45,7 @@ class CurrentOrder extends React.Component {
 }
 
 const OrderItemList = props => {
-  return props.orderItems.map(oi => <OrderItem {...oi} key={oi.cuid} />)
+  return props.orderItems.map(oi => <OrderItem edit {...oi} key={oi.cuid} />)
 }
 
 const mapState = state => {

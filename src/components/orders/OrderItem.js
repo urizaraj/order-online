@@ -17,17 +17,18 @@ class OrderItem extends Component {
   }
 
   render() {
+    const edit = this.props.edit
     return (
       <div>
-        <DFlex opt='' >
-          <div className='' >
-            <button onClick={this.removeOrderItem} className='btn btn-link' ><Icon icon='times' /></button>
-          </div>
+        <DFlex>
+          {edit && <RemoveButton onClick={this.removeOrderItem}/>}
+
           <div className='p-2' >
             {this.props.name}
             <br/>
             <SelectedOptionsList selectedOptions={this.props.selectedOptions} />
           </div>
+
           <div className='ml-auto align-self-end p-2' >
             ${this.itemPrice}
           </div>
@@ -39,6 +40,8 @@ class OrderItem extends Component {
 
   removeOrderItem = () => this.props.removeOrderItem(this.props.cuid)
 }
+
+const RemoveButton = props => <div><button {...props} className='btn btn-link' ><Icon icon='times' /></button></div>
 
 const SelectedOptionsList = props => props.selectedOptions.map(so => <SelectedOption {...so} key={so.id} />)
 
