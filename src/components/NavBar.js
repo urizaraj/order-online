@@ -9,7 +9,7 @@ import { Row, BCol } from './elements'
 
 const NavBar = props => {
   return (
-    <Row opt='p-3' >
+    <Row opt='p-3 align-items-center' >
       <BCol size='auto' >
         <NavLink to="/" >Home</NavLink>
       </BCol>
@@ -25,25 +25,23 @@ const NavBar = props => {
 }
 
 const SignedInLinks = props => {
-  const username = (
-    <BCol size='auto' key='username' >
-      {props.user.name}
-    </BCol>
-  )
+  return (
+    <React.Fragment>
+      <BCol size='auto' key='username' >
+        <strong className='text-primary' >
+          {props.user.name}
+        </strong>
+      </BCol>
 
-  const signOut = (
-    <BCol size='auto' key='signOut' >
-      <button className='btn btn-primary btn-sm' onClick={() => props.userSignOut()} >Sign Out</button>
-    </BCol>
-  )
+      <BCol size='auto' key='signOut' >
+        <button className='btn btn-primary' onClick={() => props.userSignOut()} >Sign Out</button>
+      </BCol>
 
-  const savedOrders = (
-    <BCol size='auto' key='savedOrders' >
-      <NavLink to='/user/saved_orders'>Saved Orders</NavLink>
-    </BCol>
+      <BCol size='auto' key='savedOrders' >
+        <NavLink to='/user/saved_orders'>Saved Orders</NavLink>
+      </BCol>
+    </React.Fragment>
   )
-
-  return [username, signOut, savedOrders]
 }
 
 const SignedOutLinks = props => {

@@ -6,6 +6,7 @@ $font-family-base: 'IBM Plex Sans', sans-serif;
 
 $enable-rounded: false;
 $enable-shadows: true;
+$link-hover-decoration: none;
 
 $theme-colors: (
   light: #efefef,
@@ -31,7 +32,6 @@ body {
 }
 
 .container {
-  @extend .px-3;
-  @extend .pb-3;
+  @extend .p-3;
   background: white
 }

@@ -23,16 +23,21 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div className="App container">
-          <NavBar />
-          <Switch>
-            <Route path='/locations' component={LocationsPage} />
-            <Route path='/admin' component={AdminPage} />
+        <div>
+          <div className='container-fluid bg-light' >
+            <NavBar />
+          </div>
 
-            <Route path='/user/sign_in' component={SignInPage} />
-            <Route path='/user/sign_up' component={SignUpPage} />
-            <Route path='/user/saved_orders' component={SavedOrdersPage} />
-          </Switch>
+          <div className="App container">
+            <Switch>
+              <Route path='/locations' component={LocationsPage} />
+              <Route path='/admin' component={AdminPage} />
+
+              <Route path='/user/sign_in' component={SignInPage} />
+              <Route path='/user/sign_up' component={SignUpPage} />
+              <Route path='/user/saved_orders' component={SavedOrdersPage} />
+            </Switch>
+          </div>
         </div>
       </Router>
     )
