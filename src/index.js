@@ -7,7 +7,6 @@ import { Provider } from 'react-redux'
 import thunk from 'redux-thunk';
 import rootReducer from './reducers'
 
-// import 'bootstrap/dist/css/bootstrap.min.css'
 import './plex.css'
 import './style.css'
 
