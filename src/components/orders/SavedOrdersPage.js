@@ -14,8 +14,6 @@ class SavedOrdersPage extends Component {
     this.state = {
       currentOrder: null
     }
-
-    this.handleClick = this.handleClick.bind(this);
   }
 
   render() {
@@ -42,7 +40,7 @@ class SavedOrdersPage extends Component {
     this.props.fetchOrderIndex()
   }
 
-  handleClick(id) {
+  handleClick = id => {
     this.setState({
       currentOrder: id
     })
@@ -100,5 +98,3 @@ const mapDispatch = dispatch => {
 }
 
 export default connect(mapState, mapDispatch)(SavedOrdersPage)
-
-// 
