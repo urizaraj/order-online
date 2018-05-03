@@ -27,17 +27,17 @@ const NavBar = props => {
 const SignedInLinks = props => {
   return (
     <React.Fragment>
-      <BCol size='auto' key='username' >
+      <BCol size='auto' >
         <strong className='text-primary' >
           {props.user.name}
         </strong>
       </BCol>
 
-      <BCol size='auto' key='signOut' >
+      <BCol size='auto' >
         <button className='btn btn-primary' onClick={() => props.userSignOut()} >Sign Out</button>
       </BCol>
 
-      <BCol size='auto' key='savedOrders' >
+      <BCol size='auto' >
         <NavLink to='/user/saved_orders'>Saved Orders</NavLink>
       </BCol>
     </React.Fragment>
@@ -45,14 +45,16 @@ const SignedInLinks = props => {
 }
 
 const SignedOutLinks = props => {
-  return [
-    <BCol size='auto' >
-      <NavLink to="/user/sign_in">Sign In</NavLink>
-    </BCol>,
-    <BCol size='auto' >
-      <NavLink to="/user/sign_up">Sign Up</NavLink>
-    </BCol>
-  ]
+  return (
+    <React.Fragment>
+      <BCol size='auto' >
+        <NavLink to="/user/sign_in">Sign In</NavLink>
+      </BCol>
+      <BCol size='auto' >
+        <NavLink to="/user/sign_up">Sign Up</NavLink>
+      </BCol>
+    </React.Fragment>
+  )
 }
 
 const mapState = state => {
