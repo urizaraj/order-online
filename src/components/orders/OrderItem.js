@@ -21,11 +21,11 @@ class OrderItem extends Component {
     return (
       <div>
         <DFlex>
-          {edit && <RemoveButton onClick={this.removeOrderItem}/>}
+          {edit && <RemoveButton onClick={this.removeOrderItem} />}
 
           <div className='p-2' >
             {this.props.name}
-            <br/>
+            <br />
             <SelectedOptionsList selectedOptions={this.props.selectedOptions} />
             <small><em>{this.props.instructions}</em></small>
           </div>
@@ -34,7 +34,7 @@ class OrderItem extends Component {
             ${this.itemPrice}
           </div>
         </DFlex>
-        
+
       </div>
     )
   }
@@ -54,11 +54,13 @@ const SelectedOption = props => {
           {props.name}
         </small>
       </div>
-      <div className='ml-3' >
-        <small>
-          ${props.price}
-        </small>
-      </div>
+      {props.price > 0 && (
+        <div className='ml-3' >
+          <small>
+            ${props.price}
+          </small>
+        </div>
+      )}
     </DFlex>
   )
 }
