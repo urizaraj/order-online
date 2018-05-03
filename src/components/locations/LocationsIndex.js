@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import { fetchLocations } from '../../actions/locationActions'
 
 import Icon from '@fortawesome/react-fontawesome'
+
+import { DFlex, Row, BCol } from '../elements'
 
 class LocationsIndex extends Component {
   constructor() {
@@ -22,10 +24,12 @@ class LocationsIndex extends Component {
     return (
       <div>
         <div className='mb-3' >
-          <NavLink to='/locations/new'>New Location</NavLink>
+          <Link to='/locations/new'>New Location</Link>
         </div>
 
-        {this.props.locations.map(location => <Location {...location} key={location.id} />)}
+        <Row>
+          {this.props.locations.map(location => <Location {...location} key={location.id} />)}
+        </Row>
 
         <button className='btn btn-primary' onClick={this.prevPage} disabled={this.state.page < 2} >
           <Icon icon='angle-left' /> Prev
@@ -49,22 +53,26 @@ class LocationsIndex extends Component {
   }
 
   nextPage = () => this.setState(({ page }) => ({ page: page + 1 }))
-  
+
   prevPage = () => this.setState(({ page }) => ({ page: page - 1 }))
 }
 
 const Location = props => {
   const { name, description, id } = props
   return (
-    <div className='mb-3' >
-      {name}
-      <br />
-      <small>{description}</small>
-      <br />
-      <NavLink to={`/locations/${id}`} >Link</NavLink>
-    </div>
+    <BCol size='md-6 mb-3' >
+      <h1 className='display-4 mb-1' >{name}</h1>
+      <DFlex>
+        {description}
+        <div className='ml-3' >
+          <LocationLink id={id} />
+        </div>
+      </DFlex>
+    </BCol>
   )
 }
+
+const LocationLink = ({ id }) => <Link to={`/locations/${id}`} >Link <Icon icon='arrow-right' /> </Link>
 
 // connect to store
 
