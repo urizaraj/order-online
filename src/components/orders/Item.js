@@ -6,29 +6,29 @@ import Icon from '@fortawesome/react-fontawesome'
 import { toggleActiveItem } from '../../actions/activeItemActions'
 import { addOrderItem } from '../../actions/orderActions'
 
-const Item = props => {
-  const detailsProps = {
-    options: props.options,
-    addOrderItem: props.addOrderItem,
-    item: {
-      id: props.id,
-      name: props.name,
-      price: props.price,
+class Item extends Component {
+  render() {
+    const { options, addOrderItem, id, name, price, active } = this.props
+
+    const detailsProps = {
+      options, addOrderItem, item: { id, name, price }
     }
+
+    return (
+      <div className='mb-3' >
+        <div className='' >
+          <ChevButton onClick={this.toggleActiveItem} /> {name}
+        </div>
+        {active && <Details {...detailsProps} />}
+      </div>
+    )
   }
 
-  return (
-    <div className='mb-3' >
-      <div className='' >
-        <ChevButton onClick={() => props.toggleActiveItem(props.active, props.id)} /> {props.name}
-      </div>
-      {props.active && <Details {...detailsProps} />}
-    </div>
-  )
+  toggleActiveItem = () => this.props.toggleActiveItem(this.props.active, this.props.id)
 }
 
 const ChevButton = ({ onClick }) => (
-  <button className="btn btn-primary" {...{ onClick }} ><Icon icon='chevron-down' /></button>
+  <button className="btn btn-primary" onClick={onClick} > <Icon icon='chevron-down' /></button >
 )
 
 class Details extends Component {
@@ -48,7 +48,7 @@ class Details extends Component {
     const selectedOptions = this.state.selectedOptions
     return (
       <div className='mt-2' >
-        <OptionList {...{options, handleClick: this.handleClick, selectedOptions}} />
+        <OptionList {...{ options, handleClick: this.handleClick, selectedOptions }} />
 
         <div className='mb-3 mt-2' >
           <small>Special Instructions: </small>
