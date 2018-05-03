@@ -79,7 +79,7 @@ class LocationsController < ApplicationController
 
   def options_attributes(options)
     keys = %w[id name price item_id]
-    options.map { |option| option.select { |key, _v| keys.include?(key) } }
+    options.map { |option| option.select { |key, v| keys.include?(key) && (key != 'price' || v != '' ) } }
   end
 
   def matcher(parent, children, id, cuid)
