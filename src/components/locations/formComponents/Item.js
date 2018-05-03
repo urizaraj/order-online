@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { FormGroup, FormRow, FormControl, AddButton, RemoveButton } from './elements'
 import { BCol } from '../../elements'
 import Option from './Option'
-import { updateItem, addOption, removeItem, updateResource, removeResource } from '../../../actions/newLocationActions'
+import { addOption, updateResource, removeResource } from '../../../actions/newLocationActions'
 
 class Item extends Component {
   render() {
@@ -51,14 +51,13 @@ class Item extends Component {
   }
 
   handleChange = event => {
-    const {name, value } = event.target
-    // this.props.updateItem(this.props.cuid, {[name]: value})
-    this.updateItem({[name]: value})
+    const { name, value } = event.target
+    this.updateItem({ [name]: value })
   }
 
   handlePrice = event => {
     const price = parseFloat(event.target.value)
-    this.props.updateItem(this.props.cuid, {
+    this.updateItem({
       price: (price ? price : 0).toFixed(2)
     })
   }
@@ -84,7 +83,7 @@ const mapState = (state, ownProps) => {
 }
 
 const mapDispatch = dispatch => {
-  const actions = { updateItem, addOption, removeItem, updateResource, removeResource }
+  const actions = { addOption, updateResource, removeResource }
   return bindActionCreators(actions, dispatch)
 }
 

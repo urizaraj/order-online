@@ -41,23 +41,6 @@ export function addItem(categoryCuid, categoryId = null) {
   }
 }
 
-export function updateItem(cuid, value) {
-  return {
-    type: 'UPDATE_RESOURCE',
-    resource: 'items',
-    cuid,
-    value
-  }
-}
-
-export function removeItem(cuid) {
-  return {
-    type: 'REMOVE_RESOURCE',
-    resource: 'items',
-    cuid
-  }
-}
-
 export function addOption(itemCuid, itemId = null) {
   return {
     type: 'ADD_RESOURCE',
