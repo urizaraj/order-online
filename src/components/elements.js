@@ -18,15 +18,16 @@ function div(type) {
 }
 
 export const DFlex = props => {
+  const { opt, center, ...other } = props
+
   let className = 'd-flex '
-  if (props.opt) {
-    className += props.opt
+  if (opt) {
+    className += opt
   }
 
-  if (props.center) {
+  if (center) {
     className += ' align-items-center'
   }
-  const { opt, ...other } = props
   return (
     <div {...{ className }} {...other} >
       {props.children}
