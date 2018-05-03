@@ -14,14 +14,17 @@ class Option extends Component {
         <FormRow>
           <BCol >
             <FormControl
-              onChange={this.handleName}
+              onChange={this.handleChange}
               value={this.props.name}
+              name='name'
               placeholder='Option Name' />
           </BCol>
 
           <BCol size='md-2 col'>
             <FormControl
-              onChange={this.handlePrice}
+              onChange={this.handleChange}
+              onBlur={this.handleBlur}
+              name='price'
               value={this.props.price}
               placeholder='Price' />
 
@@ -35,18 +38,16 @@ class Option extends Component {
     )
   }
 
-  handleName = event => {
-    const name = event.target.value
-    this.props.updateOption(this.props.cuid, { name })
+  handleChange = event => {
+    const { name, value } = event.target
+    this.props.updateOption(this.props.cuid, { [name]: value })
   }
 
-  handlePrice = event => {
-    let price = event.target.value
-    if (price !== '') {
-      price = parseInt(price, 10)
-      if (!price) return
-    }
-    this.props.updateOption(this.props.cuid, { price })
+  handleBlur = event => {
+    const price = parseFloat(event.target.value)
+    this.props.updateOption(this.props.cuid, {
+      price: (price ? price : 0).toFixed(2)
+    })
   }
 
   removeOption = () => this.props.removeOption(this.props.cuid)
