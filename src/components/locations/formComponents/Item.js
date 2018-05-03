@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { FormGroup, FormRow, FormControl, AddButton, RemoveButton } from './elements'
 import { BCol } from '../../elements'
 import Option from './Option'
-import { updateItem, addOption, removeItem } from '../../../actions/newLocationActions'
+import { updateItem, addOption, removeItem, updateResource, removeResource } from '../../../actions/newLocationActions'
 
 class Item extends Component {
   render() {
@@ -15,14 +15,17 @@ class Item extends Component {
           <BCol>
             <FormControl
               placeholder='Item Name'
-              onChange={this.handleName}
+              name='name'
+              onChange={this.handleChange}
               value={this.props.name} />
           </BCol>
 
           <BCol size='md-2 col' >
             <FormControl
               placeholder='Price'
-              onChange={this.handlePrice}
+              name='price'
+              onChange={this.handleChange}
+              onBlur={this.handlePrice}
               value={this.props.price} />
           </BCol>
 
@@ -33,7 +36,8 @@ class Item extends Component {
 
         <FormGroup>
           <FormControl placeholder='Description'
-            onChange={this.handleDescription}
+            name='description'
+            onChange={this.handleChange}
             value={this.props.description} />
 
         </FormGroup>
@@ -46,28 +50,24 @@ class Item extends Component {
     )
   }
 
-  handleName = event => {
-    const name = event.target.value
-    this.props.updateItem(this.props.cuid, { name })
-  }
-
-  handleDescription = event => {
-    const description = event.target.value
-    this.props.updateItem(this.props.cuid, { description })
+  handleChange = event => {
+    const {name, value } = event.target
+    // this.props.updateItem(this.props.cuid, {[name]: value})
+    this.updateItem({[name]: value})
   }
 
   handlePrice = event => {
-    let price = event.target.value
-    if (price !== '') {
-      price = parseInt(price, 10)
-      if (!price) return
-    }
-    this.props.updateItem(this.props.cuid, { price })
+    const price = parseFloat(event.target.value)
+    this.props.updateItem(this.props.cuid, {
+      price: (price ? price : 0).toFixed(2)
+    })
   }
 
   handleNewOption = () => this.props.addOption(this.props.cuid, this.props.id)
 
-  removeItem = () => this.props.removeItem(this.props.cuid)
+  removeItem = () => this.props.removeResource('items', this.props.cuid)
+
+  updateItem = value => this.props.updateResource('items', this.props.cuid, value)
 }
 
 const mapState = (state, ownProps) => {
@@ -84,7 +84,7 @@ const mapState = (state, ownProps) => {
 }
 
 const mapDispatch = dispatch => {
-  const actions = { updateItem, addOption, removeItem }
+  const actions = { updateItem, addOption, removeItem, updateResource, removeResource }
   return bindActionCreators(actions, dispatch)
 }
 
