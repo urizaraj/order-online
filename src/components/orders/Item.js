@@ -18,9 +18,13 @@ class Item extends Component {
 
     return (
       <div className='mb-3' >
-        <div className='item' onClick={this.toggleActiveItem} >
-          <Icon icon='chevron-down' /> {name}
-        </div>
+
+        <DFlex opt='item' center onClick={this.toggleActiveItem} >
+          <Icon icon='chevron-down' /> 
+          <div className='ml-3' >{name}</div> 
+          <div className='font-weight-light ml-auto' >${price}</div>
+        </DFlex>
+
         {active && <Details {...detailsProps} />}
       </div>
     )
