@@ -7133,3 +7133,14 @@ body {
 
 .container {
   background: white; }
+
+.item {
+  padding: 1rem;
+  background-color: #f6f7fd;
+  font-weight: 600;
+  font-size: 1.2rem;
+  cursor: pointer;
+  -webkit-transition: all .1s;
+  transition: all .1s; }
+  .item:hover {
+    background-color: #d1d5f3; }

@@ -31,3 +31,15 @@ body {
   @extend .p-3;
   background: white
 }
+
+.item {
+  padding: 1rem;
+  background-color: theme-color-level(primary, -12);
+  font-weight: 600;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all .1s;
+  &:hover {
+    background-color: theme-color-level(primary, -10);
+  }
+}

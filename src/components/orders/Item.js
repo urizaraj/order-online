@@ -16,8 +16,8 @@ class Item extends Component {
 
     return (
       <div className='mb-3' >
-        <div className='' >
-          <ChevButton onClick={this.toggleActiveItem} /> {name}
+        <div className='item' onClick={this.toggleActiveItem} >
+          <Icon icon='chevron-down' /> {name}
         </div>
         {active && <Details {...detailsProps} />}
       </div>
@@ -27,40 +27,36 @@ class Item extends Component {
   toggleActiveItem = () => this.props.toggleActiveItem(this.props.active, this.props.id)
 }
 
-const ChevButton = ({ onClick }) => (
-  <button className="btn btn-primary" onClick={onClick} > <Icon icon='chevron-down' /></button >
-)
-
 class Details extends Component {
   constructor() {
     super()
-
     this.state = {
       selectedOptions: [],
       text: ''
     }
-    this.handleClick = this.handleClick.bind(this)
-    this.handleChange = this.handleChange.bind(this)
   }
 
   render() {
-    const { addOrderItem, item, options } = this.props
-    const selectedOptions = this.state.selectedOptions
     return (
       <div className='mt-2' >
-        <OptionList {...{ options, handleClick: this.handleClick, selectedOptions }} />
+        <OptionList
+          options={this.props.options}
+          handleClick={this.handleClick}
+          selectedOptions={this.state.selectedOptions} />
 
         <div className='mb-3 mt-2' >
           <small>Special Instructions: </small>
           <input type='text' value={this.state.text} onChange={this.handleChange} className='form-control form-control-sm' />
         </div>
 
-        <Button handleAddItem={() => addOrderItem(item, selectedOptions, this.state.text)} />
+        <div className='text-right' >
+          <Button handleAddItem={this.addOrderItem} />
+        </div>
       </div>
     )
   }
 
-  handleClick(option) {
+  handleClick = option => {
     const selectedOptions = this.state.selectedOptions
     if (selectedOptions.includes(option)) {
       this.setState({
@@ -73,11 +69,9 @@ class Details extends Component {
     }
   }
 
-  handleChange(event) {
-    this.setState({
-      text: event.target.value
-    })
-  }
+  handleChange = event => this.setState({ text: event.target.value })
+
+  addOrderItem = () => this.props.addOrderItem(this.props.item, this.state.selectedOptions, this.state.text)
 }
 
 const OptionList = props => {
@@ -103,7 +97,7 @@ const Option = props => {
 }
 
 const Button = props => (
-  <button className="btn btn-primary" onClick={props.handleAddItem} >
+  <button className="btn btn-success" onClick={props.handleAddItem} >
     <Icon icon='plus' /> Add to Order
   </button>
 )
