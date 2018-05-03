@@ -103,6 +103,7 @@ export function resetLocation() {
 export function saveLocation() {
   return (dispatch, getState) => {
     const state = getState().newLocation
+    console.log(state)
     const options = {
       method: 'POST',
       body: JSON.stringify({ location: state }),
@@ -116,7 +117,9 @@ export function saveLocation() {
       .then(resp => resp.json())
       .then(resp => {
         console.log(resp)
-        dispatch({ type: 'LOCATION_SAVED' })
+        if (resp.saved) {
+          dispatch({ type: 'LOCATION_SAVED' })
+        }
       })
   }
 }
