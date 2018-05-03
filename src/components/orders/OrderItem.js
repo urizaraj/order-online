@@ -27,6 +27,7 @@ class OrderItem extends Component {
             {this.props.name}
             <br/>
             <SelectedOptionsList selectedOptions={this.props.selectedOptions} />
+            <small><em>{this.props.instructions}</em></small>
           </div>
 
           <div className='ml-auto align-self-end p-2' >

@@ -35,6 +35,7 @@ const mapState = state => {
     orderItems: state.order.items.map(oi => {
       return {
         selectedOptions: oi.selected_options,
+        instructions: oi.instructions,
         name: oi.name,
         price: oi.price
       }
