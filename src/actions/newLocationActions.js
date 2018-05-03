@@ -1,5 +1,13 @@
 import cuid from 'cuid'
 
+export function updateResource(resource, cuid, value) {
+  return { type: 'UPDATE_RESOURCE', resource, cuid, value }
+}
+
+export function removeResource(resource, cuid) {
+  return { type: 'REMOVE_RESOURCE', resource, cuid }
+}
+
 export function addCategory(menuId = null) {
   return {
     type: 'ADD_RESOURCE',
