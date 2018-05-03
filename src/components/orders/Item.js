@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import Icon from '@fortawesome/react-fontawesome'
-// import cuid from 'cuid'
+
+import { Row, BCol, DFlex } from '../elements'
+
 import { toggleActiveItem } from '../../actions/activeItemActions'
 import { addOrderItem } from '../../actions/orderActions'
 
@@ -39,10 +41,12 @@ class Details extends Component {
   render() {
     return (
       <div className='mt-2' >
-        <OptionList
-          options={this.props.options}
-          handleClick={this.handleClick}
-          selectedOptions={this.state.selectedOptions} />
+        <Row>
+          <OptionList
+            options={this.props.options}
+            handleClick={this.handleClick}
+            selectedOptions={this.state.selectedOptions} />
+        </Row>
 
         <div className='mb-3 mt-2' >
           <small>Special Instructions: </small>
@@ -85,15 +89,33 @@ const OptionList = props => {
 }
 
 const Option = props => {
-  let className = 'p-2 d-inline-block'
-  if (props.selected) { className += ' bg-primary text-light' }
+  let className = 'p-2 align-items-center'
+  if (props.selected) { className += ' bg-primary text-white' }
 
   const params = {
     onClick: () => props.handleClick(props.option),
     className
   }
 
-  return <div {...params}> <Icon icon={props.selected ? 'check' : 'plus'} fixedWidth /> {props.option.name} - ${props.option.price} </div>
+  return (
+    <BCol onClick={params.onClick} >
+      <DFlex opt={className} >
+
+        <Icon icon={props.selected ? 'check' : 'plus'} fixedWidth />
+
+        <div className='ml-3'  >
+          {props.option.name}
+        </div>
+
+        {props.option.price > 0 && (
+          <div className='ml-auto' >
+            ${props.option.price.toFixed(2)}
+          </div>
+        )}
+
+      </DFlex>
+    </BCol>
+  )
 }
 
 const Button = props => (
