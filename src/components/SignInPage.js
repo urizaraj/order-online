@@ -30,7 +30,8 @@ class SignInPage extends Component {
               placeholder='Username'
               className='form-control'
               value={this.state.name}
-              onChange={this.handleChange} />
+              onChange={this.handleChange}
+              autoFocus />
           </div>
 
           <div className='form-group' >
