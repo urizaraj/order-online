@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+
+import { resetOrder } from '../../actions/orderActions'
+
 import Item from './Item'
 import CurrentOrder from './CurrentOrder'
-import { resetOrder } from '../../actions/orderActions'
 
 import { Row, BCol } from '../elements'
 
@@ -21,7 +23,8 @@ class OrderNew extends Component {
       <div>
         <Row>
           <BCol>
-            <ItemList {...{ items }} />
+            {/* <ItemList {...{ items }} /> */}
+            <CategoryList categories={this.props.categories} />
           </BCol>
           <BCol>
             <CurrentOrder {...{ items }} />
@@ -52,11 +55,23 @@ const OrderSavedPrompt = props => {
   )
 }
 
+
+const CategoryList = ({ categories }) => categories.map(Category)
+
+const Category = props => {
+  return (
+    <div key={props.id} >
+      <h2>{props.name}</h2>
+      <ItemList items={props.items} />
+    </div>
+  )
+}
+
 const ItemList = ({ items }) => {
   return items.map(item => <Item {...item} key={item.id} />)
 }
 
-// connecting to the store
+//#region connecting to store
 
 const mapState = state => {
   return {
@@ -72,3 +87,5 @@ const mapDispatch = dispatch => {
 }
 
 export default OrderNew = connect(mapState, mapDispatch)(OrderNew)
+
+//#endregion
