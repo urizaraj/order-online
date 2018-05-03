@@ -102,7 +102,7 @@ const Option = props => {
   }
 
   return (
-    <BCol onClick={params.onClick} >
+    <BCol onClick={params.onClick} size='md-6' >
       <DFlex opt={className} >
 
         <Icon icon={props.selected ? 'check' : 'plus'} fixedWidth />
