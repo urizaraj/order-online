@@ -68,7 +68,7 @@ export function fetchOrderIndex() {
 
     if (!user.signedIn) return
 
-    dispatch({type: 'LOADING_ORDER'})
+    dispatch({ type: 'LOADING_ORDER' })
 
     const url = `/users/${user.id}`
 
@@ -78,4 +78,8 @@ export function fetchOrderIndex() {
         dispatch({ type: 'FETCH_ORDER_INDEX', index: resp.orders })
       })
   }
+}
+
+export function checkOut() {
+  return { type: 'CHECK_OUT' }
 }

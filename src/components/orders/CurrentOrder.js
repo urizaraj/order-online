@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 import CurrentOrderDisplay from './CurrentOrderDisplay'
 
-import { saveOrder } from '../../actions/orderActions'
+import { saveOrder, checkOut } from '../../actions/orderActions'
 
 import Icon from '@fortawesome/react-fontawesome'
 
@@ -19,8 +19,8 @@ class CurrentOrder extends React.Component {
         <CurrentOrderDisplay edit orderItems={this.props.orderItems} />
 
         <DFlex>
-          <button className='btn btn-success ml-auto' onClick={this.saveOrder} >
-            <Icon icon='check' /> Save Order
+          <button className='btn btn-success ml-auto' onClick={this.checkOut} >
+             Check Out <Icon icon='arrow-right' />
           </button>
         </DFlex>
       </div>
@@ -28,6 +28,7 @@ class CurrentOrder extends React.Component {
   }
 
   saveOrder = event => this.props.saveOrder()
+  checkOut = event => this.props.checkOut()
 }
 
 const mapState = state => {
@@ -37,7 +38,7 @@ const mapState = state => {
 }
 
 const mapDispatch = dispatch => {
-  const actions = { saveOrder }
+  const actions = { saveOrder, checkOut }
   return bindActionCreators(actions, dispatch)
 }
 
