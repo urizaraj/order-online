@@ -106,7 +106,12 @@ class CheckOutPage extends Component {
                 <div className='input-group-prepend' >
                   <span className='input-group-text' >$</span>
                 </div>
-                <FormControl placeholder='Tip' />
+                <FormControl
+                  placeholder='Tip'
+                  name='tip'
+                  value={this.props.tip}
+                  onChange={this.onChange} />
+                  
               </div>
             </FormGroup>
 
