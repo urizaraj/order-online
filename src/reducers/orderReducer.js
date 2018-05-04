@@ -9,7 +9,7 @@ const orderReducer = (state = {
     paymentType: '',
     cardNumber: '',
     fullName: '',
-    street: '',
+    address: '',
     city: '',
     state: '',
     zipcode: '',
