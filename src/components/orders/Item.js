@@ -30,6 +30,12 @@ class Item extends Component {
     )
   }
 
+  componentWillUnmount() {
+    if (this.props.active) {
+      this.toggleActiveItem()
+    }
+  }
+
   toggleActiveItem = () => this.props.toggleActiveItem(this.props.active, this.props.id)
 }
 
