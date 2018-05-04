@@ -42,12 +42,40 @@ class CheckOutPage extends Component {
 
             <FormGroup>
               <FormControl
-                placeholder='Street'
-                name='street'
-                value={this.props.street}
+                placeholder='Address'
+                name='address'
+                value={this.props.address}
                 onChange={this.onChange} />
 
             </FormGroup>
+
+            <FormRow opt='mb-3' >
+              <BCol size='md-6' >
+                <FormControl
+                  placeholder='City'
+                  name='city'
+                  value={this.props.city}
+                  onChange={this.onChange} />
+
+              </BCol>
+
+              <BCol>
+                <FormControl
+                  placeholder='State'
+                  name='state'
+                  value={this.props.state}
+                  onChange={this.onChange} />
+
+              </BCol>
+
+              <BCol>
+                <FormControl
+                  placeholder='Zipcode'
+                  name='zipcode'
+                  value={this.props.zipcode}
+                  onChange={this.onChange} />
+              </BCol>
+            </FormRow>
 
             <DFlex opt='justify-content-around text-primary mb-2' >
               <Radio name='paymentType' value='cash' checked={cash} onChange={this.onChange} >
@@ -60,7 +88,7 @@ class CheckOutPage extends Component {
 
             <FormGroup>
               <FormControl
-                disabled={cash}
+                disabled={!card}
                 placeholder='Card Number'
                 name='cardNumber'
                 value={this.props.cardNumber}
