@@ -83,3 +83,7 @@ export function fetchOrderIndex() {
 export function checkOut() {
   return { type: 'CHECK_OUT' }
 }
+
+export function updateOrder(value) {
+  return { type: 'UPDATE_ORDER', value }
+}

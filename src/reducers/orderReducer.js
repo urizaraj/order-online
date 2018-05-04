@@ -1,4 +1,21 @@
-const orderReducer = (state = { items: [], id: null, index: [], loading: false, saved: false, checkOut: false }, action) => {
+const orderReducer = (state = {
+  index: [],
+  id: null,
+  items: [],
+  loading: false,
+  saved: false,
+  checkOut: false,
+  order: {
+    paymentType: '',
+    fullName: '',
+    street: '',
+    city: '',
+    state: '',
+    zipcode: '',
+    deliveryType: '',
+    tip: ''
+  }
+}, action) => {
   switch (action.type) {
     case 'ADD_ORDER_ITEM':
       return { ...state, items: [...state.items, action.item] }
@@ -13,16 +30,19 @@ const orderReducer = (state = { items: [], id: null, index: [], loading: false, 
       return { ...state, items: action.items, id: action.id, loading: false }
 
     case 'FETCH_ORDER_INDEX':
-      return {...state, index: action.index, loading: false}
+      return { ...state, index: action.index, loading: false }
 
     case 'LOADING_ORDER':
-      return {...state, loading: true}
+      return { ...state, loading: true }
 
     case 'ORDER_SAVED':
-      return {...state, saved: true}
+      return { ...state, saved: true }
 
     case 'CHECK_OUT':
-      return {...state, checkOut: !state.checkOut}
+      return { ...state, checkOut: !state.checkOut }
+
+    case 'UPDATE_ORDER':
+      return { ...state, order: {...state.order, ...action.value}}
 
     default:
       return state

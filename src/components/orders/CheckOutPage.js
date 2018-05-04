@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import { FormGroup, FormControl } from '../locations/formComponents/elements'
-import { saveOrder, checkOut } from '../../actions/orderActions'
+import { saveOrder, checkOut, updateOrder } from '../../actions/orderActions'
 
 import CurrentOrderDisplay from './CurrentOrderDisplay'
 
@@ -12,12 +12,6 @@ import { BCol, Row, Radio, FormRow, FormCheck, Btn, DFlex } from '../elements';
 import Icon from '@fortawesome/react-fontawesome'
 
 class CheckOutPage extends Component {
-  constructor() {
-    super()
-    this.state = {
-      payment: 'cash',
-    }
-  }
   render() {
     return (
       <div>
@@ -30,11 +24,21 @@ class CheckOutPage extends Component {
             </FormGroup>
 
             <FormGroup>
-              <FormControl placeholder='Full Name' />
+              <FormControl
+                placeholder='Full Name'
+                name='fullName'
+                value={this.props.fullName}
+                onChange={this.onChange} />
+
             </FormGroup>
 
             <FormGroup>
-              <FormControl placeholder='Address' />
+              <FormControl
+                placeholder='Full Name'
+                name='fullName'
+                value={this.props.fullName}
+                onChange={this.onChange} />
+                
             </FormGroup>
           </BCol>
 
@@ -42,6 +46,7 @@ class CheckOutPage extends Component {
             <h4>Current Order</h4>
 
             <CurrentOrderDisplay orderItems={this.props.orderItems} />
+
             <FormGroup>
               <div className='input-group'>
                 <div className='input-group-prepend' >
@@ -50,6 +55,7 @@ class CheckOutPage extends Component {
                 <FormControl placeholder='Tip' />
               </div>
             </FormGroup>
+
           </BCol>
         </Row>
 
@@ -59,20 +65,26 @@ class CheckOutPage extends Component {
       </div>
     )
   }
-  togglePayment = event => {
 
-  }
-  onChange = event => this.setState({ payment: event.target.value })
   saveOrder = () => this.props.saveOrder()
   goBack = () => this.props.checkOut()
+
+  onChange = event => {
+    const { name, value } = event.target
+    this.props.updateOrder({ [name]: value })
+  }
 }
 
 const mapState = state => {
-  return { orderItems: state.order.items }
+  const order = state.order.order
+  return {
+    orderItems: state.order.items,
+    ...order
+  }
 }
 
 const mapDispatch = dispatch => {
-  const actions = { checkOut, saveOrder }
+  const actions = { checkOut, saveOrder, updateOrder }
   return bindActionCreators(actions, dispatch)
 }
 
