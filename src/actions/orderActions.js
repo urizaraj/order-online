@@ -1,4 +1,6 @@
 import cuid from 'cuid'
+import mapKeys from 'lodash/mapKeys'
+import snakeCase from 'lodash/snakeCase'
 
 export function addOrderItem(item, selectedOptions, text) {
   return {
@@ -86,4 +88,21 @@ export function checkOut() {
 
 export function updateOrder(value) {
   return { type: 'UPDATE_ORDER', value }
+}
+
+const mapper = (value, key) => snakeCase(key)
+
+export function saveOrder2() {
+  return (dispatch, getState) => {
+    const state = getState().orderNew
+
+    const order = {
+      ...mapKeys(state, mapper),
+      order_items_attributes: state.orderItemsAttributes.map(oi => ({
+        ...mapKeys(oi, mapper),
+        selected_options_attributes: oi.selectedOptionsAttributes.map(so => mapKeys(so, mapper))
+      }))
+    }
+
+  }
 }
