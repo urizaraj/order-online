@@ -15,28 +15,21 @@ class CheckOutPage extends Component {
   render() {
     const cash = this.props.paymentType === 'cash'
     const card = this.props.paymentType === 'card'
+    const pickup = this.props.deliveryType === 'pickup'
+    const delivery = this.props.deliveryType === 'delivery'
     return (
       <div>
         <Row>
           <BCol>
 
-            <DFlex opt='justify-content-around' >
-              <Radio name='paymentType' value='cash' checked={cash} onChange={this.onChange} >
-                <span className='font-weight-light h2'><Icon icon={cash ? 'check-square' : 'square'} /> Cash</span>
+            <DFlex opt='justify-content-around text-primary mb-2' >
+              <Radio name='deliveryType' value='pickup' checked={pickup} onChange={this.onChange} >
+                <span className='font-weight-light h2'><Icon icon={pickup ? 'dot-circle' : 'circle'} /> Pickup</span>
               </Radio>
-              <Radio name='paymentType' value='card' checked={card} onChange={this.onChange} >
-                <span className='font-weight-light h2' ><Icon icon={card ? 'check-square' : 'square'} /> Card</span>
+              <Radio name='deliveryType' value='delivery' checked={delivery} onChange={this.onChange} >
+                <span className='font-weight-light h2' ><Icon icon={delivery ? 'dot-circle' : 'circle'} /> Delivery</span>
               </Radio>
             </DFlex>
-
-            <FormGroup>
-              <FormControl
-                disabled={cash}
-                placeholder='Card Number'
-                name='cardNumber'
-                value={this.props.cardNumber}
-                onChange={this.onChange} />
-            </FormGroup>
 
             <FormGroup>
               <FormControl
@@ -54,6 +47,24 @@ class CheckOutPage extends Component {
                 value={this.props.street}
                 onChange={this.onChange} />
 
+            </FormGroup>
+
+            <DFlex opt='justify-content-around text-primary mb-2' >
+              <Radio name='paymentType' value='cash' checked={cash} onChange={this.onChange} >
+                <span className='font-weight-light h2'><Icon icon={cash ? 'dot-circle' : 'circle'} /> Cash</span>
+              </Radio>
+              <Radio name='paymentType' value='card' checked={card} onChange={this.onChange} >
+                <span className='font-weight-light h2' ><Icon icon={card ? 'dot-circle' : 'circle'} /> Card</span>
+              </Radio>
+            </DFlex>
+
+            <FormGroup>
+              <FormControl
+                disabled={cash}
+                placeholder='Card Number'
+                name='cardNumber'
+                value={this.props.cardNumber}
+                onChange={this.onChange} />
             </FormGroup>
           </BCol>
 
