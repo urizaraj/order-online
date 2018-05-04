@@ -7,6 +7,7 @@ const orderReducer = (state = {
   checkOut: false,
   order: {
     paymentType: '',
+    cardNumber: '',
     fullName: '',
     street: '',
     city: '',
