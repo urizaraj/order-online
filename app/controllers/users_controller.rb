@@ -2,24 +2,12 @@
 
 class UsersController < ApplicationController
   def sign_in
-    # user = User.find_by(name: params[:name])
     user = User.where('lower(name) = ?', params[:name].downcase).first
 
     valid = user&.authenticate(params[:password])
     return render json: { message: 'invalid' } unless valid
 
-    payload = { user: user.id }
-    token = JWT.encode payload, nil, 'none'
-    render json: { token: token, id: user.id, name: user.name }
-  end
-
-  def sign_in_token
-    payload = JWT.decode params[:token], nil, false
-    user = User.find(payload[0]['user'])
-
-    return render json: { message: 'invalid' } unless user
-
-    render json: user
+    render json: { token: generate_token(user), id: user.id, name: user.name }
   end
 
   def show
@@ -31,7 +19,8 @@ class UsersController < ApplicationController
     user = User.new(name: params[:name], email: params[:email], password: params[:password])
     valid = user.save
     return render json: { message: 'invalid' } unless valid
-    render json: user
+
+    render json: { token: generate_token(user), id: user.id, name: user.name }
   end
 
   private
@@ -42,5 +31,10 @@ class UsersController < ApplicationController
       .permit :name,
               :email,
               :password
+  end
+
+  def generate_token(user)
+    payload = { user: user.id }
+    JWT.encode payload, nil, 'none'
   end
 end
