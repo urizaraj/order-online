@@ -44,35 +44,7 @@ export function fetchOrderIndex() {
 
 export const checkOut = () => ({ type: 'CHECK_OUT' })
 
-
 export function saveOrder() {
-  return (dispatch, getState) => {
-    const order = getState().order
-
-    if (!order.items.length) return
-
-    dispatch({ type: 'SAVING_ORDER' })
-
-    order.location_id = getState().locations.location.id
-
-    const options = {
-      method: 'POST',
-      body: JSON.stringify({ order: order }),
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Token token=${localStorage.getItem('token')}`
-      }
-    }
-
-    return fetch('/orders.json', options)
-      .then(resp => resp.text())
-      .then(resp => {
-        dispatch({ type: 'ORDER_SAVED' })
-      })
-  }
-}
-
-export function saveOrder2() {
   return (dispatch, getState) => {
     dispatch({ type: 'SAVING_ORDER' })
 
@@ -85,7 +57,6 @@ export function saveOrder2() {
       location_id: getState().locations.location.id,
       order_items_attributes: orderItems.map(oi => {
         const { selectedOptions, ...rest } = oi
-
         return {
           ...mapKeys(rest, mapper),
           selected_options_attributes: selectedOptions.map(so => mapKeys(so, mapper))

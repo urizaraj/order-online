@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import { FormGroup, FormControl } from '../locations/formComponents/elements'
-import { checkOut, saveOrder2 as saveOrder } from '../../actions/orderActions'
+import { checkOut, saveOrder } from '../../actions/orderActions'
 import { updateOrder } from '../../actions/orderNewActions'
 
 import CurrentOrderDisplay from './CurrentOrderDisplay'
