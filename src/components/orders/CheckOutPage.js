@@ -74,7 +74,7 @@ class CheckOutPage extends Component {
                   placeholder='Zipcode'
                   name='zipcode'
                   value={this.props.zipcode}
-                  onChange={this.onChange} />
+                  onChange={this.onZipChange} />
               </BCol>
             </FormRow>
 
@@ -103,17 +103,25 @@ class CheckOutPage extends Component {
             <CurrentOrderDisplay orderItems={this.props.orderItems} />
 
             <FormGroup>
-              <div className='input-group'>
-                <div className='input-group-prepend' >
-                  <span className='input-group-text' >$</span>
-                </div>
-                <FormControl
-                  placeholder='Tip'
-                  name='tip'
-                  value={this.props.tip}
-                  onChange={this.onChange} />
+              <FormRow>
+                <BCol>
+                  <h4>Tip</h4>
+                </BCol>
+                <BCol>
+                  <div className='input-group'>
+                    <div className='input-group-prepend' >
+                      <span className='input-group-text' >$</span>
+                    </div>
+                    <FormControl
+                      placeholder='Tip'
+                      name='tip'
+                      value={this.props.tip}
+                      onChange={this.onChange}
+                      onBlur={this.onTipBlur} />
 
-              </div>
+                  </div>
+                </BCol>
+              </FormRow>
             </FormGroup>
 
           </BCol>
@@ -133,6 +141,27 @@ class CheckOutPage extends Component {
   onChange = event => {
     const { name, value } = event.target
     this.props.updateOrder({ [name]: value })
+  }
+
+  onZipChange = event => {
+    const zipcode = event.target.value
+
+    if (zipcode === '' || zipcode === '0') {
+      this.props.updateOrder({ zipcode })
+    } else if (zipcode.length > 5) {
+      return
+    } else if (!parseInt(zipcode, 10)) {
+      return
+    } else {
+      this.props.updateOrder({ zipcode })
+    }
+  }
+
+  onTipBlur = event => {
+    const tip = parseFloat(event.target.value)
+    this.props.updateOrder({
+      tip: (tip ? tip : 0).toFixed(2)
+    })
   }
 }
 
