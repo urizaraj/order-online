@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import { updateCategory, removeCategory, addItem } from '../../../actions/newLocationActions'
+import { addItem, updateResource, removeResource } from '../../../actions/newLocationActions'
 
 import { FormRow, FormControl, AddButton, RemoveButton } from './elements'
 import { BCol } from '../../elements'
@@ -35,12 +35,14 @@ class Category extends Component {
 
   handleChange = event => {
     const name = event.target.value
-    this.props.updateCategory(this.props.cuid, { name })
+    this.updateCategory({ name })
   }
 
   addItem = () => this.props.addItem(this.props.cuid, this.props.id)
 
-  removeCategory = () => this.props.removeCategory(this.props.cuid)
+  removeCategory = () => this.props.removeResource(this.props.cuid)
+
+  updateCategory = value => this.props.updateResource('categories', this.props.cuid, value)
 }
 
 const mapState = (state, ownProps) => {
@@ -56,7 +58,7 @@ const mapState = (state, ownProps) => {
 }
 
 const mapDispatch = dispatch => {
-  return bindActionCreators({ updateCategory, removeCategory, addItem }, dispatch)
+  return bindActionCreators({ updateResource, removeResource, addItem }, dispatch)
 }
 
 export default connect(mapState, mapDispatch)(Category)

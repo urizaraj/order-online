@@ -16,23 +16,6 @@ export function addCategory(menuId = null) {
   }
 }
 
-export function updateCategory(cuid, value) {
-  return {
-    type: 'UPDATE_RESOURCE',
-    resource: 'categories',
-    cuid,
-    value
-  }
-}
-
-export function removeCategory(cuid) {
-  return {
-    type: 'REMOVE_RESOURCE',
-    resource: 'categories',
-    cuid
-  }
-}
-
 export function addItem(categoryCuid, categoryId = null) {
   return {
     type: 'ADD_RESOURCE',
@@ -56,23 +39,6 @@ export function addOption(itemCuid, itemId = null) {
   }
 }
 
-export function updateOption(cuid, value) {
-  return {
-    type: 'UPDATE_RESOURCE',
-    resource: 'options',
-    cuid,
-    value
-  }
-}
-
-export function removeOption(cuid) {
-  return {
-    type: 'REMOVE_RESOURCE',
-    resource: 'options',
-    cuid
-  }
-}
-
 export function updateLocationName(name) {
   return {
     type: 'UPDATE_LOCATION',
@@ -84,6 +50,12 @@ export function updateLocationDescription(description) {
   return {
     type: 'UPDATE_LOCATION',
     value: { description }
+  }
+}
+export function updateLocation(value) {
+  return {
+    type: 'UPDATE_LOCATION',
+    value
   }
 }
 
