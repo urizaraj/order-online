@@ -1,5 +1,4 @@
 import React from 'react'
-import compact from 'lodash/compact'
 
 function div(type) {
   return props => {

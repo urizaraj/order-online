@@ -8,7 +8,7 @@ import CurrentOrderDisplay from './CurrentOrderDisplay'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { BCol, Row, Radio, FormRow, FormCheck, Btn, DFlex } from '../elements';
+import { BCol, Row, Radio, FormRow, Btn, DFlex } from '../elements';
 
 import Icon from '@fortawesome/react-fontawesome'
 

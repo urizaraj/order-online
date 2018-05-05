@@ -20,12 +20,7 @@ const orderNewReducer = (state = { ...initial }, action) => {
       }
 
     case 'REMOVE_ORDER_ITEM':
-      return {
-        ...state,
-        orderItems: state.orderItems.filter(
-          item => item.cuid !== action.cuid
-        )
-      }
+      return { ...state, orderItems: state.orderItems.filter(item => item.cuid !== action.cuid) }
 
     case 'UPDATE_ORDER':
       return { ...state, ...action.value }

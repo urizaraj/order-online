@@ -4,8 +4,6 @@ import { DFlex } from '../elements'
 
 import OrderItem from './OrderItem'
 
-import cuid from 'cuid'
-
 class CurrentOrderDisplay extends Component {
   render() {
     return (
