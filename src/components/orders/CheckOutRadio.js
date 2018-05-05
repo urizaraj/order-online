@@ -3,9 +3,10 @@ import React, { cloneElement } from 'react';
 import { DFlex, Radio } from '../elements';
 
 export const CheckOutFlex = props => {
+  let i = 0
   return (
     <DFlex opt='justify-content-around text-primary mb-2' >
-      {props.children.map(child => cloneElement(child, { name: props.name, onChange: props.onChange }))}
+      {props.children.map(child => cloneElement(child, { name: props.name, onChange: props.onChange, key: ++i }))}
     </DFlex>
   )
 }

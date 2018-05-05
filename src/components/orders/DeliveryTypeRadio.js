@@ -6,9 +6,9 @@ class DeliveryTypeRadio extends Component {
     const { pickup, delivery, onChange } = this.props
     return (
       <CheckOutFlex name='deliveryType' onChange={onChange}>
-        <CheckOutRadio value='pickup' checked={pickup} title='Cash' />
+        <CheckOutRadio value='pickup' checked={pickup} title='Pickup' />
 
-        <CheckOutRadio value='delivery' checked={delivery} title='Card' />
+        <CheckOutRadio value='delivery' checked={delivery} title='Delivery' />
       </CheckOutFlex>
     )
   }
