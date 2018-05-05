@@ -44,7 +44,7 @@ class Details extends Component {
     super()
     this.state = {
       selectedOptions: [],
-      text: ''
+      instructions: ''
     }
   }
 
@@ -60,7 +60,12 @@ class Details extends Component {
 
         <div className='mb-3 mt-2' >
           <small>Special Instructions: </small>
-          <input type='text' value={this.state.text} onChange={this.handleChange} className='form-control form-control-sm' />
+          <input
+            type='text'
+            name='instructions'
+            value={this.state.instructions}
+            onChange={this.handleChange}
+            className='form-control form-control-sm' />
         </div>
 
         <div className='text-right' >
@@ -83,7 +88,10 @@ class Details extends Component {
     }
   }
 
-  handleChange = event => this.setState({ text: event.target.value })
+  handleChange = event => {
+    const { name, value } = event.target
+    this.setState({ [name]: value })
+  }
 
   addOrderItem = () => this.props.addOrderItem(this.props.item, this.state)
 }
