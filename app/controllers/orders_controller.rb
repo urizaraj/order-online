@@ -8,7 +8,10 @@ class OrdersController < ApplicationController
   end
 
   def create
-    Order.create(attributes)
+    order = Order.new(stronger_params)
+    order.user = @user
+    render json: { status: order.save }
+    # Order.create(attributes)
   end
 
   def show
@@ -20,6 +23,12 @@ class OrdersController < ApplicationController
     params
       .require(:order)
       .permit(:location_id, items: [:id, :instructions, selectedOptions: [:id]])
+  end
+
+  def stronger_params
+    params
+      .require(:order)
+      .permit(:location_id, order_items_attributes: [:item_id, :instructions, selected_options_attributes: [:option_id]])
   end
 
   def attributes

@@ -25,7 +25,6 @@ class OrderNew extends Component {
       <div>
         <Row>
           <BCol>
-            {/* <ItemList {...{ items }} /> */}
             <CategoryList categories={this.props.categories} />
           </BCol>
           <BCol>
@@ -59,15 +58,6 @@ const OrderSavedPrompt = props => {
 
 
 const CategoryList = ({ categories }) => categories.map(cat => <Category {...cat} key={cat.id} />)
-
-// const Category = props => {
-//   return (
-//     <div key={props.id} >
-//       <h2>{props.name}</h2>
-//       <ItemList items={props.items} />
-//     </div>
-//   )
-// }
 
 class Category extends Component {
   constructor() {

@@ -1,7 +1,7 @@
 const orderReducer = (state = { index: [], id: null, loading: false, saved: false, checkOut: false }, action) => {
   switch (action.type) {
-    case 'FETCH_ORDER':
-      return { ...state, items: action.items, id: action.id, loading: false }
+    // case 'FETCH_ORDER':
+    // return { ...state, items: action.items, id: action.id, loading: false }
 
     case 'FETCH_ORDER_INDEX':
       return { ...state, index: action.index, loading: false }

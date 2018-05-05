@@ -9,7 +9,7 @@ export function addOrderItem(item, orderItem) {
       ...rest,
       cuid: cuid(),
       instructions: orderItem.instructions,
-      selectedOptionsAttributes: orderItem.selectedOptions.map(so => ({
+      selectedOptions: orderItem.selectedOptions.map(so => ({
         optionId: so.id,
         name: so.name,
         price: so.price

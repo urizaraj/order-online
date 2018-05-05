@@ -4,6 +4,8 @@ import { DFlex } from '../elements'
 
 import OrderItem from './OrderItem'
 
+import cuid from 'cuid'
+
 class CurrentOrderDisplay extends Component {
   render() {
     return (
@@ -22,7 +24,7 @@ class CurrentOrderDisplay extends Component {
   }
 
   total = () => {
-    const itemReducer = (total, item) => total + item.selectedOptionsAttributes.reduce(optionReducer, item.price)
+    const itemReducer = (total, item) => total + item.selectedOptions.reduce(optionReducer, item.price)
     const optionReducer = (total, option) => total + option.price
 
     return this.props.orderItems.reduce(itemReducer, 0)
@@ -30,7 +32,7 @@ class CurrentOrderDisplay extends Component {
 }
 
 const OrderItemList = props => {
-  return props.orderItems.map(oi => <OrderItem edit={props.edit} {...oi} key={oi.cuid} />)
+  return props.orderItems.map(oi => <OrderItem edit={props.edit} {...oi} key={oi.id ? oi.id : oi.cuid} />)
 }
 
 export default CurrentOrderDisplay

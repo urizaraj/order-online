@@ -32,16 +32,8 @@ class OrderShow extends Component {
 }
 
 const mapState = state => {
-  return {
-    orderItems: state.order.items.map(oi => {
-      return {
-        selectedOptions: oi.selected_options,
-        instructions: oi.instructions,
-        name: oi.name,
-        price: oi.price
-      }
-    })
-  }
+  const { id, ...props } = state.orderNew
+  return { ...props }
 }
 
 const mapDispatch = dispatch => {

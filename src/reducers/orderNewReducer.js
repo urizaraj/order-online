@@ -8,7 +8,7 @@ const initial = {
   zipcode: '',
   deliveryType: '',
   tip: '',
-  orderItemsAttributes: []
+  orderItems: []
 }
 
 const orderNewReducer = (state = { ...initial }, action) => {
@@ -16,13 +16,13 @@ const orderNewReducer = (state = { ...initial }, action) => {
     case 'ADD_ORDER_ITEM':
       return {
         ...state,
-        orderItemsAttributes: [...state.orderItemsAttributes, action.orderItem]
+        orderItems: [...state.orderItems, action.orderItem]
       }
 
     case 'REMOVE_ORDER_ITEM':
       return {
         ...state,
-        orderItemsAttributes: state.orderItemsAttributes.filter(
+        orderItems: state.orderItems.filter(
           item => item.cuid !== action.cuid
         )
       }
@@ -32,6 +32,9 @@ const orderNewReducer = (state = { ...initial }, action) => {
 
     case 'RESET_ORDER':
       return { ...initial }
+
+    case 'FETCH_ORDER':
+      return { ...state, ...action.order }
 
     default:
       return state

@@ -11,7 +11,7 @@ import { DFlex } from '../elements'
 class OrderItem extends Component {
   constructor(props) {
     super(props)
-    this.itemPrice = props.selectedOptionsAttributes.reduce((total, option) => {
+    this.itemPrice = props.selectedOptions.reduce((total, option) => {
       return total + option.price
     }, props.price)
   }
@@ -26,7 +26,7 @@ class OrderItem extends Component {
           <div className='p-2' >
             {this.props.name}
             <br />
-            <SelectedOptionsList selectedOptions={this.props.selectedOptionsAttributes} />
+            <SelectedOptionsList selectedOptions={this.props.selectedOptions} />
             <small><em>{this.props.instructions}</em></small>
           </div>
 
@@ -44,7 +44,7 @@ class OrderItem extends Component {
 
 const RemoveButton = props => <div><button {...props} className='btn btn-link' ><Icon icon='times' /></button></div>
 
-const SelectedOptionsList = props => props.selectedOptions.map(so => <SelectedOption {...so} key={so.optionId} />)
+const SelectedOptionsList = props => props.selectedOptions.map(so => <SelectedOption {...so} key={so.id ? so.id : so.optionId} />)
 
 const SelectedOption = props => {
   return (

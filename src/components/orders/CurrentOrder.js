@@ -33,7 +33,7 @@ class CurrentOrder extends React.Component {
 
 const mapState = state => {
   return {
-    orderItems: state.orderNew.orderItemsAttributes
+    orderItems: state.orderNew.orderItems
   }
 }
 
