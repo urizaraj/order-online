@@ -44,7 +44,7 @@ class Category extends Component {
 }
 
 const mapState = (state, ownProps) => {
-  let items = state.newLocation.items
+  let items = state.locationNew.items
 
   const [key, itemKey] = (ownProps.id ? ['id', 'category_id'] : ['cuid', 'categoryCuid'])
 

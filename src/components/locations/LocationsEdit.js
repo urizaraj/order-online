@@ -41,7 +41,7 @@ class LocationEdit extends Component {
 
 const mapState = state => {
   return {
-    loading: state.newLocation.loading
+    loading: state.locationNew.loading
   }
 }
 

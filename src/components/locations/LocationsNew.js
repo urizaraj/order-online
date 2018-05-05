@@ -37,7 +37,7 @@ class LocationNew extends Component {
 
 const mapState = state => {
   return {
-    saved: state.newLocation.saved
+    saved: state.locationNew.saved
   }
 }
 

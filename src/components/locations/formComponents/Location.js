@@ -59,10 +59,10 @@ class Location extends Component {
 
 const mapState = state => {
   return {
-    categories: state.newLocation.categories,
-    name: state.newLocation.name,
-    description: state.newLocation.description,
-    menuId: state.newLocation.menuId
+    categories: state.locationNew.categories,
+    name: state.locationNew.name,
+    description: state.locationNew.description,
+    menuId: state.locationNew.menuId
   }
 }
 

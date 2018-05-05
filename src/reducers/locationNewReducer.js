@@ -1,4 +1,4 @@
-const newLocationReducer = (state = { categories: [], items: [], options: [], name: '', description: '', loading: false, saved: false }, action) => {
+const locationNewReducer = (state = { categories: [], items: [], options: [], name: '', description: '', loading: false, saved: false }, action) => {
   const { resource } = action
   let cuid
 
@@ -29,14 +29,14 @@ const newLocationReducer = (state = { categories: [], items: [], options: [], na
       return { ...state, loading: true }
 
     case 'LOADED_EDIT_LOCATION':
-      return {...state, loading: false}
+      return { ...state, loading: false }
 
     case 'LOCATION_SAVED':
-      return {...state, saved: true}
+      return { ...state, saved: true }
 
     default:
       return state
   }
 }
 
-export default newLocationReducer
+export default locationNewReducer

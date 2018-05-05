@@ -4,7 +4,7 @@ import activeItemReducer from './activeItemReducer'
 import orderReducer from './orderReducer'
 import locationReducer from './locationReducer'
 import userReducer from './userReducer'
-import newLocationReducer from './newLocationReducer'
+import locationNewReducer from './locationNewReducer'
 import orderNewReducer from './orderNewReducer'
 
 const rootReducer = combineReducers({
@@ -13,8 +13,8 @@ const rootReducer = combineReducers({
   order: orderReducer,
   orderNew: orderNewReducer,
   locations: locationReducer,
-  user: userReducer,
-  newLocation: newLocationReducer
+  locationNew: locationNewReducer,
+  user: userReducer
 })
 
 export default rootReducer

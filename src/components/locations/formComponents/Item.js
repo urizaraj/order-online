@@ -70,7 +70,7 @@ class Item extends Component {
 }
 
 const mapState = (state, ownProps) => {
-  const options = state.newLocation.options
+  const options = state.locationNew.options
   let filter
 
   if (ownProps.id) {
