@@ -1,16 +1,14 @@
-import React, { Component } from 'react'
-
-import { FormGroup, FormControl } from '../locations/formComponents/elements'
-import { checkOut, saveOrder } from '../../actions/orderActions'
-import { updateOrder } from '../../actions/orderNewActions'
-
-import CurrentOrderDisplay from './CurrentOrderDisplay'
-
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-import { BCol, Row, Radio, FormRow, Btn, DFlex } from '../elements';
-
-import Icon from '@fortawesome/react-fontawesome'
+import Icon from '@fortawesome/react-fontawesome';
+import pick from 'lodash/pick';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { BCol, Btn, FormRow, Row } from '../elements';
+import { FormControl, FormGroup } from '../locations/formComponents/elements';
+import AddressFields from './AddressFields';
+import CurrentOrderDisplay from './CurrentOrderDisplay';
+import DeliveryTypeRadio from './DeliveryTypeRadio';
+import PaymentTypeRadio from './PaymentTypeRadio';
 
 class CheckOutPage extends Component {
   render() {
@@ -22,15 +20,7 @@ class CheckOutPage extends Component {
       <div>
         <Row>
           <BCol>
-
-            <DFlex opt='justify-content-around text-primary mb-2' >
-              <Radio name='deliveryType' value='pickup' checked={pickup} onChange={this.onChange} >
-                <span className='font-weight-light h2'><Icon icon={pickup ? 'dot-circle' : 'circle'} /> Pickup</span>
-              </Radio>
-              <Radio name='deliveryType' value='delivery' checked={delivery} onChange={this.onChange} >
-                <span className='font-weight-light h2' ><Icon icon={delivery ? 'dot-circle' : 'circle'} /> Delivery</span>
-              </Radio>
-            </DFlex>
+            <DeliveryTypeRadio onChange={this.onChange} delivery={delivery} pickup={pickup} />
 
             <FormGroup>
               <FormControl
@@ -41,51 +31,12 @@ class CheckOutPage extends Component {
 
             </FormGroup>
 
-            <FormGroup>
-              <FormControl
-                placeholder='Address'
-                name='address'
-                value={this.props.address}
-                onChange={this.onChange} />
+            <AddressFields
+              onChange={this.onChange}
+              onZipChange={this.onZipChange}
+              {...pick(this.props, ['address', 'city', 'state', 'zipcode'])} />
 
-            </FormGroup>
-
-            <FormRow opt='mb-3' >
-              <BCol size='md-6' >
-                <FormControl
-                  placeholder='City'
-                  name='city'
-                  value={this.props.city}
-                  onChange={this.onChange} />
-
-              </BCol>
-
-              <BCol>
-                <FormControl
-                  placeholder='State'
-                  name='state'
-                  value={this.props.state}
-                  onChange={this.onChange} />
-
-              </BCol>
-
-              <BCol>
-                <FormControl
-                  placeholder='Zipcode'
-                  name='zipcode'
-                  value={this.props.zipcode}
-                  onChange={this.onZipChange} />
-              </BCol>
-            </FormRow>
-
-            <DFlex opt='justify-content-around text-primary mb-2' >
-              <Radio name='paymentType' value='cash' checked={cash} onChange={this.onChange} >
-                <span className='font-weight-light h2'><Icon icon={cash ? 'dot-circle' : 'circle'} /> Cash</span>
-              </Radio>
-              <Radio name='paymentType' value='card' checked={card} onChange={this.onChange} >
-                <span className='font-weight-light h2' ><Icon icon={card ? 'dot-circle' : 'circle'} /> Card</span>
-              </Radio>
-            </DFlex>
+            <PaymentTypeRadio onChange={this.onChange} cash={cash} card={card} />
 
             <FormGroup>
               <FormControl
