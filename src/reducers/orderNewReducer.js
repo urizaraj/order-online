@@ -14,13 +14,21 @@ const initial = {
 const orderNewReducer = (state = { ...initial }, action) => {
   switch (action.type) {
     case 'ADD_ORDER_ITEM':
-      return { ...state, orderItemsAttributes: [...state.orderItemsAttributes, action.orderItem] }
+      return {
+        ...state,
+        orderItemsAttributes: [...state.orderItemsAttributes, action.orderItem]
+      }
 
     case 'REMOVE_ORDER_ITEM':
-      return { ...state, orderItemsAttributes: state.orderItemsAttributes.filter(item => item.cuid !== action.cuid) }
+      return {
+        ...state,
+        orderItemsAttributes: state.orderItemsAttributes.filter(
+          item => item.cuid !== action.cuid
+        )
+      }
 
     case 'UPDATE_ORDER':
-      return { ...state, order: { ...state.order, ...action.value } }
+      return { ...state, ...action.value }
 
     case 'RESET_ORDER':
       return { ...initial }
