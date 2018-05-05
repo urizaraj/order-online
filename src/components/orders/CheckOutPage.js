@@ -9,6 +9,8 @@ import AddressFields from './AddressFields';
 import CurrentOrderDisplay from './CurrentOrderDisplay';
 import DeliveryTypeRadio from './DeliveryTypeRadio';
 import PaymentTypeRadio from './PaymentTypeRadio';
+import { checkOut, saveOrder } from '../../actions/orderActions'
+import { updateOrder } from '../../actions/orderNewActions'
 
 class CheckOutPage extends Component {
   render() {
@@ -118,9 +120,7 @@ class CheckOutPage extends Component {
 
 const mapState = state => {
   const order = state.orderNew
-  return {
-    ...order
-  }
+  return { ...order }
 }
 
 const mapDispatch = dispatch => {
