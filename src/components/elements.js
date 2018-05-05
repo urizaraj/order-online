@@ -1,4 +1,5 @@
 import React from 'react'
+import compact from 'lodash/compact'
 
 function div(type) {
   return props => {
@@ -10,7 +11,7 @@ function div(type) {
 
     const { opt, ...other } = props
     return (
-      <div {...{ className }} {...other} >
+      <div {...{ className }} {...other}>
         {props.children}
       </div>
     )
@@ -29,7 +30,7 @@ export const DFlex = props => {
     className += ' align-items-center'
   }
   return (
-    <div {...{ className }} {...other} >
+    <div {...{ className }} {...other}>
       {props.children}
     </div>
   )
@@ -42,7 +43,7 @@ export const Row = props => {
   }
   const { opt, ...other } = props
   return (
-    <div {...{ className }} {...other} >
+    <div {...{ className }} {...other}>
       {props.children}
     </div>
   )
@@ -61,7 +62,7 @@ export const BCol = props => {
   }
 
   return (
-    <div className={className} {...other} >
+    <div className={className} {...other}>
       {props.children}
     </div>
   )
@@ -75,7 +76,7 @@ export const Radio = props => {
   }
   return (
     <label>
-      <input type='radio' {...other} style={style} />
+      <input type="radio" {...other} style={style} />
       {children}
     </label>
   )
@@ -90,5 +91,13 @@ export const Btn = props => {
     className: `btn btn-${opt}`,
     ...rest
   }
-  return <button {...newProps} >{children}</button>
+  return <button {...newProps}>{children}</button>
+}
+
+export function classNames(base, options = {}) {
+  const one = Object.entries(options).map((key, value) => {
+    if (value) return key
+  })
+
+  return [base, ...compact(one)].join(' ')
 }
