@@ -37,3 +37,5 @@ const orderNewReducer = (state = { ...initial }, action) => {
       return state
   }
 }
+
+export default orderNewReducer

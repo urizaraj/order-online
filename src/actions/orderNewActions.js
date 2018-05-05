@@ -1,14 +1,18 @@
 import cuid from 'cuid'
 
 export function addOrderItem(item, orderItem) {
+  const { id, ...rest } = item
   return {
     type: 'ADD_ORDER_ITEM',
     orderItem: {
-      itemId: item.id,
+      itemId: id,
+      ...rest,
       cuid: cuid(),
       instructions: orderItem.instructions,
       selectedOptionsAttributes: orderItem.selectedOptions.map(so => ({
-        optionId: so.id
+        optionId: so.id,
+        name: so.name,
+        price: so.price
       }))
     }
   }

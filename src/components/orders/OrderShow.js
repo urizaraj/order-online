@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import { fetchOrder, resetOrder } from '../../actions/orderActions'
+import { fetchOrder } from '../../actions/orderActions'
+import { resetOrder } from '../../actions/orderNewActions'
 
 import CurrentOrderDisplay from "./CurrentOrderDisplay"
 

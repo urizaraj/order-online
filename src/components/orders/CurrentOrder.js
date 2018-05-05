@@ -20,7 +20,7 @@ class CurrentOrder extends React.Component {
 
         <DFlex>
           <button className='btn btn-success ml-auto' onClick={this.checkOut} >
-             Check Out <Icon icon='arrow-right' />
+            Check Out <Icon icon='arrow-right' />
           </button>
         </DFlex>
       </div>
@@ -33,7 +33,7 @@ class CurrentOrder extends React.Component {
 
 const mapState = state => {
   return {
-    orderItems: state.order.items
+    orderItems: state.orderNew.orderItemsAttributes
   }
 }
 

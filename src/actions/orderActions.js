@@ -2,20 +2,6 @@ import cuid from 'cuid'
 import mapKeys from 'lodash/mapKeys'
 import snakeCase from 'lodash/snakeCase'
 
-export function addOrderItem(item, selectedOptions, text) {
-  return {
-    type: 'ADD_ORDER_ITEM',
-    item: { ...item, cuid: cuid(), selectedOptions, instructions: text }
-  }
-}
-
-export function removeOrderItem(cuid) {
-  return {
-    type: 'REMOVE_ORDER_ITEM',
-    cuid
-  }
-}
-
 export function saveOrder() {
   return (dispatch, getState) => {
     const order = getState().order
@@ -40,12 +26,6 @@ export function saveOrder() {
       .then(resp => {
         dispatch({ type: 'ORDER_SAVED' })
       })
-  }
-}
-
-export function resetOrder() {
-  return {
-    type: 'RESET_ORDER'
   }
 }
 
@@ -82,13 +62,7 @@ export function fetchOrderIndex() {
   }
 }
 
-export function checkOut() {
-  return { type: 'CHECK_OUT' }
-}
-
-export function updateOrder(value) {
-  return { type: 'UPDATE_ORDER', value }
-}
+export const checkOut = () => ({ type: 'CHECK_OUT' })
 
 const mapper = (value, key) => snakeCase(key)
 

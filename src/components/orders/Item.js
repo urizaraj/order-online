@@ -6,7 +6,7 @@ import Icon from '@fortawesome/react-fontawesome'
 import { Row, BCol, DFlex } from '../elements'
 
 import { toggleActiveItem } from '../../actions/activeItemActions'
-import { addOrderItem } from '../../actions/orderActions'
+import { addOrderItem } from '../../actions/orderNewActions'
 
 class Item extends Component {
   render() {
@@ -20,8 +20,8 @@ class Item extends Component {
       <div className='mb-3' >
 
         <DFlex opt='item' center onClick={this.toggleActiveItem} >
-          <Icon icon='chevron-down' /> 
-          <div className='ml-3' >{name}</div> 
+          <Icon icon='chevron-down' />
+          <div className='ml-3' >{name}</div>
           <div className='font-weight-light ml-auto' >${price}</div>
         </DFlex>
 
@@ -85,7 +85,7 @@ class Details extends Component {
 
   handleChange = event => this.setState({ text: event.target.value })
 
-  addOrderItem = () => this.props.addOrderItem(this.props.item, this.state.selectedOptions, this.state.text)
+  addOrderItem = () => this.props.addOrderItem(this.props.item, this.state)
 }
 
 const OptionList = props => {

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import { resetOrder } from '../../actions/orderActions'
+import { resetOrder } from '../../actions/orderNewActions'
 
 import Item from './Item'
 import CurrentOrder from './CurrentOrder'

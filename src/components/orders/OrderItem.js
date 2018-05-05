@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import { removeOrderItem } from '../../actions/orderActions'
+import { removeOrderItem } from '../../actions/orderNewActions'
 
 import Icon from '@fortawesome/react-fontawesome'
 
@@ -11,7 +11,7 @@ import { DFlex } from '../elements'
 class OrderItem extends Component {
   constructor(props) {
     super(props)
-    this.itemPrice = props.selectedOptions.reduce((total, option) => {
+    this.itemPrice = props.selectedOptionsAttributes.reduce((total, option) => {
       return total + option.price
     }, props.price)
   }
@@ -26,7 +26,7 @@ class OrderItem extends Component {
           <div className='p-2' >
             {this.props.name}
             <br />
-            <SelectedOptionsList selectedOptions={this.props.selectedOptions} />
+            <SelectedOptionsList selectedOptions={this.props.selectedOptionsAttributes} />
             <small><em>{this.props.instructions}</em></small>
           </div>
 
@@ -44,7 +44,7 @@ class OrderItem extends Component {
 
 const RemoveButton = props => <div><button {...props} className='btn btn-link' ><Icon icon='times' /></button></div>
 
-const SelectedOptionsList = props => props.selectedOptions.map(so => <SelectedOption {...so} key={so.id} />)
+const SelectedOptionsList = props => props.selectedOptions.map(so => <SelectedOption {...so} key={so.optionId} />)
 
 const SelectedOption = props => {
   return (

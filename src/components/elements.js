@@ -94,10 +94,10 @@ export const Btn = props => {
   return <button {...newProps}>{children}</button>
 }
 
-export function classNames(base, options = {}) {
-  const one = Object.entries(options).map((key, value) => {
-    if (value) return key
-  })
+// export function classNames(base, options = {}) {
+//   const one = Object.entries(options).map((key, value) => {
+//     if (value) return key
+//   })
 
-  return [base, ...compact(one)].join(' ')
-}
+//   return [base, ...compact(one)].join(' ')
+// }

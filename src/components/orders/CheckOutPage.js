@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 
 import { FormGroup, FormControl } from '../locations/formComponents/elements'
-import { saveOrder, checkOut, updateOrder } from '../../actions/orderActions'
+import { checkOut, saveOrder } from '../../actions/orderActions'
+import { updateOrder } from '../../actions/orderNewActions'
 
 import CurrentOrderDisplay from './CurrentOrderDisplay'
 
@@ -111,7 +112,7 @@ class CheckOutPage extends Component {
                   name='tip'
                   value={this.props.tip}
                   onChange={this.onChange} />
-                  
+
               </div>
             </FormGroup>
 
@@ -136,9 +137,8 @@ class CheckOutPage extends Component {
 }
 
 const mapState = state => {
-  const order = state.order.order
+  const order = state.orderNew
   return {
-    orderItems: state.order.items,
     ...order
   }
 }

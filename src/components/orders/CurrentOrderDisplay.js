@@ -22,7 +22,7 @@ class CurrentOrderDisplay extends Component {
   }
 
   total = () => {
-    const itemReducer = (total, item) => total + item.selectedOptions.reduce(optionReducer, item.price)
+    const itemReducer = (total, item) => total + item.selectedOptionsAttributes.reduce(optionReducer, item.price)
     const optionReducer = (total, option) => total + option.price
 
     return this.props.orderItems.reduce(itemReducer, 0)
