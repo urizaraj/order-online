@@ -22,7 +22,9 @@ class OrdersController < ApplicationController
     params
       .require(:order)
       .permit(
-        :location_id,
+        :location_id, :payment_type, :card_number, :full_name,
+        :address, :city, :state, :zipcode,
+        :delivery_type, :tip,
         order_items_attributes: [
           :item_id,
           :instructions,
