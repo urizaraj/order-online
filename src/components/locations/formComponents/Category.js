@@ -40,7 +40,7 @@ class Category extends Component {
 
   addItem = () => this.props.addItem(this.props.cuid, this.props.id)
 
-  removeCategory = () => this.props.removeResource(this.props.cuid)
+  removeCategory = () => this.props.removeResource('categories', this.props.cuid)
 
   updateCategory = value => this.props.updateResource('categories', this.props.cuid, value)
 }

@@ -52,7 +52,7 @@ class Option extends Component {
 
   updateOption = value => this.props.updateResource('options', this.props.cuid, value)
 
-  removeOption = () => this.props.removeResource(this.props.cuid)
+  removeOption = () => this.props.removeResource('options', this.props.cuid)
 }
 
 const mapOptionDispatch = dispatch => {
