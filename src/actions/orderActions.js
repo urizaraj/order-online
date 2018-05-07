@@ -1,6 +1,7 @@
 import mapKeys from 'lodash/mapKeys'
 import snakeCase from 'lodash/snakeCase'
 import camelCase from 'lodash/camelCase'
+import pickBy from 'lodash/pickBy'
 
 const mapper = (value, key) => snakeCase(key)
 const mapperCamel = (value, key) => camelCase(key)
@@ -54,6 +55,8 @@ export function fetchOrderIndex() {
 
 export const checkOut = () => ({ type: 'CHECK_OUT' })
 
+const valueTrue = (value, key) => value
+
 export function saveOrder() {
   return (dispatch, getState) => {
     dispatch({ type: 'SAVING_ORDER' })
@@ -63,12 +66,12 @@ export function saveOrder() {
     const { orderItems, ...rest } = state
 
     const order = {
-      ...mapKeys(rest, mapper),
+      ...mapKeys(pickBy(rest, valueTrue), mapper),
       location_id: getState().locations.location.id,
       order_items_attributes: orderItems.map(oi => {
         const { selectedOptions, ...rest } = oi
         return {
-          ...mapKeys(rest, mapper),
+          ...mapKeys(pickBy(rest, valueTrue), mapper),
           selected_options_attributes: selectedOptions.map(so => mapKeys(so, mapper))
         }
       })
@@ -84,7 +87,14 @@ export function saveOrder() {
     }
 
     return fetch('/orders.json', options)
-      .then(resp => resp.text())
-      .then(resp => dispatch({ type: 'ORDER_SAVED' }))
+      .then(resp => resp.json())
+      .then(resp => {
+        if (resp.status) {
+          dispatch({ type: 'ORDER_SAVED' })
+        } else {
+          console.log(resp.messages)
+          dispatch({ type: 'ORDER_INVALID', messages: resp.messages })
+        }
+      })
   }
 }
