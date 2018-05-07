@@ -2,7 +2,7 @@ import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import { NavLink } from 'react-router-dom'
+import { NavLink, Link } from 'react-router-dom'
 
 import { userSignOut } from '../actions/userActions'
 import { Row, BCol } from './elements'
@@ -28,9 +28,11 @@ const SignedInLinks = props => {
   return (
     <React.Fragment>
       <BCol size='auto' >
-        <strong className='text-primary' >
-          {props.user.name}
-        </strong>
+        <NavLink to='/user'>
+          <strong>
+            {props.user.name}
+          </strong>
+        </NavLink>
       </BCol>
 
       <BCol size='auto' >

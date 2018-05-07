@@ -12,6 +12,7 @@ import SignInPage from './SignInPage'
 import SignUpPage from './SignUpPage'
 import AdminPage from './AdminPage'
 import SavedOrdersPage from './orders/SavedOrdersPage';
+import UserShow from './users/UserShow';
 
 class App extends Component {
   constructor(props) {
@@ -36,6 +37,7 @@ class App extends Component {
               <Route path='/user/sign_in' component={SignInPage} />
               <Route path='/user/sign_up' component={SignUpPage} />
               <Route path='/user/saved_orders' component={SavedOrdersPage} />
+              <Route path='/user' component={UserShow} />
             </Switch>
           </div>
         </div>
