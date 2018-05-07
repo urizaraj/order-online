@@ -46,7 +46,7 @@ export function fetchOrder(id) {
   }
 }
 
-export function fetchOrderIndex() {
+export function fetchOrderIndex(page = 1) {
   return (dispatch, getState) => {
     const user = getState().user
 
@@ -56,7 +56,7 @@ export function fetchOrderIndex() {
 
     const options = { headers: { Authorization: authorizationToken() } }
 
-    fetch('/orders', options)
+    fetch(`/orders?page=${page}`, options)
       .then(resp => resp.json())
       .then(resp => {
         dispatch({ type: 'FETCH_ORDER_INDEX', index: resp })

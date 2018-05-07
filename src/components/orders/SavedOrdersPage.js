@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import defaultTo from 'lodash/defaultTo'
+import { Link } from 'react-router-dom'
 
-import { Row, BCol } from '../elements'
+import { Row, BCol, Btn } from '../elements'
 
 import OrderShow from './OrderShow';
 
@@ -17,9 +19,11 @@ class SavedOrdersPage extends Component {
   }
 
   render() {
+    const page = parseInt(defaultTo(this.props.match.params.page, 1))
+
     return (
       <div>
-        <Row>
+        <Row opt='mb-3' >
           <BCol>
             <OrderList
               orders={this.props.orders}
@@ -32,12 +36,30 @@ class SavedOrdersPage extends Component {
           </BCol>
         </Row>
 
+        <Row>
+          <BCol size='auto'>
+            <Link to={`/user/saved_orders/page/${Math.max((page - 1), 1)}`} >Prev</Link>
+          </BCol>
+          <BCol size='auto' >
+            {page}
+          </BCol>
+          <BCol size='auto' >
+            <Link to={`/user/saved_orders/page/${page + 1}`} >Next</Link>
+          </BCol>
+        </Row>
       </div>
     )
   }
 
   componentDidMount() {
-    this.props.fetchOrderIndex()
+    this.props.fetchOrderIndex(this.props.match.params.page)
+  }
+
+  componentDidUpdate(props) {
+    if (props.match.params.page !== this.props.match.params.page) {
+      this.props.fetchOrderIndex(this.props.match.params.page)
+    }
+    // 
   }
 
   handleClick = id => {

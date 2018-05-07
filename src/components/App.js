@@ -36,6 +36,7 @@ class App extends Component {
 
               <Route path='/user/sign_in' component={SignInPage} />
               <Route path='/user/sign_up' component={SignUpPage} />
+              <Route path='/user/saved_orders/page/:page' component={SavedOrdersPage} />
               <Route path='/user/saved_orders' component={SavedOrdersPage} />
               <Route path='/user' component={UserShow} />
             </Switch>

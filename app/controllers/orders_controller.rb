@@ -4,7 +4,9 @@ class OrdersController < ApplicationController
   before_action :authenticate, only: %i[create index]
 
   def index
-    render json: @user.orders.limit(5), each_serializer: OrderIndexSerializer
+    page = params[:page].to_i || 1
+    offset = (page - 1) * 5
+    render json: @user.orders.limit(5).offset(offset), each_serializer: OrderIndexSerializer
   end
 
   def create
