@@ -2,21 +2,13 @@ import mapKeys from 'lodash/mapKeys'
 import snakeCase from 'lodash/snakeCase'
 import camelCase from 'lodash/camelCase'
 import pickBy from 'lodash/pickBy'
-import { authorizationToken } from './'
+import { authorizationToken, respToJson } from './'
 
 const mapper = (value, key) => snakeCase(key)
 const mapperCamel = (value, key) => camelCase(key)
 const valueTrue = (value, key) => value
 
 export const checkOut = () => ({ type: 'CHECK_OUT' })
-
-function jsonIfOk(resp) {
-  if (resp.ok) {
-    return resp.json()
-  } else {
-    throw new Error()
-  }
-}
 
 function orderToCamel(resp) {
   const { order_items, ...rest } = resp
@@ -45,7 +37,7 @@ export function fetchOrder(id) {
   return dispatch => {
     dispatch({ type: 'LOADING_ORDER' })
     return fetch(`/orders/${id}`)
-      .then(jsonIfOk)
+      .then(respToJson)
       .then(resp => {
         const order = orderToCamel(resp)
         dispatch({ type: 'FETCH_ORDER', order })
