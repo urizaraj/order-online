@@ -2,28 +2,53 @@ import mapKeys from 'lodash/mapKeys'
 import snakeCase from 'lodash/snakeCase'
 import camelCase from 'lodash/camelCase'
 import pickBy from 'lodash/pickBy'
+import { authorizationToken } from './'
 
 const mapper = (value, key) => snakeCase(key)
 const mapperCamel = (value, key) => camelCase(key)
+const valueTrue = (value, key) => value
+
+export const checkOut = () => ({ type: 'CHECK_OUT' })
+
+function jsonIfOk(resp) {
+  if (resp.ok) {
+    return resp.json()
+  } else {
+    throw new Error()
+  }
+}
+
+function orderToCamel(resp) {
+  const { order_items, ...rest } = resp
+  return {
+    ...mapKeys(rest, mapperCamel),
+    orderItems: order_items.map(oi => mapKeys(oi, mapperCamel))
+  }
+}
+
+function orderToSnake(state, locationId) {
+  const { orderItems, ...rest } = state
+  return {
+    ...mapKeys(pickBy(rest, valueTrue), mapper),
+    location_id: locationId,
+    order_items_attributes: orderItems.map(oi => {
+      const { selectedOptions, ...rest } = oi
+      return {
+        ...mapKeys(pickBy(rest, valueTrue), mapper),
+        selected_options_attributes: selectedOptions.map(so => mapKeys(so, mapper))
+      }
+    })
+  }
+}
 
 export function fetchOrder(id) {
   return dispatch => {
     dispatch({ type: 'LOADING_ORDER' })
     return fetch(`/orders/${id}`)
+      .then(jsonIfOk)
       .then(resp => {
-        if (resp.ok) return resp.json()
-        throw new Error()
-      })
-      .then(resp => {
-        const { order_items, ...rest } = resp
-        const order = {
-          ...mapKeys(rest, mapperCamel),
-          orderItems: order_items.map(oi => mapKeys(oi, mapperCamel))
-        }
-        dispatch({
-          type: 'FETCH_ORDER',
-          order
-        })
+        const order = orderToCamel(resp)
+        dispatch({ type: 'FETCH_ORDER', order })
       })
       .catch(error => console.log(error.message))
   }
@@ -37,15 +62,9 @@ export function fetchOrderIndex() {
 
     dispatch({ type: 'LOADING_ORDER' })
 
-    const url = '/orders'
+    const options = { headers: { Authorization: authorizationToken() } }
 
-    const options = {
-      headers: {
-        'Authorization': `Token token=${localStorage.getItem('token')}`
-      }
-    }
-
-    fetch(url, options)
+    fetch('/orders', options)
       .then(resp => resp.json())
       .then(resp => {
         dispatch({ type: 'FETCH_ORDER_INDEX', index: resp })
@@ -53,36 +72,16 @@ export function fetchOrderIndex() {
   }
 }
 
-export const checkOut = () => ({ type: 'CHECK_OUT' })
-
-const valueTrue = (value, key) => value
-
 export function saveOrder() {
   return (dispatch, getState) => {
     dispatch({ type: 'SAVING_ORDER' })
-
-    const state = getState().orderNew
-
-    const { orderItems, ...rest } = state
-
-    const order = {
-      ...mapKeys(pickBy(rest, valueTrue), mapper),
-      location_id: getState().locations.location.id,
-      order_items_attributes: orderItems.map(oi => {
-        const { selectedOptions, ...rest } = oi
-        return {
-          ...mapKeys(pickBy(rest, valueTrue), mapper),
-          selected_options_attributes: selectedOptions.map(so => mapKeys(so, mapper))
-        }
-      })
-    }
-
+    const order = orderToSnake(getState().orderNew, getState().locations.location.id)
     const options = {
       method: 'POST',
       body: JSON.stringify({ order }),
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Token token=${localStorage.getItem('token')}`
+        Authorization: authorizationToken()
       }
     }
 

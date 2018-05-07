@@ -1,4 +1,5 @@
 import cuid from 'cuid'
+import { authorizationToken } from './'
 
 export function updateResource(resource, cuid, value) {
   return { type: 'UPDATE_RESOURCE', resource, cuid, value }
@@ -56,7 +57,7 @@ export function saveLocation() {
       body: JSON.stringify({ location: state }),
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Token token=${localStorage.getItem('token')}`
+        Authorization: authorizationToken()
       }
     }
 

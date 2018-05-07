@@ -1,4 +1,5 @@
 import cuid from 'cuid'
+import { authorizationToken } from './'
 
 export function fetchLocation(id) {
   return dispatch => {
@@ -43,7 +44,7 @@ export function patchLocation() {
       body: JSON.stringify({ location: state }),
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Token token=${localStorage.getItem('token')}`
+        Authorization: authorizationToken()
       }
     }
 
