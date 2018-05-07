@@ -36,7 +36,7 @@ const SignedInLinks = props => {
       </BCol>
 
       <BCol size='auto' >
-        <button className='btn btn-primary' onClick={() => props.userSignOut()} >Sign Out</button>
+        <button className='btn btn-primary text-light' onClick={() => props.userSignOut()} >Sign Out</button>
       </BCol>
 
       <BCol size='auto' >
