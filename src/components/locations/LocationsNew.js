@@ -9,6 +9,7 @@ import Location from './formComponents/Location'
 
 class LocationNew extends Component {
   render() {
+    if (!this.props.signedIn) return <Redirect to='/locations' />
     if (this.props.saved) return <Redirect to='/locations' />
 
     return (
@@ -37,6 +38,7 @@ class LocationNew extends Component {
 
 const mapState = state => {
   return {
+    signedIn: state.user.signedIn,
     saved: state.locationNew.saved
   }
 }

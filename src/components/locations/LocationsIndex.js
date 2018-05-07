@@ -23,9 +23,11 @@ class LocationsIndex extends Component {
 
     return (
       <div>
-        <div className='mb-3' >
-          <Link to='/locations/new'>New Location</Link>
-        </div>
+        {this.props.signedIn && (
+          <div className='mb-3' >
+            <Link to='/locations/new'>New Location</Link>
+          </div>
+        )}
 
         <Row>
           {this.props.locations.map(location => <Location {...location} key={location.id} />)}
@@ -79,7 +81,8 @@ const LocationLink = ({ id }) => <Link to={`/locations/${id}`} >Link <Icon icon=
 const mapState = state => {
   return {
     locations: state.locations.locations,
-    loading: state.locations.loading
+    loading: state.locations.loading,
+    signedIn: state.user.signedIn
   }
 }
 

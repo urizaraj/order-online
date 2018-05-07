@@ -36,7 +36,7 @@ class LocationsShow extends Component {
           {this.props.description}
         </div>
 
-        <LocationActions url={this.url} />
+        <LocationActions url={this.url} signedIn={this.props.signedIn} />
 
         <Switch>
           <Route path={`${this.url}/edit`} render={this.locationEdit} />
@@ -69,16 +69,18 @@ const LocationActions = props => {
       </BCol>
 
       <BCol size='auto' >
-        <NavLink to={`${url}/edit`} >
-          Edit
-        </NavLink>
-      </BCol>
-
-      <BCol>
         <NavLink to={`${url}/new_order`} >
           New Order
         </NavLink>
       </BCol>
+
+      {props.signedIn && (
+        <BCol size='auto' >
+          <NavLink to={`${url}/edit`} >
+            Edit
+              </NavLink>
+        </BCol>
+      )}
     </Row>
   )
 }
@@ -86,6 +88,7 @@ const LocationActions = props => {
 const mapState = state => {
   return {
     ...state.locations.location,
+    signedIn: state.user.signedIn,
     loading: state.locations.loading
   }
 }

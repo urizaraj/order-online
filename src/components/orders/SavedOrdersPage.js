@@ -59,7 +59,6 @@ class SavedOrdersPage extends Component {
     if (props.match.params.page !== this.props.match.params.page) {
       this.props.fetchOrderIndex(this.props.match.params.page)
     }
-    // 
   }
 
   handleClick = id => {

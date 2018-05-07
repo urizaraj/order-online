@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 
 import { fetchLocation, patchLocation } from '../../actions/editLocationActions'
 import { resetLocation } from '../../actions/newLocationActions'
@@ -11,6 +12,7 @@ import Icon from '@fortawesome/react-fontawesome'
 class LocationEdit extends Component {
   render() {
     if (this.props.loading) return <div className='text-center' ><Icon icon="spinner" spin size='2x' /></div>
+    if (!this.props.signedIn) return <Redirect to='/locations' />
     return (
       <div>
         <h1>Edit Location</h1>
@@ -41,7 +43,8 @@ class LocationEdit extends Component {
 
 const mapState = state => {
   return {
-    loading: state.locationNew.loading
+    loading: state.locationNew.loading,
+    signedIn: state.user.signedIn
   }
 }
 
