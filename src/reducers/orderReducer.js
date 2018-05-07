@@ -12,6 +12,9 @@ const orderReducer = (state = { index: [], loading: false, saved: false, checkOu
     case 'CHECK_OUT':
       return { ...state, checkOut: !state.checkOut }
 
+    case 'NEW_ORDER':
+      return { ...state, saved: false, checkOut: false }
+
     default:
       return state
   }

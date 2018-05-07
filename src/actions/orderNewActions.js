@@ -22,4 +22,9 @@ export const removeOrderItem = cuid => ({ type: 'REMOVE_ORDER_ITEM', cuid })
 
 export const updateOrder = value => ({ type: 'UPDATE_ORDER', value })
 
-export const resetOrder = () => ({ type: 'RESET_ORDER' })
+export const resetOrder = () => {
+  return dispatch => {
+    dispatch({ type: 'RESET_ORDER' })
+    return dispatch({ type: 'NEW_ORDER' })
+  }
+}
