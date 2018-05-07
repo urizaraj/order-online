@@ -9,7 +9,10 @@ export function fetchOrder(id) {
   return dispatch => {
     dispatch({ type: 'LOADING_ORDER' })
     return fetch(`/orders/${id}`)
-      .then(resp => resp.json())
+      .then(resp => {
+        if (resp.ok) return resp.json()
+        throw new Error()
+      })
       .then(resp => {
         const { order_items, ...rest } = resp
         const order = {
@@ -21,6 +24,7 @@ export function fetchOrder(id) {
           order
         })
       })
+      .catch(error => console.log(error.message))
   }
 }
 
@@ -32,12 +36,18 @@ export function fetchOrderIndex() {
 
     dispatch({ type: 'LOADING_ORDER' })
 
-    const url = `/users/${user.id}`
+    const url = '/orders'
 
-    fetch(url)
+    const options = {
+      headers: {
+        'Authorization': `Token token=${localStorage.getItem('token')}`
+      }
+    }
+
+    fetch(url, options)
       .then(resp => resp.json())
       .then(resp => {
-        dispatch({ type: 'FETCH_ORDER_INDEX', index: resp.orders })
+        dispatch({ type: 'FETCH_ORDER_INDEX', index: resp })
       })
   }
 }

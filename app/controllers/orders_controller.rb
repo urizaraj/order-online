@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 class OrdersController < ApplicationController
-  before_action :authenticate, only: [:create]
+  before_action :authenticate, only: %i[create index]
 
   def index
-    render json: Order.limit(5), include: '**'
+    render json: @user.orders.limit(5), each_serializer: OrderIndexSerializer
   end
 
   def create
