@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 import { FormGroup, FormControl, AddButton } from './elements'
 
-import { addCategory, updateLocationName, updateLocationDescription } from '../../../actions/newLocationActions'
+import { addCategory, updateLocation } from '../../../actions/newLocationActions'
 
 import Category from './Category'
 
@@ -40,12 +40,8 @@ class Location extends Component {
   }
 
   handleChange = event => {
-    const value = event.target.value
-    const name = event.target.name
-
-    const func = (name === 'name' ? this.props.updateLocationName : this.props.updateLocationDescription)
-
-    func(value)
+    const { name, value } = event.target
+    this.props.updateLocation({ [name]: value })
   }
 
   handleSubmit = event => {
@@ -67,7 +63,7 @@ const mapState = state => {
 }
 
 const mapDispatch = dispatch => {
-  const actions = { addCategory, updateLocationName, updateLocationDescription }
+  const actions = { addCategory, updateLocation }
   return bindActionCreators(actions, dispatch)
 }
 

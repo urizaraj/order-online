@@ -39,24 +39,8 @@ export function addOption(itemCuid, itemId = null) {
   }
 }
 
-export function updateLocationName(name) {
-  return {
-    type: 'UPDATE_LOCATION',
-    value: { name }
-  }
-}
-
-export function updateLocationDescription(description) {
-  return {
-    type: 'UPDATE_LOCATION',
-    value: { description }
-  }
-}
 export function updateLocation(value) {
-  return {
-    type: 'UPDATE_LOCATION',
-    value
-  }
+  return { type: 'UPDATE_LOCATION', value }
 }
 
 export function resetLocation() {
