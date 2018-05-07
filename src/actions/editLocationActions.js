@@ -32,12 +32,12 @@ function handleResp(resp, dispatch) {
     }
   })
 
-  dispatch({type: 'LOADED_EDIT_LOCATION'})
+  dispatch({ type: 'LOADED_EDIT_LOCATION' })
 }
 
 export function patchLocation() {
   return (dispatch, getState) => {
-    const state = getState().newLocation
+    const state = getState().locationNew
     const options = {
       method: 'PATCH',
       body: JSON.stringify({ location: state }),
@@ -50,7 +50,7 @@ export function patchLocation() {
     return fetch(`/locations/${state.id}`, options)
       .then(resp => resp.json())
       .then(resp => {
-        dispatch({type: 'RESET_LOCATION'})
+        dispatch({ type: 'RESET_LOCATION' })
         handleResp(resp, dispatch)
       })
   }
