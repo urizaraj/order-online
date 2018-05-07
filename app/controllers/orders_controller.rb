@@ -10,7 +10,9 @@ class OrdersController < ApplicationController
   def create
     order = Order.new(stronger_params)
     order.user = @user
-    render json: { status: order.save }
+    order.save
+    return render json: { status: false, messages: order.errors.full_messages } unless order.valid?
+    render json: { status: true }
   end
 
   def show
