@@ -36,6 +36,7 @@ class CheckOutPage extends Component {
             <AddressFields
               onChange={this.onChange}
               onZipChange={this.onZipChange}
+              onStateChange={this.onStateChange}
               {...pick(this.props, ['address', 'city', 'state', 'zipcode'])} />
 
             <PaymentTypeRadio onChange={this.onChange} cash={cash} card={card} />
@@ -115,6 +116,12 @@ class CheckOutPage extends Component {
     this.props.updateOrder({
       tip: (tip ? tip : 0).toFixed(2)
     })
+  }
+
+  onStateChange = event => {
+    const state = event.target.value
+    if (state.length > 2) return
+    this.props.updateOrder({ state: state.toUpperCase() })
   }
 }
 

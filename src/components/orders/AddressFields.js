@@ -32,7 +32,7 @@ class AddressFields extends Component {
               name='state'
               list='states'
               value={this.props.state}
-              onChange={this.props.onChange} />
+              onChange={this.props.onStateChange} />
 
             <StateDataList />
           </BCol>
