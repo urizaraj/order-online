@@ -1,6 +1,7 @@
-import React, { Component, Fragment } from 'react';
-import { BCol, FormRow } from '../elements';
-import { FormControl, FormGroup } from '../locations/formComponents/elements';
+import React, { Component, Fragment } from 'react'
+import { BCol, FormRow } from '../elements'
+import { FormControl, FormGroup } from '../locations/formComponents/elements'
+import { StateDataList } from '../states'
 
 class AddressFields extends Component {
   render() {
@@ -29,9 +30,11 @@ class AddressFields extends Component {
             <FormControl
               placeholder='State'
               name='state'
+              list='states'
               value={this.props.state}
               onChange={this.props.onChange} />
 
+            <StateDataList />
           </BCol>
 
           <BCol>
