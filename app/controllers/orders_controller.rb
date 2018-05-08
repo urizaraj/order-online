@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class OrdersController < ApplicationController
-  before_action :authenticate, only: %i[create index]
+  before_action :authenticate, only: %i[index]
 
   def index
     page = params[:page].to_i || 1
@@ -11,7 +11,7 @@ class OrdersController < ApplicationController
 
   def create
     order = Order.new(stronger_params)
-    order.user = @user
+    order.user = @user if @user
     order.save
     return render json: { status: false, messages: order.errors.full_messages } unless order.valid?
     render json: { status: true }
