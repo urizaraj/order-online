@@ -7,7 +7,7 @@ class LocationsController < ApplicationController
     page = params[:page].to_i || 1
     offset = (page - 1) * 4
 
-    render json: Location.limit(4).offset(offset)
+    render json: Location.limit(4).offset(offset), each_serializer: LocationIndexSerializer
   end
 
   def show
@@ -38,8 +38,8 @@ class LocationsController < ApplicationController
               :description,
               :id,
               :menuId,
-              categories: %i[id cuid name description menu_id],
-              items: %i[id cuid name description price category_id categoryCuid],
+              categories: %i[id cuid name description menu_id _destroy],
+              items: %i[id cuid name description price category_id categoryCuid _destroy],
               options: %i[id cuid name price item_id itemCuid _destroy]
   end
 
@@ -63,7 +63,7 @@ class LocationsController < ApplicationController
 
     items = strong_params[:items].map do |item|
       key = item['id'] || item['cuid']
-      options_attributes = options[key].to_a.map { |option| option.except(:itemCuid, :cuid).reject {|k, v| v.nil?} }
+      options_attributes = options[key].to_a.map { |option| option.except(:itemCuid, :cuid).reject { |_k, v| v.nil? } }
       item.merge(options_attributes: options_attributes)
     end
 
@@ -73,10 +73,10 @@ class LocationsController < ApplicationController
 
     categories = strong_params[:categories].map do |category|
       key = category['id'] || category['cuid']
-      items_attributes = items[key].to_a.map { |item| item.except(:categoryCuid, :cuid).reject {|k, v| v.nil?} }
+      items_attributes = items[key].to_a.map { |item| item.except(:categoryCuid, :cuid).reject { |_k, v| v.nil? } }
       category.merge(items_attributes: items_attributes)
     end
 
-    categories.to_a.map { |category| category.except(:cuid).reject {|k, v| v.nil?} }
+    categories.to_a.map { |category| category.except(:cuid).reject { |_k, v| v.nil? } }
   end
 end
