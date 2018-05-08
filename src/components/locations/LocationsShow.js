@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import { Route, Switch } from 'react-router-dom'
 
-import { Row, BCol } from '../elements'
+import { Row, BCol, Nav } from '../elements'
 
 import { fetchLocation } from '../../actions/locationActions'
 import { fetchMenu } from '../../actions/menuActions'
@@ -61,27 +61,21 @@ class LocationsShow extends Component {
 const LocationActions = props => {
   const { url } = props
   return (
-    <Row opt='mb-3' >
-      <BCol size='auto' >
+    <div className='mb-3' >
+      <Nav>
         <NavLink to={`${url}/menu`} >
           Menu
-        </NavLink>
-      </BCol>
-
-      <BCol size='auto' >
+          </NavLink>
         <NavLink to={`${url}/new_order`} >
           New Order
-        </NavLink>
-      </BCol>
-
-      {props.signedIn && (
-        <BCol size='auto' >
+          </NavLink>
+        {props.signedIn && (
           <NavLink to={`${url}/edit`} >
             Edit
-              </NavLink>
-        </BCol>
-      )}
-    </Row>
+          </NavLink>
+        )}
+      </Nav>
+    </div>
   )
 }
 

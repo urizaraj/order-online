@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { cloneElement } from 'react'
 
 function div(type) {
   return props => {
@@ -100,3 +100,12 @@ export const Btn = props => {
 
 //   return [base, ...compact(one)].join(' ')
 // }
+
+export const Nav = props => {
+  let i = 0
+  return (
+    <nav className='nav nav-pills' >
+      {props.children.map(link => cloneElement(link, { className: 'nav-item nav-link', key: ++i }))}
+    </nav>
+  )
+}
