@@ -11,11 +11,11 @@ const NavBar = props => {
   return (
     <Row opt='p-3 align-items-center' >
       <BCol size='auto' >
-        <NavLink to="/" >Home</NavLink>
+        <Link to="/" >Home</Link>
       </BCol>
 
       <BCol size='auto' >
-        <NavLink to="/locations">Locations</NavLink>
+        <Link to="/locations">Locations</Link>
       </BCol>
 
       {props.user.signedIn ? <SignedInLinks userSignOut={props.userSignOut} user={props.user} /> : <SignedOutLinks />}
@@ -28,11 +28,11 @@ const SignedInLinks = props => {
   return (
     <React.Fragment>
       <BCol size='auto' >
-        <NavLink to='/user'>
+        <Link to='/user'>
           <strong>
             {props.user.name}
           </strong>
-        </NavLink>
+        </Link>
       </BCol>
 
       <BCol size='auto' >
@@ -40,7 +40,7 @@ const SignedInLinks = props => {
       </BCol>
 
       <BCol size='auto' >
-        <NavLink to='/user/saved_orders'>Saved Orders</NavLink>
+        <Link to='/user/saved_orders'>Saved Orders</Link>
       </BCol>
     </React.Fragment>
   )
@@ -50,10 +50,10 @@ const SignedOutLinks = props => {
   return (
     <React.Fragment>
       <BCol size='auto' >
-        <NavLink to="/user/sign_in">Sign In</NavLink>
+        <Link to="/user/sign_in">Sign In</Link>
       </BCol>
       <BCol size='auto' >
-        <NavLink to="/user/sign_up">Sign Up</NavLink>
+        <Link to="/user/sign_up">Sign Up</Link>
       </BCol>
     </React.Fragment>
   )
