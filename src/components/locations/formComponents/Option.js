@@ -34,7 +34,7 @@ class Option extends Component {
           </BCol>
 
           <BCol size='auto'  >
-            <RemoveButton onClick={this.removeExisting} />
+            <RemoveButton onClick={this.removeAction} />
           </BCol>
         </FormRow>
       </div>
@@ -58,6 +58,8 @@ class Option extends Component {
   removeOption = () => this.props.removeResource('options', this.props.cuid)
 
   removeExisting = () => this.props.updateResource('options', this.props.cuid, { '_destroy': !this.props['_destroy'] })
+
+  removeAction = this.props.id ? this.removeExisting : this.removeOption
 }
 
 const mapOptionDispatch = dispatch => {
