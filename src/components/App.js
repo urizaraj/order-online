@@ -8,11 +8,8 @@ import { userCheckToken } from '../actions/userActions'
 
 import NavBar from './NavBar'
 import LocationsPage from './locations/LocationsPage'
-import SignInPage from './SignInPage'
-import SignUpPage from './SignUpPage'
 import AdminPage from './AdminPage'
-import SavedOrdersPage from './orders/SavedOrdersPage';
-import UserShow from './users/UserShow';
+import { UserPage } from './users';
 
 class App extends Component {
   constructor(props) {
@@ -33,12 +30,7 @@ class App extends Component {
             <Switch>
               <Route path='/locations' component={LocationsPage} />
               <Route path='/admin' component={AdminPage} />
-
-              <Route path='/user/sign_in' component={SignInPage} />
-              <Route path='/user/sign_up' component={SignUpPage} />
-              <Route path='/user/saved_orders/page/:page' component={SavedOrdersPage} />
-              <Route path='/user/saved_orders' component={SavedOrdersPage} />
-              <Route path='/user' component={UserShow} />
+              <Route path='/user' component={UserPage} />
             </Switch>
           </div>
         </div>

@@ -3,15 +3,16 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
-import { userSignIn } from '../actions/userActions'
+import { userSignUp } from '../../actions/userActions'
 
-class SignInPage extends Component {
+class SignUpPage extends Component {
   constructor() {
     super()
 
     this.state = {
       name: '',
-      password: ''
+      password: '',
+      email: ''
     }
   }
 
@@ -20,7 +21,7 @@ class SignInPage extends Component {
 
     return (
       <div>
-        <h2>Sign In</h2>
+        <h2>Sign Up</h2>
         {this.props.invalid && <InvalidMessage />}
         <form onSubmit={this.handleSubmit} >
           <div className='form-group' >
@@ -32,6 +33,16 @@ class SignInPage extends Component {
               value={this.state.name}
               onChange={this.handleChange}
               autoFocus />
+          </div>
+
+          <div className='form-group' >
+            <input
+              type='email'
+              name='email'
+              placeholder='Email'
+              className='form-control'
+              value={this.state.email}
+              onChange={this.handleChange} />
           </div>
 
           <div className='form-group' >
@@ -58,7 +69,7 @@ class SignInPage extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
-    this.props.userSignIn(this.state)
+    this.props.userSignUp(this.state)
   }
 }
 
@@ -69,7 +80,7 @@ const InvalidMessage = props => (
 )
 
 const mapDispatch = dispatch => {
-  const actions = { userSignIn }
+  const actions = { userSignUp }
   return bindActionCreators(actions, dispatch)
 }
 
@@ -77,4 +88,4 @@ const mapState = state => {
   return { invalid: state.user.invalid, signedIn: state.user.signedIn }
 }
 
-export default connect(mapState, mapDispatch)(SignInPage)
+export default connect(mapState, mapDispatch)(SignUpPage)
