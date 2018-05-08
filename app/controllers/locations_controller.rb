@@ -45,50 +45,38 @@ class LocationsController < ApplicationController
 
   def params_to_attributes
     location = strong_params
-
-    categories, items, options = location.values_at(:categories, :items, :options)
-
     {
       id: location[:id],
       name: location[:name],
       description: location[:description],
       menu_attributes: {
         id: location[:menuId],
-        categories_attributes: categories_attributes(categories, items, options)
+        categories_attributes: categories_attributes
       }
-    }.compact
+    }
   end
 
-  def categories_attributes(categories, items, options)
-    keys = %w[id name menu_id]
-    categories.map do |category|
-      c_items = matcher(category, items, :category_id, :categoryCuid)
-      h = category.select { |key, _v| keys.include?(key) }
-      h.merge(items_attributes: items_attributes(c_items, options))
+  def categories_attributes
+    options = strong_params[:options].to_a.group_by do |option|
+      option['item_id'] || option['itemCuid']
     end
-  end
 
-  def items_attributes(items, options)
-    keys = %w[id name description price category_id]
-    items.map do |item|
-      i_options = matcher(item, options, :item_id, :itemCuid)
-      h = item.select { |key, _v| keys.include?(key) }
-      h.merge(options_attributes: options_attributes(i_options))
+    items = strong_params[:items].map do |item|
+      key = item['id'] || item['cuid']
+      options_attributes = options[key].to_a.map { |option| option.except(:itemCuid, :cuid).reject {|k, v| v.nil?} }
+      item.merge(options_attributes: options_attributes)
     end
-  end
 
-  def options_attributes(options)
-    keys = %w[id name price item_id]
-    options.map { |option| option.select { |key, v| keys.include?(key) && (key != 'price' || v != '' ) } }
-  end
-
-  def matcher(parent, children, id, cuid)
-    children.select do |child|
-      if child[id]
-        child[id] == parent[:id]
-      else
-        child[cuid] == parent[:cuid]
-      end
+    items = items.group_by do |item|
+      item['category_id'] || item['categoryCuid']
     end
+
+    categories = strong_params[:categories].map do |category|
+      key = category['id'] || category['cuid']
+      items_attributes = items[key].to_a.map { |item| item.except(:categoryCuid, :cuid).reject {|k, v| v.nil?} }
+      category.merge(items_attributes: items_attributes)
+    end
+
+    categories.to_a.map { |category| category.except(:cuid).reject {|k, v| v.nil?} }
   end
 end
