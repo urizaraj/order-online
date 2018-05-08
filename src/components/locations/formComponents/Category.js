@@ -10,24 +10,26 @@ import Item from './Item'
 
 class Category extends Component {
   render() {
+    const disabled = this.props['_destroy']
     return (
       <div className='mb-3 ml-3' >
         <FormRow>
           <BCol >
             <FormControl
+              disabled={disabled}
               placeholder='Category Name'
               value={this.props.name}
               onChange={this.handleChange} />
           </BCol>
 
           <BCol size='auto' opt='mb-3' >
-            <RemoveButton onClick={this.removeCategory} />
+            <RemoveButton onClick={this.removeAction} />
           </BCol>
         </FormRow>
 
-        <AddButton onClick={this.addItem} type='Item' />
+        <AddButton onClick={this.addItem} disabled={disabled} type='Item' />
 
-        {this.props.items.map(item => <Item {...item} key={item.cuid} />)}
+        {!disabled && this.props.items.map(item => <Item {...item} key={item.cuid} />)}
 
       </div>
     )
@@ -40,9 +42,13 @@ class Category extends Component {
 
   addItem = () => this.props.addItem(this.props.cuid, this.props.id)
 
+  updateCategory = value => this.props.updateResource('categories', this.props.cuid, value)
+
   removeCategory = () => this.props.removeResource('categories', this.props.cuid)
 
-  updateCategory = value => this.props.updateResource('categories', this.props.cuid, value)
+  removeExisting = () => this.props.updateResource('categories', this.props.cuid, { '_destroy': !this.props['_destroy'] })
+
+  removeAction = this.props.id ? this.removeExisting : this.removeCategory
 }
 
 const mapState = (state, ownProps) => {

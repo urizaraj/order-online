@@ -9,6 +9,7 @@ import { addOption, updateResource, removeResource } from '../../../actions/newL
 
 class Item extends Component {
   render() {
+    const disabled = this.props['_destroy']
     return (
       <div className='mb-3 ml-3' >
         <FormRow>
@@ -16,12 +17,14 @@ class Item extends Component {
             <FormControl
               placeholder='Item Name'
               name='name'
+              disabled={disabled}
               onChange={this.handleChange}
               value={this.props.name} />
           </BCol>
 
           <BCol size='md-2 col' >
             <FormControl
+              disabled={disabled}
               placeholder='Price'
               name='price'
               onChange={this.handleChange}
@@ -30,21 +33,22 @@ class Item extends Component {
           </BCol>
 
           <BCol size='auto' opt='mb-3' >
-            <RemoveButton onClick={this.removeItem} />
+            <RemoveButton onClick={this.removeAction} />
           </BCol>
         </FormRow>
 
         <FormGroup>
           <FormControl placeholder='Description'
+            disabled={disabled}
             name='description'
             onChange={this.handleChange}
             value={this.props.description} />
 
         </FormGroup>
 
-        <AddButton onClick={this.handleNewOption} type='Option' />
+        <AddButton disabled={disabled} onClick={this.handleNewOption} type='Option' />
 
-        {this.props.options.map(option => <Option {...option} key={option.cuid} />)}
+        {!disabled && this.props.options.map(option => <Option {...option} key={option.cuid} />)}
 
       </div>
     )
@@ -64,9 +68,13 @@ class Item extends Component {
 
   handleNewOption = () => this.props.addOption(this.props.cuid, this.props.id)
 
+  updateItem = value => this.props.updateResource('items', this.props.cuid, value)
+
   removeItem = () => this.props.removeResource('items', this.props.cuid)
 
-  updateItem = value => this.props.updateResource('items', this.props.cuid, value)
+  removeExisting = () => this.props.updateResource('items', this.props.cuid, { '_destroy': !this.props['_destroy'] })
+
+  removeAction = this.props.id ? this.removeExisting : this.removeItem
 }
 
 const mapState = (state, ownProps) => {
