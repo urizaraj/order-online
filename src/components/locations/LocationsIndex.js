@@ -7,7 +7,7 @@ import { fetchLocations } from '../../actions/locationActions'
 
 import Icon from '@fortawesome/react-fontawesome'
 
-import { DFlex, Row, BCol } from '../elements'
+import { DFlex, Row, BCol, Pagination } from '../elements'
 
 class LocationsIndex extends Component {
   constructor() {
@@ -33,13 +33,10 @@ class LocationsIndex extends Component {
           {this.props.locations.map(location => <Location {...location} key={location.id} />)}
         </Row>
 
-        <button className='btn btn-primary' onClick={this.prevPage} disabled={this.state.page < 2} >
-          <Icon icon='angle-left' /> Prev
-        </button>
-
-        <button className='btn btn-primary' onClick={this.nextPage} >
-          Next <Icon icon='angle-right' />
-        </button>
+        <Pagination
+          page={this.state.page}
+          prevPage={this.prevPage}
+          nextPage={this.nextPage} />
       </div>
     )
   }

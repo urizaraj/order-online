@@ -1,4 +1,5 @@
 import React, { cloneElement } from 'react'
+import Icon from '@fortawesome/react-fontawesome'
 
 function div(type) {
   return props => {
@@ -99,5 +100,21 @@ export const Nav = props => {
     <nav className='nav nav-pills' >
       {props.children.map(link => cloneElement(link, { className: 'nav-item nav-link', key: ++i }))}
     </nav>
+  )
+}
+
+export const Pagination = props => {
+  return (
+    <div>
+      <button className='btn btn-primary' onClick={props.prevPage} disabled={props.page < 2} >
+        <Icon icon='angle-left' /> Prev
+        </button>
+      <button className='btn btn-primary' >
+        {props.page}
+      </button>
+      <button className='btn btn-primary' onClick={props.nextPage} >
+        Next <Icon icon='angle-right' />
+      </button>
+    </div>
   )
 }
