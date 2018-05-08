@@ -2,7 +2,7 @@ import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import { NavLink, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import { userSignOut } from '../actions/userActions'
 import { Row, BCol } from './elements'

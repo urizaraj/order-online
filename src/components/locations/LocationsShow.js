@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import { Route, Switch } from 'react-router-dom'
 
-import { Row, BCol, Nav } from '../elements'
+import { Nav } from '../elements'
 
 import { fetchLocation } from '../../actions/locationActions'
 import { fetchMenu } from '../../actions/menuActions'

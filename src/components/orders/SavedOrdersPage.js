@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import defaultTo from 'lodash/defaultTo'
 import { Link } from 'react-router-dom'
 
-import { Row, BCol, Btn } from '../elements'
+import { Row, BCol } from '../elements'
 
 import OrderShow from './OrderShow';
 
@@ -19,7 +19,7 @@ class SavedOrdersPage extends Component {
   }
 
   render() {
-    const page = parseInt(defaultTo(this.props.match.params.page, 1))
+    const page = parseInt(defaultTo(this.props.match.params.page, 1), 10)
 
     return (
       <div>
