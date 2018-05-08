@@ -14,7 +14,7 @@ class CurrentOrderDisplay extends Component {
           <h4 className='align-self-center mb-0' >Total</h4>
 
           <div className='ml-auto p-2' >
-            ${this.total()}
+            ${this.total().toFixed(2)}
           </div>
         </DFlex>
       </div>

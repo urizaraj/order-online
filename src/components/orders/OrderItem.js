@@ -31,7 +31,7 @@ class OrderItem extends Component {
           </div>
 
           <div className='ml-auto align-self-end p-2' >
-            ${this.itemPrice}
+            ${this.itemPrice.toFixed(2)}
           </div>
         </DFlex>
 
@@ -57,7 +57,7 @@ const SelectedOption = props => {
       {props.price > 0 && (
         <div className='ml-3' >
           <small>
-            ${props.price}
+            ${props.price.toFixed(2)}
           </small>
         </div>
       )}
