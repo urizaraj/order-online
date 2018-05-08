@@ -9,11 +9,13 @@ import { updateResource, removeResource } from '../../../actions/newLocationActi
 
 class Option extends Component {
   render() {
+    const disabled = this.props['_destroy']
     return (
       <div className='mb-3 ml-3' >
         <FormRow>
           <BCol >
             <FormControl
+              disabled={disabled}
               onChange={this.handleChange}
               value={this.props.name}
               name='name'
@@ -22,6 +24,7 @@ class Option extends Component {
 
           <BCol size='md-2 col'>
             <FormControl
+              disabled={disabled}
               onChange={this.handleChange}
               onBlur={this.handleBlur}
               name='price'
@@ -31,7 +34,7 @@ class Option extends Component {
           </BCol>
 
           <BCol size='auto'  >
-            <RemoveButton onClick={this.removeOption} />
+            <RemoveButton onClick={this.removeExisting} />
           </BCol>
         </FormRow>
       </div>
@@ -53,6 +56,8 @@ class Option extends Component {
   updateOption = value => this.props.updateResource('options', this.props.cuid, value)
 
   removeOption = () => this.props.removeResource('options', this.props.cuid)
+
+  removeExisting = () => this.props.updateResource('options', this.props.cuid, { '_destroy': !this.props['_destroy'] })
 }
 
 const mapOptionDispatch = dispatch => {

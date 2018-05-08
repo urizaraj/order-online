@@ -40,7 +40,7 @@ class LocationsController < ApplicationController
               :menuId,
               categories: %i[id cuid name description menu_id],
               items: %i[id cuid name description price category_id categoryCuid],
-              options: %i[id cuid name price item_id itemCuid]
+              options: %i[id cuid name price item_id itemCuid _destroy]
   end
 
   def params_to_attributes
