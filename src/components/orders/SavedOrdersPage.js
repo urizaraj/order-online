@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import defaultTo from 'lodash/defaultTo'
-import { Link } from 'react-router-dom'
 
-import { Row, BCol } from '../elements'
+import { Row, BCol, Pagination } from '../elements'
 
 import OrderShow from './OrderShow';
 
@@ -14,13 +12,12 @@ class SavedOrdersPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentOrder: null
+      currentOrder: null,
+      page: 1
     }
   }
 
   render() {
-    const page = parseInt(defaultTo(this.props.match.params.page, 1), 10)
-
     return (
       <div>
         <Row opt='mb-3' >
@@ -36,28 +33,21 @@ class SavedOrdersPage extends Component {
           </BCol>
         </Row>
 
-        <Row>
-          <BCol size='auto'>
-            <Link to={`/user/saved_orders/page/${Math.max((page - 1), 1)}`} >Prev</Link>
-          </BCol>
-          <BCol size='auto' >
-            {page}
-          </BCol>
-          <BCol size='auto' >
-            <Link to={`/user/saved_orders/page/${page + 1}`} >Next</Link>
-          </BCol>
-        </Row>
+        <Pagination
+          page={this.state.page}
+          prevPage={this.prevPage}
+          nextPage={this.nextPage} />
       </div>
     )
   }
 
   componentDidMount() {
-    this.props.fetchOrderIndex(this.props.match.params.page)
+    this.props.fetchOrderIndex()
   }
 
-  componentDidUpdate(props) {
-    if (props.match.params.page !== this.props.match.params.page) {
-      this.props.fetchOrderIndex(this.props.match.params.page)
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.page !== prevState.page) {
+      this.props.fetchOrderIndex(this.state.page)
     }
   }
 
@@ -66,6 +56,10 @@ class SavedOrdersPage extends Component {
       currentOrder: id
     })
   }
+
+  nextPage = () => this.setState(({ page }) => ({ page: page + 1 }))
+
+  prevPage = () => this.setState(({ page }) => ({ page: page - 1 }))
 }
 
 const OrderList = props => {
