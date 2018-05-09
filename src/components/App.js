@@ -22,9 +22,7 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <div className='container-fluid bg-secondary' >
-            <NavBar />
-          </div>
+          <NavBar />
 
           <div className="App container">
             <Switch>

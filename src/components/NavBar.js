@@ -9,21 +9,23 @@ import { DFlex } from './elements'
 
 export const NavBar = props => {
   return (
-    <DFlex opt='align-items-stretch flex-wrap' >
-      <Link to="/" >
-        <div className='cnav' >
-          Home
-        </div>
-      </Link>
+    <div className='container-fluid bg-secondary' >
+      <DFlex opt='align-items-stretch flex-wrap' >
+        <Link to="/" >
+          <div className='cnav' >
+            Home
+          </div>
+        </Link>
 
-      <Link to="/locations">
-        <div className='cnav' >
-          Locations
-        </div>
-      </Link>
+        <Link to="/locations">
+          <div className='cnav' >
+            Locations
+          </div>
+        </Link>
 
-      {props.user.signedIn ? <SignedInLinks userSignOut={props.userSignOut} user={props.user} /> : <SignedOutLinks />}
-    </DFlex>
+        {props.user.signedIn ? <SignedInLinks userSignOut={props.userSignOut} user={props.user} /> : <SignedOutLinks />}
+      </DFlex>
+    </div>
   )
 }
 
