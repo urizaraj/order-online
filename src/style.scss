@@ -19,7 +19,8 @@ $theme-colors: (
 
 $input-btn-focus-width: 0rem;
 
-$body-bg: #d4dcff;
+// $body-bg: #1f01b9;
+// $body-bg: #d4dcff;
 $body-color: #373f51;
 
 @import "../node_modules/bootstrap/scss/bootstrap";
@@ -30,7 +31,7 @@ body {
 
 .container {
   @extend .p-3;
-  background: theme-color(light)
+  background: white;
 }
 
 .item {
@@ -42,5 +43,25 @@ body {
   transition: all .1s;
   &:hover {
     background-color: theme-color-level(primary, -10);
+  }
+}
+
+h1, h2 {
+  color: theme-color(primary)
+}
+
+.cnav {
+  color: white;
+  font-weight: 400;
+  font-size: 1.1rem;
+  padding: 1rem 1.5rem;
+
+  &:hover {
+    color: theme-color(primary);
+    background-color: white;
+  }
+
+  &.user {
+    font-weight: 600;
   }
 }

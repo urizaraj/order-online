@@ -22,7 +22,7 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <div className='container-fluid bg-light' >
+          <div className='container-fluid bg-secondary' >
             <NavBar />
           </div>
 
@@ -31,12 +31,15 @@ class App extends Component {
               <Route path='/locations' component={LocationsPage} />
               <Route path='/admin' component={AdminPage} />
               <Route path='/user' component={UserPage} />
+              <Route path='/' render={this.home} />
             </Switch>
           </div>
         </div>
       </Router>
     )
   }
+
+  home = () => <div>Welcome!</div>
 }
 
 const mapDispatch = dispatch => {

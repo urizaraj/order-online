@@ -8,6 +8,6 @@ export const FormControl = props => <input {...props} type='text' className='for
 
 export const FormRow = props => <div className='form-row' >{props.children}</div>
 
-export const RemoveButton = props => <button className='btn btn-secondary' onClick={props.onClick} ><Icon icon='trash' /></button>
+export const RemoveButton = props => <button className='btn btn-danger' onClick={props.onClick} ><Icon icon='trash' /></button>
 
 export const AddButton = props => <button className='btn btn-success btn-sm mb-3' onClick={props.onClick} disabled={props.disabled} > <Icon icon='plus' /> New {props.type}</button>
