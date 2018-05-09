@@ -1,24 +1,22 @@
-# README
+# order-online
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Description
 
-Things you may want to cover:
+Order Online is a React application with a Rails backend that provides an elegant interface for ordering food online.
 
-* Ruby version
+![Order Form](https://i.imgur.com/H7BwfbH.png)
 
-* System dependencies
+## Installation Guide
 
-* Configuration
+* Fork and clone this repository
+* `rake db:setup` to initialize the database
+* `bundle install` to install all the required gems
+* `npm install` to install all requred node modules
+* `rails s -p 3001` to start the Rails server on port 3001
+* `npm start` to start the node server
 
-* Database creation
+#### Contributions
 
-* Database initialization
+Contact me or open an issue before submitting any pull requests.
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+[This project has been licensed under the MIT open source license.](LICENSE)
