@@ -11,6 +11,7 @@ class OrderShow extends Component {
   render() {
     return (
       <div>
+        <h4>{this.props.locationName}</h4>
         <CurrentOrderDisplay orderItems={this.props.orderItems} />
       </div>
     )

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import { Row, BCol, Pagination } from '../elements'
+import { Row, BCol, Pagination, DFlex } from '../elements'
 
 import OrderShow from './OrderShow';
 
@@ -76,26 +76,16 @@ const OrderList = props => {
 const Order = props => {
   const { created_at, location_name, id, handleClick, active } = props
   const date = new Date(created_at).toDateString()
-  let opt
+  let opt = 'mb-3'
 
   if (active) {
-    opt = 'align-items-center bg-primary py-2 text-light'
-  } else {
-    opt = 'align-items-center'
+    opt += ' blue-left-border'
   }
 
   return (
-    <div>
-      <Row opt={opt} onClick={() => handleClick(id)} >
-        <BCol>
-          <h4 className='mb-0' >
-            {location_name}
-          </h4>
-          <small>
-            {date}
-          </small>
-        </BCol>
-      </Row>
+    <div className={opt} onClick={() => handleClick(id)} >
+      <h4 className='mb-1' >{location_name}</h4>
+      {date}
     </div>
   )
 }

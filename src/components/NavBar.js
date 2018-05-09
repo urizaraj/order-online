@@ -44,13 +44,6 @@ const SignedInLinks = props => {
           Sign Out
       </div>
       </Link>
-
-      <Link to='/user/saved_orders'>
-        <div className='cnav' >
-          Saved Orders
-      </div>
-      </Link>
-
     </Fragment>
   )
 }
