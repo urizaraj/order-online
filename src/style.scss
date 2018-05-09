@@ -9,17 +9,18 @@ $enable-shadows: true;
 $link-hover-decoration: none;
 
 $theme-colors: (
-  light: #efefef,
-  dark: #2b2d42,
-  primary: #192bc2,
-  secondary: #d1345b,
+  primary: #1f01b9,
+  secondary: #007fff,
+  danger: #d81159,
   success: #1effbc,
+  light: #fffaff,
+  dark: #373f51,
 );
 
 $input-btn-focus-width: 0rem;
 
-$body-bg: #efefef;
-$body-color: #2b2d42;
+$body-bg: #d4dcff;
+$body-color: #373f51;
 
 @import "../node_modules/bootstrap/scss/bootstrap";
 
@@ -29,7 +30,7 @@ body {
 
 .container {
   @extend .p-3;
-  background: white
+  background: theme-color(light)
 }
 
 .item {
