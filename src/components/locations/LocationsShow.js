@@ -31,8 +31,8 @@ class LocationsShow extends Component {
 
     return (
       <div>
-        <h1 className='mb-0 display-4' >{this.props.name}</h1>
-        <div className='mb-3' >
+        <h1 className='mb-2 display-4' >{this.props.name}</h1>
+        <div className='description' >
           {this.props.description}
         </div>
 

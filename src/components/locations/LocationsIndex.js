@@ -61,8 +61,12 @@ const Location = props => {
   return (
     <BCol size='md-6 mb-3' >
       <h1 className='display-4 mb-1' >{name}</h1>
-      <DFlex>
-        {description}
+
+      <DFlex center>
+        <div className='description mb-0' >
+          {description}
+        </div>
+
         <div className='ml-3' >
           <LocationLink id={id} />
         </div>

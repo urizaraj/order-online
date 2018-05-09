@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { fetchMenu } from '../../actions/menuActions'
 
 import Icon from '@fortawesome/react-fontawesome'
-import { DFlex } from '../elements'
+import { DFlex, Row, BCol } from '../elements'
 
 class MenusShow extends Component {
   render() {
@@ -14,25 +14,31 @@ class MenusShow extends Component {
 
     return (
       <div>
-        <h1>Menu</h1>
-        <CategoryList categories={this.props.categories} />
+        <Row>
+          <CategoryList categories={this.props.categories} />
+        </Row>
       </div>
     )
   }
 }
 
-const CategoryList = ({ categories }) => categories.map(category => <Category {...{ ...category, key: category.id }} />)
+const CategoryList = ({ categories }) => categories.map(category => (
+  <Category {...category} key={category.id} />
+))
 
 const Category = props => {
   return (
-    <div className='mb-3' >
+    <BCol size='md-6' >
       <h2 className='text-primary' >{props.name}</h2>
-      <ItemList items={props.items} />
-    </div>
+
+      <div className='blue-left-border' >
+        <ItemList items={props.items} />
+      </div>
+    </BCol>
   )
 }
 
-const ItemList = ({ items }) => items.map(item => <Item {...{ ...item, key: item.id }} />)
+const ItemList = ({ items }) => items.map(item => <Item {...item} key={item.id} />)
 
 
 const Item = ({ name, description, price }) => {
@@ -41,10 +47,12 @@ const Item = ({ name, description, price }) => {
 
       <DFlex>
         <h3 className='mb-0' >{name}</h3>
-        <h3 className='mb-0 ml-3 text-muted ' >${price}</h3>
+        <h3 className='mb-0 ml-auto font-weight-light' >${price}</h3>
       </DFlex>
 
-      <small>{description}</small>
+      <div className='' >
+        {description}
+      </div>
     </div>
   )
 }
