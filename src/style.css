@@ -7173,3 +7173,11 @@ h1, h2, h3, h4 {
   color: #007fff;
   font-size: 1.2rem;
   font-weight: 500; }
+
+.home {
+  font-size: 1.5rem;
+  color: #1f01b9; }
+  .home a {
+    color: #007fff; }
+    .home a:hover {
+      color: #006bd6; }

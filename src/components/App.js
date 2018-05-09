@@ -10,6 +10,7 @@ import NavBar from './NavBar'
 import LocationsPage from './locations/LocationsPage'
 import AdminPage from './AdminPage'
 import { UserPage } from './users';
+import HomePage from './HomePage'
 
 class App extends Component {
   constructor(props) {
@@ -29,15 +30,13 @@ class App extends Component {
               <Route path='/locations' component={LocationsPage} />
               <Route path='/admin' component={AdminPage} />
               <Route path='/user' component={UserPage} />
-              <Route path='/' render={this.home} />
+              <Route path='/' component={HomePage} />
             </Switch>
           </div>
         </div>
       </Router>
     )
   }
-
-  home = () => <div>Welcome!</div>
 }
 
 const mapDispatch = dispatch => {
