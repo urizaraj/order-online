@@ -7131,22 +7131,27 @@ body {
       -ms-user-select: none;
           user-select: none; }
 
+h1, h2, h3, h4 {
+  color: #1f01b9; }
+
 .container {
   background: white; }
 
 .item {
   padding: 1rem;
-  background-color: #f6f5fc;
+  background-color: #e4e1f7;
   font-weight: 600;
   font-size: 1.2rem;
   cursor: pointer;
-  -webkit-transition: all .1s;
-  transition: all .1s; }
+  -webkit-transition: all .05s;
+  transition: all .05s; }
   .item:hover {
     background-color: #d2ccf1; }
 
-h1, h2 {
-  color: #1f01b9; }
+.option {
+  cursor: pointer; }
+  .option:hover {
+    background-color: #e4e1f7; }
 
 .cnav {
   color: white;

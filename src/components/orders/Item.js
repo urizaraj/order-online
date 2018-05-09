@@ -107,7 +107,7 @@ const OptionList = props => {
 }
 
 const Option = props => {
-  let className = 'p-2 align-items-center'
+  let className = 'p-2 align-items-center option'
   if (props.selected) { className += ' bg-primary text-white' }
 
   const params = {
@@ -121,7 +121,7 @@ const Option = props => {
 
         <Icon icon={props.selected ? 'check' : 'plus'} fixedWidth />
 
-        <div className='ml-3'  >
+        <div className='ml-3 mr-3'  >
           {props.option.name}
         </div>
 

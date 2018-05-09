@@ -29,6 +29,10 @@ body {
   user-select: none;
 }
 
+h1, h2, h3, h4 {
+  color: theme-color(primary)
+}
+
 .container {
   @extend .p-3;
   background: white;
@@ -36,18 +40,22 @@ body {
 
 .item {
   padding: 1rem;
-  background-color: theme-color-level(primary, -12);
+  background-color: theme-color-level(primary, -11);
   font-weight: 600;
   font-size: 1.2rem;
   cursor: pointer;
-  transition: all .1s;
+  transition: all .05s;
   &:hover {
     background-color: theme-color-level(primary, -10);
   }
 }
 
-h1, h2 {
-  color: theme-color(primary)
+.option {
+  cursor: pointer;
+  // transition: background-color .05s;
+  &:hover {
+    background-color: theme-color-level(primary, -11)
+  }
 }
 
 .cnav {
@@ -65,3 +73,4 @@ h1, h2 {
     font-weight: 600;
   }
 }
+
