@@ -1,5 +1,6 @@
 import React, { cloneElement } from 'react'
 import Icon from '@fortawesome/react-fontawesome'
+import compact from 'lodash/compact'
 
 function div(type) {
   return props => {
@@ -96,9 +97,10 @@ export const Btn = props => {
 
 export const Nav = props => {
   let i = 0
+  const children = compact(props.children)
   return (
     <nav className='nav nav-pills' >
-      {props.children.map(link => cloneElement(link, { className: 'nav-item nav-link', key: ++i }))}
+      {children.map(link => cloneElement(link, { className: 'nav-item nav-link', key: ++i }))}
     </nav>
   )
 }
