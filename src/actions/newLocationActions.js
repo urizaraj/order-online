@@ -50,7 +50,7 @@ export function resetLocation() {
 
 export function saveLocation() {
   return (dispatch, getState) => {
-    const state = getState().newLocation
+    const state = getState().locationNew
     console.log(state)
     const options = {
       method: 'POST',
