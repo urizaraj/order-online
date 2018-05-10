@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Order < ApplicationRecord
+  include States
+
   belongs_to :user, optional: true
   belongs_to :location
   has_many :order_items
@@ -11,7 +13,9 @@ class Order < ApplicationRecord
   validates :delivery_type, inclusion: { in: %w[pickup delivery] }
   validates :payment_type, inclusion: { in: %w[cash card] }
   validates :zipcode, format: { with: /\d{5}/ }
-  validates :state, format: { with: /[A-Z]{2}/ }
+  # validates :state, format: { with: /[A-Z]{2}/ }
+  # validates :state, inclusion: { in: %w[ct] }
+  validate :real_state
   validates :card_number,
             format: { with: /\d{16}/ },
             if: :payment_type_card
@@ -31,5 +35,10 @@ class Order < ApplicationRecord
 
   def payment_type_card
     payment_type == 'card'
+  end
+
+  def real_state
+    return if states.include?(state)
+    errors.add :state, 'must be a valid state'
   end
 end
