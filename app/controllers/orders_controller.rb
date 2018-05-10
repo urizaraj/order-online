@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class OrdersController < ApplicationController
-  before_action :authenticate, only: %i[create index]
+  before_action :authenticate_or_request, only: %i[index]
+  before_action :authenticate, only: [:create]
 
   def index
     page = params[:page].to_i || 1

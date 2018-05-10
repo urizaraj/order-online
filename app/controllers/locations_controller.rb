@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class LocationsController < ApplicationController
-  before_action :authenticate, only: %i[create update]
+  before_action :authenticate_or_request, only: %i[create update]
 
   def index
     page = params[:page].to_i || 1
