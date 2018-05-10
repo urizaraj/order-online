@@ -74,7 +74,7 @@ class SignUpPage extends Component {
 }
 
 const InvalidMessage = props => (
-  <div className='text-secondary mb-3' >
+  <div className='text-danger mb-3' >
     <strong>Invalid username or password</strong>
   </div>
 )
