@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
 class OrdersController < ApplicationController
-  before_action :authenticate, only: %i[index]
+  before_action :authenticate, only: %i[create index]
 
   def index
     page = params[:page].to_i || 1
     offset = (page - 1) * 5
-    render json: @user.orders.limit(5).offset(offset), each_serializer: OrderIndexSerializer
+    render json: @user.orders.order(id: :desc).limit(5).offset(offset), each_serializer: OrderIndexSerializer
   end
 
   def create
