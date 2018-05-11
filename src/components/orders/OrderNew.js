@@ -100,6 +100,6 @@ const mapDispatch = dispatch => {
   return bindActionCreators(actions, dispatch)
 }
 
-export default OrderNew = connect(mapState, mapDispatch)(OrderNew)
+export default connect(mapState, mapDispatch)(OrderNew)
 
 //#endregion
