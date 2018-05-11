@@ -13,14 +13,10 @@ export function fetchLocation(id) {
 }
 
 function handleResp(resp, dispatch) {
+  const resources = {}
+
   for (let resource of ['categories', 'items', 'options']) {
-    for (let value of resp[resource]) {
-      dispatch({
-        type: 'ADD_RESOURCE',
-        resource,
-        value: { cuid: cuid(), ...value }
-      })
-    }
+    resources[resource] = resp[resource].map(value => ({ cuid: cuid(), ...value }))
   }
 
   dispatch({
@@ -29,7 +25,8 @@ function handleResp(resp, dispatch) {
       name: resp.name,
       description: resp.description,
       id: resp.id,
-      menuId: resp.menu.id
+      menuId: resp.menu.id,
+      ...resources
     }
   })
 
