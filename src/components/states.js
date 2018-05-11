@@ -62,10 +62,10 @@ export const states = [
   'WY'
 ]
 
-const StateOptions = () => states.map(state => <option key={state} value={state} />)
+const stateOptions = states.map(state => <option key={state} value={state} />)
 
 export const StateDataList = () => (
   <datalist id='states'>
-    <StateOptions />
+    {stateOptions}
   </datalist>
 )
