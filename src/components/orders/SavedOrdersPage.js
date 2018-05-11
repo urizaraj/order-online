@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import { Row, BCol, Pagination, DFlex } from '../elements'
+import { Row, BCol, Pagination } from '../elements'
 
 import OrderShow from './OrderShow';
 

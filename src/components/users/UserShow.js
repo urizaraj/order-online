@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Redirect, Link, NavLink } from 'react-router-dom'
+import { Redirect, NavLink } from 'react-router-dom'
 import { Route, Switch } from 'react-router-dom'
 import SavedOrdersPage from '../orders/SavedOrdersPage'
 import { Nav } from '../elements';

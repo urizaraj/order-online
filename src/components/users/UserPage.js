@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { UserShow, SignInPage, SignUpPage } from '.';
-import SavedOrdersPage from '../orders/SavedOrdersPage'
 import { Route, Switch } from 'react-router-dom'
 
 class UserPage extends Component {
