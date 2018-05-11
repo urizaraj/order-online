@@ -85,6 +85,8 @@ export const Radio = props => {
 
 export const FormRow = div('form-row')
 export const FormCheck = div('form-check')
+export const FormGroup = div('form-group')
+export const FormControl = props => <input {...props} type='text' className='form-control' />
 
 export const Btn = props => {
   const { opt, children, ...rest } = props

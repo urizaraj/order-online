@@ -1,12 +1,10 @@
-import React, { Component } from 'react'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-
-import { FormGroup, FormControl, AddButton } from './elements'
-
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { FormControl, FormGroup } from '../../elements';
+import Category from './Category';
+import { AddButton } from './elements';
 import { addCategory, updateLocation } from '../../../actions/newLocationActions'
-
-import Category from './Category'
 
 class Location extends Component {
   render() {

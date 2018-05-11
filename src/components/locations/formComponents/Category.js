@@ -1,12 +1,10 @@
-import React, { Component } from 'react'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { BCol, FormControl, FormRow } from '../../elements';
+import Item from './Item';
+import { AddButton, RemoveButton } from './elements';
 import { addItem, updateResource, removeResource } from '../../../actions/newLocationActions'
-
-import { FormRow, FormControl, AddButton, RemoveButton } from './elements'
-import { BCol } from '../../elements'
-import Item from './Item'
 
 class Category extends Component {
   render() {

@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-
-import { FormGroup, FormRow, FormControl, AddButton, RemoveButton } from './elements'
-import { BCol } from '../../elements'
-import Option from './Option'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { BCol, FormControl, FormGroup, FormRow } from '../../elements';
+import Option from './Option';
+import { AddButton, RemoveButton } from './elements';
 import { addOption, updateResource, removeResource } from '../../../actions/newLocationActions'
+
 
 class Item extends Component {
   render() {

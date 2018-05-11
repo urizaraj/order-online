@@ -1,10 +1,8 @@
-import React, { Component } from 'react'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-
-import { FormRow, FormControl, RemoveButton } from './elements'
-import { BCol } from '../../elements'
-
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { BCol, FormControl, FormRow } from '../../elements';
+import { RemoveButton } from './elements';
 import { updateResource, removeResource } from '../../../actions/newLocationActions'
 
 class Option extends Component {

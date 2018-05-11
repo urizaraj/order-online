@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import { BCol, FormRow } from '../elements'
-import { FormControl, FormGroup } from '../locations/formComponents/elements'
+import { BCol, FormRow, FormControl, FormGroup } from '../elements'
 import { StateDataList } from '../states'
 
 class AddressFields extends Component {
