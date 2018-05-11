@@ -5,14 +5,12 @@ import compact from 'lodash/compact'
 function div(type) {
   return props => {
     let className = type
-
-    if (props.opt) {
-      className += ' ' + props.opt
-    }
-
     const { opt, ...other } = props
+    if (opt) {
+      className += ' ' + opt
+    }
     return (
-      <div {...{ className }} {...other}>
+      <div className={className} {...other}>
         {props.children}
       </div>
     )
@@ -31,20 +29,20 @@ export const DFlex = props => {
     className += ' align-items-center'
   }
   return (
-    <div {...{ className }} {...other}>
+    <div className={className} {...other}>
       {props.children}
     </div>
   )
 }
 
 export const Row = props => {
-  let className = 'row '
-  if (props.opt) {
-    className += props.opt
-  }
   const { opt, ...other } = props
+  let className = 'row '
+  if (opt) {
+    className += opt
+  }
   return (
-    <div {...{ className }} {...other}>
+    <div className={className} {...other}>
       {props.children}
     </div>
   )
