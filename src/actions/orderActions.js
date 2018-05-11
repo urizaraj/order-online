@@ -4,9 +4,12 @@ import camelCase from 'lodash/camelCase'
 import pickBy from 'lodash/pickBy'
 import { authorizationToken, respToJson } from './'
 
-const mapper = (value, key) => snakeCase(key)
 const mapperCamel = (value, key) => camelCase(key)
 const valueTrue = (value, key) => value
+
+const mapKeysSnake = rest => {
+  return mapKeys(pickBy(rest, valueTrue), (value, key) => snakeCase(key))
+}
 
 export const checkOut = () => ({ type: 'CHECK_OUT' })
 
@@ -21,13 +24,13 @@ function orderToCamel(resp) {
 function orderToSnake(state, locationId) {
   const { orderItems, ...rest } = state
   return {
-    ...mapKeys(pickBy(rest, valueTrue), mapper),
+    ...mapKeysSnake(rest),
     location_id: locationId,
     order_items_attributes: orderItems.map(oi => {
       const { selectedOptions, ...rest } = oi
       return {
-        ...mapKeys(pickBy(rest, valueTrue), mapper),
-        selected_options_attributes: selectedOptions.map(so => mapKeys(so, mapper))
+        ...mapKeysSnake(rest),
+        selected_options_attributes: selectedOptions.map(mapKeysSnake)
       }
     })
   }
