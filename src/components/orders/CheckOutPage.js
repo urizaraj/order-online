@@ -3,7 +3,7 @@ import pick from 'lodash/pick';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { BCol, Btn, FormRow, Row, FormControl, FormGroup } from '../elements';
+import { BCol, Btn, FormRow, Row, FormControl, FormGroup, FormPrice } from '../elements';
 import AddressFields from './AddressFields';
 import CurrentOrderDisplay from './CurrentOrderDisplay';
 import DeliveryTypeRadio from './DeliveryTypeRadio';
@@ -61,18 +61,12 @@ class CheckOutPage extends Component {
                   <h4>Tip</h4>
                 </BCol>
                 <BCol>
-                  <div className='input-group'>
-                    <div className='input-group-prepend' >
-                      <span className='input-group-text' >$</span>
-                    </div>
-                    <FormControl
-                      placeholder='Tip'
-                      name='tip'
-                      value={this.props.tip}
-                      onChange={this.onChange}
-                      onBlur={this.onTipBlur} />
-
-                  </div>
+                  <FormPrice
+                    placeholder='Tip'
+                    name='tip'
+                    value={this.props.tip}
+                    onChange={this.onChange}
+                    onBlur={this.onTipBlur} />
                 </BCol>
               </FormRow>
             </FormGroup>

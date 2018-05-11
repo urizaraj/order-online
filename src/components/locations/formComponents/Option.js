@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { BCol, FormControl, FormRow } from '../../elements';
+import { BCol, FormControl, FormRow, FormPrice } from '../../elements';
 import { RemoveButton } from './elements';
 import { updateResource, removeResource } from '../../../actions/newLocationActions'
 
@@ -21,7 +21,7 @@ class Option extends Component {
           </BCol>
 
           <BCol size='md-2 col'>
-            <FormControl
+            <FormPrice
               disabled={disabled}
               onChange={this.handleChange}
               onBlur={this.handleBlur}

@@ -122,3 +122,14 @@ export const Pagination = props => {
     </div>
   )
 }
+
+export const FormPrice = props => {
+  return (
+    <div className='input-group'>
+      <div className='input-group-prepend' >
+        <span className='input-group-text' >$</span>
+      </div>
+      <FormControl {...props} />
+    </div>
+  )
+}

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { BCol, FormControl, FormGroup, FormRow } from '../../elements';
+import { BCol, FormControl, FormGroup, FormRow, FormPrice } from '../../elements';
 import Option from './Option';
 import { AddButton, RemoveButton } from './elements';
 import { addOption, updateResource, removeResource } from '../../../actions/newLocationActions'
@@ -23,7 +23,7 @@ class Item extends Component {
           </BCol>
 
           <BCol size='md-2 col' >
-            <FormControl
+            <FormPrice
               disabled={disabled}
               placeholder='Price'
               name='price'
