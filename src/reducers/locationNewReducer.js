@@ -1,4 +1,14 @@
-const locationNewReducer = (state = { categories: [], items: [], options: [], name: '', description: '', loading: false, saved: false }, action) => {
+const initialState = {
+  categories: [],
+  items: [],
+  options: [],
+  name: '',
+  description: '',
+  loading: false,
+  saved: false
+}
+
+const locationNewReducer = (state = { ...initialState }, action) => {
   const { resource } = action
   let cuid
 
@@ -7,12 +17,8 @@ const locationNewReducer = (state = { categories: [], items: [], options: [], na
       return { ...state, [resource]: [...state[resource], action.value] }
 
     case 'UPDATE_RESOURCE':
-      cuid = action.cuid
-      return {
-        ...state, [resource]: state[resource].map(r => {
-          return (r.cuid === cuid ? { ...r, ...action.value } : r)
-        })
-      }
+      const sameCuid = cuidCheckFunction(action)
+      return { ...state, [resource]: state[resource].map(sameCuid) }
 
     case 'REMOVE_RESOURCE':
       cuid = action.cuid
@@ -23,7 +29,7 @@ const locationNewReducer = (state = { categories: [], items: [], options: [], na
       return { ...state, ...action.value }
 
     case 'RESET_LOCATION':
-      return { categories: [], items: [], options: [], name: '', description: '', loading: false, saved: false }
+      return { ...initialState }
 
     case 'LOADING_EDIT_LOCATION':
       return { ...state, loading: true }
@@ -36,6 +42,13 @@ const locationNewReducer = (state = { categories: [], items: [], options: [], na
 
     default:
       return state
+  }
+}
+
+function cuidCheckFunction(action) {
+  const { cuid, value } = action
+  return function (resource) {
+    return resource.cuid === cuid ? { ...resource, ...value } : resource
   }
 }
 
