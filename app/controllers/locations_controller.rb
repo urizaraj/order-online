@@ -2,19 +2,19 @@
 
 class LocationsController < ApplicationController
   before_action :authenticate_or_request, only: %i[create update]
+  before_action :find_location, only: %i[show update]
 
   def index
     page = params[:page].to_i || 1
     offset = (page - 1) * 4
+    locations = Location.limit(4).offset(offset)
 
-    render json: Location.limit(4).offset(offset), each_serializer: LocationIndexSerializer
+    render json: locations, each_serializer: LocationIndexSerializer
   end
 
   def show
-    location = Location.find(params[:id])
-
-    return render json: location, serializer: LocationEditSerializer if params[:edit]
-    render json: location
+    render json: @location,
+           serializer: params[:edit] ? LocationEditSerializer : LocationSerializer
   end
 
   def create
@@ -24,12 +24,15 @@ class LocationsController < ApplicationController
   end
 
   def update
-    location = Location.find(params[:id])
-    location.update(params_to_attributes)
-    render json: location, serializer: LocationEditSerializer
+    @location.update(params_to_attributes)
+    render json: @location, serializer: LocationEditSerializer
   end
 
   private
+
+  def find_location
+    @location = Location.find(params[:id])
+  end
 
   def strong_params
     params
@@ -61,22 +64,28 @@ class LocationsController < ApplicationController
       option['item_id'] || option['itemCuid']
     end
 
-    items = strong_params[:items].map do |item|
-      key = item['id'] || item['cuid']
-      options_attributes = options[key].to_a.map { |option| option.except(:itemCuid, :cuid).reject { |_k, v| v.nil? } }
-      item.merge(options_attributes: options_attributes)
-    end
+    items = map_resource :items, :itemCuid, options, :options_attributes
 
     items = items.group_by do |item|
       item['category_id'] || item['categoryCuid']
     end
 
-    categories = strong_params[:categories].map do |category|
-      key = category['id'] || category['cuid']
-      items_attributes = items[key].to_a.map { |item| item.except(:categoryCuid, :cuid).reject { |_k, v| v.nil? } }
-      category.merge(items_attributes: items_attributes)
-    end
+    categories = map_resource :categories, :categoryCuid, items, :items_attributes
 
-    categories.to_a.map { |category| category.except(:cuid).reject { |_k, v| v.nil? } }
+    categories.map { |category| category.except(:cuid).reject { |_k, v| v.nil? } }
+  end
+
+  def map_resource(resource, cuid, children, child_attributes)
+    strong_params[resource].map do |r|
+      key = r['id'] || r['cuid']
+      a = children_to_attributes children[key], cuid
+      r.merge(child_attributes => a)
+    end
+  end
+
+  def children_to_attributes(children, parent_cuid)
+    children.to_a.map do |resource|
+      resource.except(parent_cuid, :cuid).reject { |_k, v| v.nil? }
+    end
   end
 end
