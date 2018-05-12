@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
 import { resetLocation, saveLocation } from '../../actions/newLocationActions'
-
+import { Btn } from '../elements'
 import Location from './formComponents/Location'
 
 class LocationNew extends Component {
@@ -17,12 +17,9 @@ class LocationNew extends Component {
         <h1>New Location</h1>
         <Location />
 
-        <button
-          onClick={this.saveLocation}
-          className='btn btn-primary' >
+        <Btn primary onClick={this.saveLocation}>
           Save Location
-        </button>
-
+        </Btn>
       </div>
     )
   }

@@ -35,7 +35,8 @@ export const Btn = props => {
   return (
     <button
       onClick={props.onClick}
-      className={result} >
+      className={result}
+      disabled={props.disabled} >
       {props.children}
     </button>
   )

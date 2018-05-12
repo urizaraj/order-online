@@ -1,10 +1,15 @@
 import Icon from '@fortawesome/react-fontawesome';
 import React from 'react';
+import { Btn } from '../../elements';
 
-export const RemoveButton = props => <button className='btn btn-danger' onClick={props.onClick} ><Icon icon='trash' /></button>
+export const RemoveButton = props => (
+  <Btn danger onClick={props.onClick}>
+    <Icon icon='trash' />
+  </Btn>
+)
 
 export const AddButton = props => (
-  <button className='btn btn-success btn-sm mb-3' onClick={props.onClick} disabled={props.disabled} >
+  <Btn opt='mb-3' success sm onClick={props.onClick} disabled={props.disabled}>
     <Icon icon='plus' /> New {props.type}
-  </button>
+  </Btn>
 )

@@ -8,6 +8,7 @@ import { resetLocation } from '../../actions/newLocationActions'
 
 import Location from './formComponents/Location'
 import Icon from '@fortawesome/react-fontawesome'
+import { Btn } from '../elements';
 
 class LocationEdit extends Component {
   render() {
@@ -18,11 +19,9 @@ class LocationEdit extends Component {
         <h1>Edit Location</h1>
         <Location />
 
-        <button
-          onClick={this.patchLocation}
-          className='btn btn-primary' >
+        <Btn primary onClick={this.patchLocation}>
           Update Location
-        </button>
+        </Btn>
 
       </div>
     )

@@ -2,7 +2,8 @@ import React, { cloneElement } from 'react'
 import Icon from '@fortawesome/react-fontawesome'
 import compact from 'lodash/compact'
 
-export { Btn } from './Btn'
+import { Btn } from './Btn'
+export { Btn }
 
 function div(type) {
   return props => {
@@ -101,15 +102,17 @@ export const Nav = props => {
 export const Pagination = props => {
   return (
     <div>
-      <button className='btn btn-primary' onClick={props.prevPage} disabled={props.page < 2} >
+      <Btn primary onClick={props.prevPage} disabled={props.page < 2}>
         <Icon icon='angle-left' /> Prev
-        </button>
-      <button className='btn btn-primary' >
+      </Btn>
+
+      <Btn primary>
         {props.page}
-      </button>
-      <button className='btn btn-primary' onClick={props.nextPage} >
+      </Btn>
+
+      <Btn primary onClick={props.nextPage}>
         Next <Icon icon='angle-right' />
-      </button>
+      </Btn>
     </div>
   )
 }

@@ -8,7 +8,7 @@ import Item from './Item'
 import CurrentOrder from './CurrentOrder'
 import CheckOutPage from './CheckOutPage'
 
-import { Row, BCol } from '../elements'
+import { Row, BCol, Btn } from '../elements'
 
 class OrderNew extends Component {
   render() {
@@ -49,9 +49,9 @@ const OrderSavedPrompt = props => {
         Order Saved!
       </h1>
 
-      <button className='btn btn-success' onClick={props.resetOrder} >
+      <Btn success onClick={props.resetOrder}>
         New Order
-      </button>
+      </Btn>
     </div>
   )
 }

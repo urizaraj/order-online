@@ -8,7 +8,7 @@ import { saveOrder, checkOut } from '../../actions/orderActions'
 
 import Icon from '@fortawesome/react-fontawesome'
 
-import { DFlex } from '../elements'
+import { DFlex, Btn } from '../elements'
 
 class CurrentOrder extends React.Component {
   render() {
@@ -19,9 +19,9 @@ class CurrentOrder extends React.Component {
         <CurrentOrderDisplay edit orderItems={this.props.orderItems} />
 
         <DFlex>
-          <button className='btn btn-success ml-auto' onClick={this.checkOut} >
+          <Btn success opt='ml-auto' onClick={this.checkOut} >
             Check Out <Icon icon='arrow-right' />
-          </button>
+          </Btn>
         </DFlex>
       </div>
     )
@@ -42,4 +42,4 @@ const mapDispatch = dispatch => {
   return bindActionCreators(actions, dispatch)
 }
 
-export default CurrentOrder = connect(mapState, mapDispatch)(CurrentOrder)
+export default connect(mapState, mapDispatch)(CurrentOrder)
