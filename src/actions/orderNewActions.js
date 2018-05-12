@@ -1,19 +1,25 @@
 import cuid from 'cuid'
 
 export function addOrderItem(item, orderItem) {
-  const { id, ...rest } = item
+  const { id, name, price, options } = item
+
+  const { instructions, selectedOptions } = orderItem
   return {
     type: 'ADD_ORDER_ITEM',
     orderItem: {
       itemId: id,
-      ...rest,
+      name,
+      price,
       cuid: cuid(),
-      instructions: orderItem.instructions,
-      selectedOptions: orderItem.selectedOptions.map(so => ({
-        optionId: so.id,
-        name: so.name,
-        price: so.price
-      }))
+      instructions,
+      selectedOptions: selectedOptions.map(so => {
+        const option = options.find(({ id }) => id === so)
+        return {
+          optionId: option.id,
+          name: option.name,
+          price: option.price
+        }
+      })
     }
   }
 }

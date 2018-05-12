@@ -11,14 +11,8 @@ import ItemDetails from './ItemDetails'
 
 class Item extends Component {
   render() {
-    const { options, addOrderItem, id, name, price, active } = this.props
-
-    const detailsProps = {
-      options,
-      addOrderItem,
-      item: { id, name, price }
-    }
-
+    const { active, ...rest } = this.props
+    const { name, price } = rest
     return (
       <div className="mb-3">
         <DFlex opt="item" center onClick={this.toggleActiveItem}>
@@ -27,7 +21,7 @@ class Item extends Component {
           <div className="font-weight-light ml-auto">${price}</div>
         </DFlex>
 
-        {active && <ItemDetails {...detailsProps} />}
+        {active && <ItemDetails {...rest} />}
       </div>
     )
   }

@@ -50,7 +50,7 @@ export default class ItemDetails extends Component {
     this.setState({ [name]: value })
   }
 
-  addOrderItem = () => this.props.addOrderItem(this.props.item, this.state)
+  addOrderItem = () => this.props.addOrderItem(this.props, this.state)
 
   handleCheck = event => {
     const value = parseInt(event.target.value, 10)

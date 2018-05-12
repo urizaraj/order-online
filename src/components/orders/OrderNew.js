@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
@@ -8,27 +8,28 @@ import Item from './Item'
 import CurrentOrder from './CurrentOrder'
 import CheckOutPage from './CheckOutPage'
 
+import flatMap from 'lodash/flatMap'
+
 import { Row, BCol, Btn } from '../elements'
 
 class OrderNew extends Component {
   render() {
+    const { saved, checkOut, categories } = this.props
 
-    if (this.props.saved) return <OrderSavedPrompt resetOrder={this.resetOrder} />
-    if (this.props.checkOut) return <CheckOutPage />
+    if (saved) return <OrderSavedPrompt resetOrder={this.resetOrder} />
 
-    const items = []
-    this.props.categories.forEach(category => {
-      category.items.forEach(item => items.push(item))
-    })
+    if (checkOut) return <CheckOutPage />
+
+    const items = flatMap(categories, cat => cat.items)
 
     return (
       <div>
         <Row>
           <BCol>
-            <CategoryList categories={this.props.categories} />
+            <CategoryList categories={categories} />
           </BCol>
           <BCol>
-            <CurrentOrder {...{ items }} />
+            <CurrentOrder items={items} />
           </BCol>
         </Row>
       </div>
@@ -45,9 +46,7 @@ class OrderNew extends Component {
 const OrderSavedPrompt = props => {
   return (
     <div>
-      <h1>
-        Order Saved!
-      </h1>
+      <h1>Order Saved!</h1>
 
       <Btn success onClick={props.resetOrder}>
         New Order
@@ -56,8 +55,8 @@ const OrderSavedPrompt = props => {
   )
 }
 
-
-const CategoryList = ({ categories }) => categories.map(cat => <Category {...cat} key={cat.id} />)
+const CategoryList = ({ categories }) =>
+  categories.map(cat => <Category {...cat} key={cat.id} />)
 
 class Category extends Component {
   constructor() {
