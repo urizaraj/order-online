@@ -1,13 +1,21 @@
-import Icon from '@fortawesome/react-fontawesome';
-import pick from 'lodash/pick';
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { BCol, Btn, FormRow, Row, FormControl, FormGroup, FormPrice } from '../elements';
-import AddressFields from './formComponents/AddressFields';
-import CurrentOrderDisplay from './CurrentOrderDisplay';
-import DeliveryTypeRadio from './formComponents/DeliveryTypeRadio';
-import PaymentTypeRadio from './formComponents/PaymentTypeRadio';
+import Icon from '@fortawesome/react-fontawesome'
+import pick from 'lodash/pick'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import {
+  BCol,
+  Btn,
+  FormRow,
+  Row,
+  FormControl,
+  FormGroup,
+  FormPrice
+} from '../elements'
+import AddressFields from './formComponents/AddressFields'
+import CurrentOrderDisplay from './CurrentOrderDisplay'
+import DeliveryTypeRadio from './formComponents/DeliveryTypeRadio'
+import PaymentTypeRadio from './formComponents/PaymentTypeRadio'
 import { checkOut, saveOrder } from '../../actions/orderActions'
 import { updateOrder } from '../../actions/orderNewActions'
 
@@ -17,36 +25,52 @@ class CheckOutPage extends Component {
     const card = this.props.paymentType === 'card'
     const pickup = this.props.deliveryType === 'pickup'
     const delivery = this.props.deliveryType === 'delivery'
+    const addressProps = pick(this.props, [
+      'address',
+      'city',
+      'state',
+      'zipcode'
+    ])
     return (
       <div>
         <Row>
           <BCol>
-            <DeliveryTypeRadio onChange={this.onChange} delivery={delivery} pickup={pickup} />
+            <DeliveryTypeRadio
+              onChange={this.onChange}
+              delivery={delivery}
+              pickup={pickup}
+            />
 
             <FormGroup>
               <FormControl
-                placeholder='Full Name'
-                name='fullName'
+                placeholder="Full Name"
+                name="fullName"
                 value={this.props.fullName}
-                onChange={this.onChange} />
-
+                onChange={this.onChange}
+              />
             </FormGroup>
 
             <AddressFields
+              {...addressProps}
               onChange={this.onChange}
               onZipChange={this.onZipChange}
               onStateChange={this.onStateChange}
-              {...pick(this.props, ['address', 'city', 'state', 'zipcode'])} />
+            />
 
-            <PaymentTypeRadio onChange={this.onChange} cash={cash} card={card} />
+            <PaymentTypeRadio
+              onChange={this.onChange}
+              cash={cash}
+              card={card}
+            />
 
             <FormGroup>
               <FormControl
                 disabled={!card}
-                placeholder='Card Number'
-                name='cardNumber'
+                placeholder="Card Number"
+                name="cardNumber"
                 value={this.props.cardNumber}
-                onChange={this.onChange} />
+                onChange={this.onChange}
+              />
             </FormGroup>
           </BCol>
 
@@ -62,21 +86,25 @@ class CheckOutPage extends Component {
                 </BCol>
                 <BCol>
                   <FormPrice
-                    placeholder='Tip'
-                    name='tip'
+                    placeholder="Tip"
+                    name="tip"
                     value={this.props.tip}
                     onChange={this.onChange}
-                    onBlur={this.onTipBlur} />
+                    onBlur={this.onTipBlur}
+                  />
                 </BCol>
               </FormRow>
             </FormGroup>
-
           </BCol>
         </Row>
 
-        <div className='text-right'>
-          <Btn primary onClick={this.goBack} > <Icon icon='arrow-left' /> Go Back </Btn>
-          <Btn success onClick={this.saveOrder} ><Icon icon='check' /> Save Order</Btn>
+        <div className="text-right">
+          <Btn primary onClick={this.goBack}>
+            <Icon icon="arrow-left" /> Go Back
+          </Btn>
+          <Btn success onClick={this.saveOrder}>
+            <Icon icon="check" /> Save Order
+          </Btn>
         </div>
       </div>
     )
