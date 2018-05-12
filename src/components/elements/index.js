@@ -4,24 +4,10 @@ import compact from 'lodash/compact'
 
 import { Btn } from './Btn'
 export { Btn }
-
-function div(type) {
-  return props => {
-    let className = type
-    const { opt, ...other } = props
-    if (opt) {
-      className += ' ' + opt
-    }
-    return (
-      <div className={className} {...other}>
-        {props.children}
-      </div>
-    )
-  }
-}
+export * from './formComponents'
 
 export const DFlex = props => {
-  const { opt, center, ...other } = props
+  const { opt, center, children, ...other } = props
 
   let className = 'd-flex '
   if (opt) {
@@ -33,26 +19,26 @@ export const DFlex = props => {
   }
   return (
     <div className={className} {...other}>
-      {props.children}
+      {children}
     </div>
   )
 }
 
 export const Row = props => {
-  const { opt, ...other } = props
+  const { opt, children, ...other } = props
   let className = 'row '
   if (opt) {
     className += opt
   }
   return (
     <div className={className} {...other}>
-      {props.children}
+      {children}
     </div>
   )
 }
 
 export const BCol = props => {
-  const { size, opt, ...other } = props
+  const { size, opt, children, ...other } = props
 
   let className = 'col'
   if (size) {
@@ -65,7 +51,7 @@ export const BCol = props => {
 
   return (
     <div className={className} {...other}>
-      {props.children}
+      {children}
     </div>
   )
 }
@@ -83,11 +69,6 @@ export const Radio = props => {
     </label>
   )
 }
-
-export const FormRow = div('form-row')
-export const FormCheck = div('form-check')
-export const FormGroup = div('form-group')
-export const FormControl = props => <input {...props} type='text' className='form-control' />
 
 export const Nav = props => {
   let i = 0
@@ -113,17 +94,6 @@ export const Pagination = props => {
       <Btn primary onClick={props.nextPage}>
         Next <Icon icon='angle-right' />
       </Btn>
-    </div>
-  )
-}
-
-export const FormPrice = props => {
-  return (
-    <div className='input-group'>
-      <div className='input-group-prepend' >
-        <span className='input-group-text' >$</span>
-      </div>
-      <FormControl {...props} />
     </div>
   )
 }
