@@ -75,8 +75,8 @@ class CheckOutPage extends Component {
         </Row>
 
         <div className='text-right'>
-          <Btn opt='primary' onClick={this.goBack} > <Icon icon='arrow-left' /> Go Back </Btn>
-          <Btn opt='success' onClick={this.saveOrder} ><Icon icon='check' /> Save Order</Btn>
+          <Btn primary onClick={this.goBack} > <Icon icon='arrow-left' /> Go Back </Btn>
+          <Btn success onClick={this.saveOrder} ><Icon icon='check' /> Save Order</Btn>
         </div>
       </div>
     )
