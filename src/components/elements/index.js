@@ -2,6 +2,8 @@ import React, { cloneElement } from 'react'
 import Icon from '@fortawesome/react-fontawesome'
 import compact from 'lodash/compact'
 
+export { Btn } from './Btn'
+
 function div(type) {
   return props => {
     let className = type
@@ -85,15 +87,6 @@ export const FormRow = div('form-row')
 export const FormCheck = div('form-check')
 export const FormGroup = div('form-group')
 export const FormControl = props => <input {...props} type='text' className='form-control' />
-
-export const Btn = props => {
-  const { opt, children, ...rest } = props
-  const newProps = {
-    className: `btn btn-${opt}`,
-    ...rest
-  }
-  return <button {...newProps}>{children}</button>
-}
 
 export const Nav = props => {
   let i = 0
