@@ -5,11 +5,19 @@ import { connect } from 'react-redux'
 import { fetchOrder } from '../../actions/orderActions'
 import { resetOrder } from '../../actions/orderNewActions'
 
-import CurrentOrderDisplay from "./CurrentOrderDisplay"
+import CurrentOrderDisplay from './CurrentOrderDisplay'
 
 class OrderShow extends Component {
   render() {
-    const { address, city, state, zipcode, deliveryType, fullName, paymentType } = this.props
+    const {
+      address,
+      city,
+      state,
+      zipcode,
+      deliveryType,
+      fullName,
+      paymentType
+    } = this.props
     return (
       <div>
         <h4>{this.props.locationName}</h4>
@@ -17,15 +25,11 @@ class OrderShow extends Component {
 
         <h4>Order Information</h4>
         <div>
-          <div className='mb-2' >
+          <div className="mb-2">
             <Badge text={paymentType} /> <Badge text={deliveryType} />
           </div>
-          <div>
-            {fullName}
-          </div>
-          <div>
-            {address}
-          </div>
+          <div>{fullName}</div>
+          <div>{address}</div>
           <div>
             {city}, {state} {zipcode}
           </div>
@@ -51,11 +55,7 @@ class OrderShow extends Component {
 
 const Badge = props => {
   const { text } = props
-  return (
-    <span className='badge badge-secondary text-capitalize' >
-      {text}
-    </span>
-  )
+  return <span className="badge badge-secondary text-capitalize">{text}</span>
 }
 
 const mapState = state => {

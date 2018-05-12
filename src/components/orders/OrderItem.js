@@ -7,6 +7,7 @@ import { removeOrderItem } from '../../actions/orderNewActions'
 import Icon from '@fortawesome/react-fontawesome'
 
 import { DFlex } from '../elements'
+import cuid from 'cuid'
 
 class OrderItem extends Component {
   constructor(props) {
@@ -23,18 +24,19 @@ class OrderItem extends Component {
         <DFlex>
           {edit && <RemoveButton onClick={this.removeOrderItem} />}
 
-          <div className='p-2' >
+          <div className="p-2">
             {this.props.name}
             <br />
             <SelectedOptionsList selectedOptions={this.props.selectedOptions} />
-            <small><em>{this.props.instructions}</em></small>
+            <small>
+              <em>{this.props.instructions}</em>
+            </small>
           </div>
 
-          <div className='ml-auto align-self-end p-2' >
+          <div className="ml-auto align-self-end p-2">
             ${this.itemPrice.toFixed(2)}
           </div>
         </DFlex>
-
       </div>
     )
   }
@@ -42,23 +44,26 @@ class OrderItem extends Component {
   removeOrderItem = () => this.props.removeOrderItem(this.props.cuid)
 }
 
-const RemoveButton = props => <div><button {...props} className='btn btn-link' ><Icon icon='times' /></button></div>
+const RemoveButton = props => (
+  <div>
+    <button {...props} className="btn btn-link">
+      <Icon icon="times" />
+    </button>
+  </div>
+)
 
-const SelectedOptionsList = props => props.selectedOptions.map(so => <SelectedOption {...so} key={so.id ? so.id : so.optionId} />)
+const SelectedOptionsList = props =>
+  props.selectedOptions.map(so => <SelectedOption {...so} key={cuid()} />)
 
 const SelectedOption = props => {
   return (
     <DFlex>
-      <div className='' >
-        <small>
-          {props.name}
-        </small>
+      <div className="">
+        <small>{props.name}</small>
       </div>
       {props.price > 0 && (
-        <div className='ml-3' >
-          <small>
-            ${props.price.toFixed(2)}
-          </small>
+        <div className="ml-3">
+          <small>${props.price.toFixed(2)}</small>
         </div>
       )}
     </DFlex>
