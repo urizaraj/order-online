@@ -1,6 +1,6 @@
 import Icon from '@fortawesome/react-fontawesome';
 import React, { cloneElement } from 'react';
-import { DFlex, Radio } from '../elements';
+import { DFlex, Radio } from '../../elements';
 
 export const CheckOutFlex = props => {
   let i = 0

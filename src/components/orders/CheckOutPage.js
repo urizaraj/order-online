@@ -4,10 +4,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { BCol, Btn, FormRow, Row, FormControl, FormGroup, FormPrice } from '../elements';
-import AddressFields from './AddressFields';
+import AddressFields from './formComponents/AddressFields';
 import CurrentOrderDisplay from './CurrentOrderDisplay';
-import DeliveryTypeRadio from './DeliveryTypeRadio';
-import PaymentTypeRadio from './PaymentTypeRadio';
+import DeliveryTypeRadio from './formComponents/DeliveryTypeRadio';
+import PaymentTypeRadio from './formComponents/PaymentTypeRadio';
 import { checkOut, saveOrder } from '../../actions/orderActions'
 import { updateOrder } from '../../actions/orderNewActions'
 
