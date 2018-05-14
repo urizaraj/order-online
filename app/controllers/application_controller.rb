@@ -5,8 +5,10 @@ class ApplicationController < ActionController::API
 
   def authenticate
     authenticate_with_http_token do |token|
-      payload = JWT.decode token, nil, false
-      @user = User.find(payload[0]['user'])
+      if token != "null"
+        payload = JWT.decode token, nil, false
+        @user = User.find(payload[0]['user'])
+      end
     end
   end
 
