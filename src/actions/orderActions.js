@@ -81,7 +81,13 @@ export function saveOrder() {
     }
 
     return fetch('/orders.json', options)
-      .then(resp => resp.json())
+      .then(resp => {
+        if (resp.ok) {
+          return resp.json()
+        } else {
+          throw new Error()
+        }
+      })
       .then(resp => {
         if (resp.status) {
           dispatch({ type: 'ORDER_SAVED' })
@@ -90,5 +96,6 @@ export function saveOrder() {
           dispatch({ type: 'ORDER_INVALID', messages: resp.messages })
         }
       })
+      .catch(error => console.log(error.message))
   }
 }
