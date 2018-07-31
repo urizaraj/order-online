@@ -5,7 +5,8 @@ const initialState = {
   name: '',
   description: '',
   loading: false,
-  saved: false
+  saved: false,
+  id: null
 }
 
 const locationNewReducer = (state = { ...initialState }, action) => {
@@ -38,7 +39,7 @@ const locationNewReducer = (state = { ...initialState }, action) => {
       return { ...state, loading: false }
 
     case 'LOCATION_SAVED':
-      return { ...state, saved: true }
+      return { ...state, saved: true, id: action.id }
 
     default:
       return state
@@ -47,7 +48,7 @@ const locationNewReducer = (state = { ...initialState }, action) => {
 
 function cuidCheckFunction(action) {
   const { cuid, value } = action
-  return function (resource) {
+  return function(resource) {
     return resource.cuid === cuid ? { ...resource, ...value } : resource
   }
 }
