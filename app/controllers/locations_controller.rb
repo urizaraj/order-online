@@ -20,7 +20,7 @@ class LocationsController < ApplicationController
   def create
     location = Location.new(params_to_attributes)
     status = location.save
-    render json: { saved: status }
+    render json: { saved: status, id: location.id }
   end
 
   def update
