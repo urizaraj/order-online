@@ -9,8 +9,8 @@ import Location from './formComponents/Location'
 
 class LocationNew extends Component {
   render() {
-    if (!this.props.signedIn) return <Redirect to='/locations' />
-    if (this.props.saved) return <Redirect to='/locations' />
+    if (!this.props.signedIn) return <Redirect to="/locations" />
+    if (this.props.saved) return <Redirect to={`/locations/${this.props.id}`} />
 
     return (
       <div>
@@ -25,7 +25,7 @@ class LocationNew extends Component {
   }
 
   saveLocation = event => {
-    this.props.saveLocation()
+    this.props.saveLocation(this.props.history)
   }
 
   componentWillUnmount() {
@@ -36,7 +36,8 @@ class LocationNew extends Component {
 const mapState = state => {
   return {
     signedIn: state.user.signedIn,
-    saved: state.locationNew.saved
+    saved: state.locationNew.saved,
+    id: state.locationNew.id
   }
 }
 
