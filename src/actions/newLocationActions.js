@@ -21,7 +21,14 @@ export function addItem(categoryCuid, categoryId = null) {
   return {
     type: 'ADD_RESOURCE',
     resource: 'items',
-    value: { name: '', price: '', description: '', categoryCuid, cuid: cuid(), category_id: categoryId }
+    value: {
+      name: '',
+      price: '',
+      description: '',
+      categoryCuid,
+      cuid: cuid(),
+      category_id: categoryId
+    }
   }
 }
 
@@ -48,7 +55,7 @@ export function resetLocation() {
   return { type: 'RESET_LOCATION' }
 }
 
-export function saveLocation() {
+export function saveLocation(history) {
   return (dispatch, getState) => {
     const state = getState().locationNew
     const options = {
@@ -64,6 +71,7 @@ export function saveLocation() {
       .then(resp => resp.json())
       .then(resp => {
         if (resp.saved) {
+          history.push(`locations/${resp.id}`)
           dispatch({ type: 'LOCATION_SAVED' })
         }
       })
