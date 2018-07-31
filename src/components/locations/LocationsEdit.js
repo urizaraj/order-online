@@ -8,12 +8,18 @@ import { resetLocation } from '../../actions/newLocationActions'
 
 import Location from './formComponents/Location'
 import Icon from '@fortawesome/react-fontawesome'
-import { Btn } from '../elements';
+import { Btn } from '../elements'
+
+const loading = (
+  <div className="text-center">
+    <Icon icon="spinner" spin size="2x" />
+  </div>
+)
 
 class LocationEdit extends Component {
   render() {
-    if (this.props.loading) return <div className='text-center' ><Icon icon="spinner" spin size='2x' /></div>
-    if (!this.props.signedIn) return <Redirect to='/locations' />
+    if (this.props.loading) return loading
+    if (!this.props.signedIn) return <Redirect to="/locations" />
     return (
       <div>
         <h1>Edit Location</h1>
@@ -22,7 +28,6 @@ class LocationEdit extends Component {
         <Btn primary onClick={this.patchLocation}>
           Update Location
         </Btn>
-
       </div>
     )
   }
@@ -48,7 +53,10 @@ const mapState = state => {
 }
 
 const mapDispatch = dispatch => {
-  return bindActionCreators({ fetchLocation, patchLocation, resetLocation }, dispatch)
+  return bindActionCreators(
+    { fetchLocation, patchLocation, resetLocation },
+    dispatch
+  )
 }
 
 export default connect(mapState, mapDispatch)(LocationEdit)
